@@ -46,6 +46,16 @@ namespace Hotel.Server
 
             app.UseHttpsRedirection();
 
+            // align origin with client address
+            app.UseCors(policy =>
+                policy.WithOrigins(
+                    "https://localhost:44394",
+                    "https://localhost:5001"
+                )
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
+
             app.UseRouting();
 
             app.UseAuthorization();
