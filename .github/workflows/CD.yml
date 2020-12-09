@@ -11,7 +11,7 @@ jobs:
         steps:  
         # step 1: Checkout GitHub Action
         - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
+          uses: actions/checkout@main
 
         # step 2: Docker login
         - name: 'Docker login'
