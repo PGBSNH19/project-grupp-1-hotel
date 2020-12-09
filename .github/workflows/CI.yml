@@ -34,42 +34,18 @@ jobs:
         username: ${{ secrets.REGISTRY }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    # step 3: Build Docker Image
+    # step 3: Build Docker Server Image
     - name: Build Docker
       run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
-    # step 4: Push Docker to Azure Registry
+    # step 4: Push Server Image to Azure Registry
     - name: Push Docker
       run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
-    # # build and push Client image
+    # step 5: Build Docker Client Image
+    - name: Build Docker
+      run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
 
-    # - name: ACR build Client
-    #   id: acrclient
-    #   uses: ams0/acr-task-github-action@v1
-    #   with:
-    #     service_principal: ${{ secrets.service_principal_id }}
-    #     service_principal_password: ${{ secrets.service_principal_password }}
-    #     tenant: ${{ secrets.tenant }}
-    #     registry: ${{ secrets.registry }}
-    #     repository: ${{ secrets.client_repository }}
-    #     image: client
-    #     # git_access_token: ${{ secrets.git_access_token }}
-    #     folder: Hotel.Client/
-    #     dockerfile: Dockerfile
-
-    # # build and push Server image
-
-    # - name: ACR build Server
-    #   id: acrserver
-    #   uses: ams0/acr-task-github-action@v1
-    #   with:
-    #     service_principal: ${{ secrets.service_principal_id }}
-    #     service_principal_password: ${{ secrets.service_principal_password }}
-    #     tenant: ${{ secrets.tenant }}
-    #     registry: ${{ secrets.registry }}
-    #     repository: ${{ secrets.server_repository }}
-    #     image: server
-    #     # git_access_token: ${{ secrets.git_access_token }}
-    #     folder: Hotel.Server/
-    #     dockerfile: Dockerfile
+    # step 6: Push Client Image to Azure Registry
+    - name: Push Docker
+      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
