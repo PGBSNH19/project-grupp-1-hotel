@@ -14,19 +14,23 @@ else
     <span>@dummy.Content</span>
 }
 
-
 @code {
-    protected Dummy dummy { get; set; }
+    protected DummyInfo dummy { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        dummy = await Http.GetFromJsonAsync<Dummy>("https://localhost:44354/api/WeatherForecast/hello");
+        try
+        {
+            dummy = await Http.GetFromJsonAsync<DummyInfo>("http://localhost:5001/api/WeatherForecast/hello");
+        }
+        catch { Console.WriteLine("Error requesting"); }
+
+
         Console.WriteLine(dummy);
         Console.WriteLine("test");
     }
 
-    public class Dummy
-    {
+    public class DummyInfo {
         public string Content { get; set; }
     }
 }

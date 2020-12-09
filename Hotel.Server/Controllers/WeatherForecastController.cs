@@ -54,11 +54,11 @@ namespace Hotel.Server.Controllers
         [Route("hello")]
         public async Task<ActionResult> GetHello()
         {
-            var d = new Dummy { Content = "hello" };
+            var d = new DummyInfo { Content = "hello" };
             return Ok(d);
         }
 
-        public class Dummy
+        public class DummyInfo
         {
             public string Content { get; set; }
         }

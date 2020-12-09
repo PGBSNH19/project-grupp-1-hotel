@@ -1,16 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Hotel.Server
 {
@@ -46,15 +39,21 @@ namespace Hotel.Server
 
             app.UseHttpsRedirection();
 
-            // align origin with client address
+            // this works for specific origins
+            //app.UseCors(policy =>
+            //    policy.WithOrigins(
+            //        "https://localhost:44394",
+            //        "https://localhost:5001"
+            //    )
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //);
             app.UseCors(policy =>
-                policy.WithOrigins(
-                    "https://localhost:44394",
-                    "https://localhost:5001"
-                )
+                policy.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
             );
+
 
             app.UseRouting();
 

@@ -11,7 +11,7 @@ WORKDIR . /
 # We proceed by copying all the contents in
 # the main project folder to root and build it
 COPY . .
-RUN dotnet build "Hotel.Client.csproj" -c Release -o /build
+# RUN dotnet build "Hotel.Client.csproj" -c Release -o /build
 
 # Once we're done building, we'll publish the project
 # to the publish folder 
