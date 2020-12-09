@@ -26,11 +26,11 @@ jobs:
       id: acrclient
       uses: ams0/acr-task-github-action@v1
       with:
-        service_principal: ${{ secrets.service_principal_id }}
-        service_principal_password: ${{ secrets.service_principal_password }}
-        tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.client_repository }}
+        service_principal: ${{ secrets.SERVICE_PRINCIPAL_ID }}
+        service_principal_password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+        tenant: ${{ secrets.TENANT }}
+        registry: ${{ secrets.REGISTRY }}
+        repository: ${{ secrets.CLIENT_REPOSITORY }}
         image: client
         # git_access_token: ${{ secrets.git_access_token }}
         folder: Hotel.Client/
@@ -40,11 +40,11 @@ jobs:
       id: acrserver
       uses: ams0/acr-task-github-action@v1
       with:
-        service_principal: ${{ secrets.service_principal_id }}
-        service_principal_password: ${{ secrets.service_principal_password }}
-        tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.server_repository }}
+        service_principal: ${{ secrets.SERVICE_PRINCIPAL_ID }}
+        service_principal_password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
+        tenant: ${{ secrets.TENANT }}
+        registry: ${{ secrets.REGISTRY }}
+        repository: ${{ secrets.SERVER_REPOSITORY }}
         image: server
         # git_access_token: ${{ secrets.git_access_token }}
         folder: Hotel.Server/
