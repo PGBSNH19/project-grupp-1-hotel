@@ -14,7 +14,7 @@ jobs:
           uses: actions/checkout@main
 
         # step 2: Docker login
-        - name: 'Docker login'
+        - name: ACR login
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
@@ -22,17 +22,17 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
 
         # step 3: Build Docker Server Image
-        - name: Build Docker
+        - name: Build Server Image
           run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
         # step 4: Push Server Image to Azure Registry
-        - name: Push Docker
+        - name: Push Server Image To ACR
           run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
         # step 5: Build Docker Client Image
-        - name: Build Docker
+        - name: Build Client Image
           run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
 
         # step 6: Push Client Image to Azure Registry
-        - name: Push Docker
+        - name: Push Client Image To ACR
           run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
