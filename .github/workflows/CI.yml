@@ -23,7 +23,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     # build and push Client image
     - name: ACR build Client
-      id: acr
+      id: acrclient
       uses: ams0/acr-task-github-action@v1
       with:
         service_principal: ${{ secrets.service_principal_id }}
@@ -37,7 +37,7 @@ jobs:
         dockerfile: Dockerfile
     # build and push Server image
     - name: ACR build Server
-      id: acr
+      id: acrserver
       uses: ams0/acr-task-github-action@v1
       with:
         service_principal: ${{ secrets.service_principal_id }}
