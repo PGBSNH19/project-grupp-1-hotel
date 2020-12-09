@@ -22,25 +22,3 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
 
-    # step 1: Checkout GitHub Action
-    - name: Checkout GitHub Action
-      uses: actions/checkout@development
-
-    - name: Docker login
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
-        username: ${{ secrets.REGISTRY }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-
-    - name: Build Docker Server image
-      run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
-
-    - name: Push Docker Server image
-      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
-
-    - name: Build Docker Client image
-      run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
-
-    - name: Push Docker Client image
-      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
