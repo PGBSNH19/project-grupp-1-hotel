@@ -21,31 +21,55 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    # build and push Client image
-    - name: ACR build Client
-      id: acrclient
-      uses: ams0/acr-task-github-action@v1
+
+    # step 1: Checkout GitHub Action
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+
+    # step 2: Docker login
+    - name: 'Docker login'
+      uses: azure/docker-login@v1
       with:
-        service_principal: ${{ secrets.service_principal_id }}
-        service_principal_password: ${{ secrets.service_principal_password }}
-        tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.client_repository }}
-        image: client
-        # git_access_token: ${{ secrets.git_access_token }}
-        folder: Hotel.Client/
-        dockerfile: Dockerfile
-    # build and push Server image
-    - name: ACR build Server
-      id: acrserver
-      uses: ams0/acr-task-github-action@v1
-      with:
-        service_principal: ${{ secrets.service_principal_id }}
-        service_principal_password: ${{ secrets.service_principal_password }}
-        tenant: ${{ secrets.tenant }}
-        registry: ${{ secrets.registry }}
-        repository: ${{ secrets.server_repository }}
-        image: server
-        # git_access_token: ${{ secrets.git_access_token }}
-        folder: Hotel.Server/
-        dockerfile: Dockerfile
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
+        username: ${{ secrets.REGISTRY }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    # step 3: Build Docker Image
+    - name: Build Docker
+      run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+
+    # step 4: Push Docker to Azure Registry
+    - name: Push Docker
+      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+
+    # # build and push Client image
+
+    # - name: ACR build Client
+    #   id: acrclient
+    #   uses: ams0/acr-task-github-action@v1
+    #   with:
+    #     service_principal: ${{ secrets.service_principal_id }}
+    #     service_principal_password: ${{ secrets.service_principal_password }}
+    #     tenant: ${{ secrets.tenant }}
+    #     registry: ${{ secrets.registry }}
+    #     repository: ${{ secrets.client_repository }}
+    #     image: client
+    #     # git_access_token: ${{ secrets.git_access_token }}
+    #     folder: Hotel.Client/
+    #     dockerfile: Dockerfile
+
+    # # build and push Server image
+
+    # - name: ACR build Server
+    #   id: acrserver
+    #   uses: ams0/acr-task-github-action@v1
+    #   with:
+    #     service_principal: ${{ secrets.service_principal_id }}
+    #     service_principal_password: ${{ secrets.service_principal_password }}
+    #     tenant: ${{ secrets.tenant }}
+    #     registry: ${{ secrets.registry }}
+    #     repository: ${{ secrets.server_repository }}
+    #     image: server
+    #     # git_access_token: ${{ secrets.git_access_token }}
+    #     folder: Hotel.Server/
+    #     dockerfile: Dockerfile
