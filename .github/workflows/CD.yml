@@ -2,33 +2,35 @@ name: Continous Delivery
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    
-    # step 1: Checkout GitHub Action
-    - name: 'Checkout GitHub Action'
-      uses: actions/checkout@main
 
-    # step 2: Docker login
-    - name: 'Docker login'
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
-        username: ${{ secrets.REGISTRY }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:  
+        # step 1: Checkout GitHub Action
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@main
 
-    # step 3: Build Docker Server Image
-    - name: Build Docker
-      run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+        # step 2: Docker login
+        - name: ACR login
+          uses: azure/docker-login@v1
+          with:
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
+            username: ${{ secrets.REGISTRY }}
+            password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    # step 4: Push Server Image to Azure Registry
-    - name: Push Docker
-      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+        # step 3: Build Docker Server Image
+        - name: Build Server Image
+          run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
-    # step 5: Build Docker Client Image
-    - name: Build Docker
-      run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+        # step 4: Push Server Image to Azure Registry
+        - name: Push Server Image To ACR
+          run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
-    # step 6: Push Client Image to Azure Registry
-    - name: Push Docker
-      run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+        # step 5: Build Docker Client Image
+        - name: Build Client Image
+          run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+
+        # step 6: Push Client Image to Azure Registry
+        - name: Push Client Image To ACR
+          run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
