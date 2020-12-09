@@ -32,7 +32,7 @@ jobs:
         registry: ${{ secrets.registry }}
         repository: ${{ secrets.client_repository }}
         image: client
-        git_access_token: ${{ secrets.git_access_token }}
+        # git_access_token: ${{ secrets.git_access_token }}
         folder: Hotel.Client/
         dockerfile: Dockerfile
     # build and push Server image
@@ -46,6 +46,6 @@ jobs:
         registry: ${{ secrets.registry }}
         repository: ${{ secrets.server_repository }}
         image: server
-        git_access_token: ${{ secrets.git_access_token }}
+        # git_access_token: ${{ secrets.git_access_token }}
         folder: Hotel.Server/
         dockerfile: Dockerfile
