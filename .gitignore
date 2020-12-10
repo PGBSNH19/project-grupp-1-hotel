@@ -441,4 +441,4 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-*.Development.json
+**/*.Development.json
