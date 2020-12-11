@@ -2,8 +2,18 @@
 
 ## Appen
 
-Börjar designas som mobile first, meny överst, och en ingång till bokning tidigt på sidan. 
-Längre ner på sidan bilder, betyg, texter, rekkomendationer etc, här kan man vara kreativ.
+Börjar designas som mobile first, den ska vara mobil och PC vänlig. 
+
+Meny överst, och en ingång till bokning tidigt på sidan. Längre ner på sidan bilder, betyg, texter, rekkomendationer etc, här kan man vara kreativ.
+
+### Utgångspunkt (Mall)
+https://www.elite.se/
+
+### Device Breakpoints
+
+Systemet byggs anpassat för en minsta storlek (mobile):
+
+Min-device-width: 360px
 
 ### Länkar i menyn
 * Bokning
@@ -11,6 +21,31 @@ Längre ner på sidan bilder, betyg, texter, rekkomendationer etc, här kan man 
 * Boka konferensrum [disabled]
 * Resturang -> Resturangsida med meny
 * Vårat spa
+
+## Tekniska krav
+
+- .NET Version 
+- C# 5.0 
+- Blazor
+- Backend Framework API MVC
+- REST
+- T-SQL
+- GitHub Action CI/CD
+- Deployment till Azure
+- Docker
+- Automatiska tester
+- Unit tests
+
+## Projektkrav
+
+- Ett SRS dokument på engelska (md) Påbörjat :ballot_box_with_check:
+- Krav skrivs som features med BDD på engelska (Påbörjat) :ballot_box_with_check:
+- Al kod i ett publikt GitHub repo :ballot_box_with_check:
+- GitHub pull requests :ballot_box_with_check:
+- Confluenece :ballot_box_with_check:
+- Jira :ballot_box_with_check:
+
+## Data Models
 
 ### Booking
 ```
@@ -55,10 +90,12 @@ Pets [bool]
 ```
 
 ### BreakfastReview
+
 ```
 Created = DateTime.Now
 Description
 Grade (1,5) [HttpGet] > 4
+Author (optional)
 (ImageUrl)
 ```
 
@@ -67,5 +104,6 @@ Grade (1,5) [HttpGet] > 4
 Created = DateTime.Now
 Description
 Grade (1,5) [HttpGet] > 4
+Author (optional)
 (ImageUrl)
 ```
