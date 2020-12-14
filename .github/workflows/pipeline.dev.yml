@@ -36,31 +36,31 @@ jobs:
             username: ${{ secrets.REGISTRY_DEV }}
             password: ${{ secrets.REGISTRY_PASSWORD_DEV }}
 
-        - name: Build and Push Server Image to Registry
-          run:  |
-            docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
+        # - name: Build and Push Server Image to Registry
+        #   run:  |
+        #     docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
+        #     docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
 
-        - name: Build and Push Client Image to Registry
-          run: | 
-            docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
+        # - name: Build and Push Client Image to Registry
+        #   run: | 
+        #     docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
+        #     docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
         
-        - name: Azure Service Principal authentication
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+        # - name: Azure Service Principal authentication
+        #   uses: azure/login@v1
+        #   with:
+        #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: Deploy Server to App Service
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: hotelserverdev
-            publish-profile: ${{ secrets.SERVER_PUBLISH_PROFILE_DEV }}
-            images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/server:${{ github.sha }}
+        # - name: Deploy Server to App Service
+        #   uses: azure/webapps-deploy@v2
+        #   with:
+        #     app-name: hotelserverdev
+        #     publish-profile: ${{ secrets.SERVER_PUBLISH_PROFILE_DEV }}
+        #     images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/server:${{ github.sha }}
 
-        - name: Deploy Server to App Service
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: hotelclientdev
-            publish-profile: ${{ secrets.CLIENT_PUBLISH_PROFILE_DEV }}
-            images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/client:${{ github.sha }}
+        # - name: Deploy Server to App Service
+        #   uses: azure/webapps-deploy@v2
+        #   with:
+        #     app-name: hotelclientdev
+        #     publish-profile: ${{ secrets.CLIENT_PUBLISH_PROFILE_DEV }}
+        #     images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/client:${{ github.sha }}

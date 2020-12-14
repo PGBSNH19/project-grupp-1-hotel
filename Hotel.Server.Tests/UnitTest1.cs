@@ -16,6 +16,7 @@ namespace Hotel.Server.Tests
 
             var result = controller.GetFoo();
 
+            Assert.Null(result); // intentional failure
             Assert.IsType<OkResult>(result);
         }
     }
