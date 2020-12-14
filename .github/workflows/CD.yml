@@ -32,19 +32,19 @@ jobs:
         - name: Docker login
           uses: azure/docker-login@v1
           with:
-            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            username: ${{ secrets.REGISTRY }}
-            password: ${{ secrets.REGISTRY_PASSWORD }}
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}
+            username: ${{ secrets.REGISTRY_DEV }}
+            password: ${{ secrets.REGISTRY_PASSWORD_DEV }}
 
         - name: Build and Push Server Image to Registry
           run:  |
-            docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+            docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
 
         - name: Build and Push Client Image to Registry
           run: | 
-            docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+            docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
         
         - name: Azure Service Principal authentication
           uses: azure/login@v1
@@ -56,4 +56,4 @@ jobs:
           with:
             app-name: hotelserverdev
             publish-profile: ${{ secrets.AZURE_SERVER_PUBLISH_PROFILE }}
-            images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/server:${{ github.sha }}
+            images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/server:${{ github.sha }}
