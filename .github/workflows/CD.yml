@@ -1,36 +1,58 @@
 name: Continous Delivery
 on:
   push:
-    branches: [ main ]
+    branches: [ development ]
 
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+
+        - name: Setup .NET Core
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: '5.0'
+
+        - name: Install dependencies
+          run: dotnet restore
+
+        - name: Build
+          run: dotnet build --configuration Release --no-restore
+
+        - name: Test
+          run: dotnet test --no-restore --verbosity normal
+
         steps:  
-        # step 1: Checkout GitHub Action
-        - name: 'Checkout GitHub Action'
+        - name: Checkout GitHub Action
           uses: actions/checkout@main
 
-        # step 2: Docker login
-        - name: ACR login
+        - name: Docker login to ACR
           uses: azure/docker-login@v1
           with:
-            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER}}
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.REGISTRY }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
 
-        # step 3: Build Docker Server Image
-        - name: Build Server Image
-          run: docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+        - name: Build and Push Server Image to Registry
+          run:  |
+            docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
 
-        # step 4: Push Server Image to Azure Registry
-        - name: Push Server Image To ACR
-          run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/server:${{ github.sha }}
+        - name: Build and Push Client Image to Registry
+          run: | 
+            docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+        
+        # - name: Azure Service Principal authentication
+        #   uses: azure/login@v1
+        #   with:
+        #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        # step 5: Build Docker Client Image
-        - name: Build Client Image
-          run: docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
-
-        # step 6: Push Client Image to Azure Registry
-        - name: Push Client Image To ACR
-          run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
+        - name: Deploy Server to App Service
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: hotelserverdev
+            publish-profile: ${{ secrets.AZURE_SERVER_PUBLISH_PROFILE }}
+            images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/server:${{ github.sha }}
