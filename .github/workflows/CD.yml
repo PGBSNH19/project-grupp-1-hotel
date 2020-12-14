@@ -6,7 +6,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-
+        
+        # Continous Integration
         steps:
         - uses: actions/checkout@v2
 
@@ -20,10 +21,11 @@ jobs:
 
         - name: Build
           run: dotnet build --configuration Release --no-restore
-
+        # to do: make sure this breaks the pipeline on failure
         - name: Test
           run: dotnet test --no-restore --verbosity normal
 
+        # Continous Deployment
         - name: Checkout GitHub Action
           uses: actions/checkout@main
 
@@ -44,10 +46,10 @@ jobs:
             docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER}}/client:${{ github.sha }}
         
-        # - name: Azure Service Principal authentication
-        #   uses: azure/login@v1
-        #   with:
-        #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+        - name: Azure Service Principal authentication
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
 
         - name: Deploy Server to App Service
           uses: azure/webapps-deploy@v2
