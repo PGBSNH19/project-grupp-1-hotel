@@ -24,7 +24,6 @@ jobs:
         - name: Test
           run: dotnet test --no-restore --verbosity normal
 
-        steps:  
         - name: Checkout GitHub Action
           uses: actions/checkout@main
 
