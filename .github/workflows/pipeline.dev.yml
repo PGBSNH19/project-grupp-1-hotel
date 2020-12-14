@@ -55,5 +55,12 @@ jobs:
           uses: azure/webapps-deploy@v2
           with:
             app-name: hotelserverdev
-            publish-profile: ${{ secrets.AZURE_SERVER_PUBLISH_PROFILE }}
+            publish-profile: ${{ secrets.SERVER_PUBLISH_PROFILE_DEV }}
             images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/server:${{ github.sha }}
+
+        - name: Deploy Server to App Service
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: hotelclientdev
+            publish-profile: ${{ secrets.CLIENT_PUBLISH_PROFILE_DEV }}
+            images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/client:${{ github.sha }}
