@@ -54,7 +54,7 @@ namespace Hotel.Server.Controllers
         [Route("hello")]
         public async Task<ActionResult> GetHello()
         {
-            var d = new DummyInfo { Content = "hello" };
+            var d = new DummyInfo { Content = "Development server up and running" };
             return Ok(d);
         }
 

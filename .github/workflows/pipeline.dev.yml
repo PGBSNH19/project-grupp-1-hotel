@@ -1,4 +1,4 @@
-name: Continous Delivery
+name: Development CI/CD
 on:
   push:
     branches: [ development ]

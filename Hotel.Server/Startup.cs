@@ -47,6 +47,7 @@ namespace Hotel.Server
             //    .AllowAnyMethod()
             //    .AllowAnyHeader()
             //);
+
             app.UseCors(policy =>
                 policy.AllowAnyOrigin()
                 .AllowAnyMethod()
