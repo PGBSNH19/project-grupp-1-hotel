@@ -21,7 +21,7 @@ jobs:
 
         - name: Build
           run: dotnet build --configuration Release --no-restore
-        # to do: make sure this breaks the pipeline on failure
+        # to do: make sure this stops the pipeline on failure
         - name: Test
           run: dotnet test --no-restore --verbosity normal
 
@@ -29,7 +29,7 @@ jobs:
         - name: Checkout GitHub Action
           uses: actions/checkout@main
 
-        - name: Docker login to ACR
+        - name: Docker login
           uses: azure/docker-login@v1
           with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
