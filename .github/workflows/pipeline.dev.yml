@@ -18,11 +18,11 @@ jobs:
       with:
         dotnet-version: '5.0'
 
-    #restore dependencies and tools
+    # restore dependencies and tools
     - name: Dotnet restore
       run: dotnet restore
 
-    # Dotnet build
+    # dotnet build
     - name: Dotnet build
       run: dotnet build --configuration Release --no-restore
 
@@ -31,21 +31,26 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     # Continous Deployment
-    # appsettings to do: test this out
-    - name: Appsettings Variable Substitution
+    - name: Appsettings variable substitution for Server
       uses: microsoft/variable-substitution@v1
       with:
         files: Hotel.Server/appsettings.json
       env:
         ConnectionStrings.DefaultConnection: ${{ secrets.CONNECTION_STRING_DEV }}
-        
+
+    - name: Appsettings variable substitution for Client
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: Hotel.Client/wwwroot/appsettings.json
+      env:
+        BaseApiUrl: ${{ secrets.BASE_API_URL_DEV }}
+
     - name: Login to container registry
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}
         username: ${{ secrets.REGISTRY_DEV }}
         password: ${{ secrets.REGISTRY_PASSWORD_DEV }}
-
 
     - name: Build Docker image of Server and push to Registry
       run:  |

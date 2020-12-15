@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
+@inject IConfiguration Configuration
 
 <h1>Weather forecast</h1>
 
@@ -21,7 +22,7 @@ else
     {
         try
         {
-            dummy = await Http.GetFromJsonAsync<DummyInfo>("http://localhost:5001/api/WeatherForecast/hello");
+            dummy = await Http.GetFromJsonAsync<DummyInfo>($"{Configuration["BaseApiUrl"]}api/WeatherForecast/hello");
         }
         catch { Console.WriteLine("Error requesting"); }
 
@@ -30,7 +31,8 @@ else
         Console.WriteLine("test");
     }
 
-    public class DummyInfo {
+    public class DummyInfo
+    {
         public string Content { get; set; }
     }
 }
