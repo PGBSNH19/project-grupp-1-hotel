@@ -18,6 +18,7 @@ namespace Hotel.Server.Models
         public bool Breakfast { get; set; }
         public bool SpaAccess { get; set; }
         public DateTime Created { get; private set; } = DateTime.Now;
+
         public void Cancel() => IsCanceled = true;
     }
 }
