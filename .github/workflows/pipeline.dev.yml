@@ -59,7 +59,7 @@ jobs:
       with:
         files: Hotel.Server/appsettings.json
       env:
-        ConnectionStrings.Default: ${{ secrets.CONNECTION_STRING_DEV }}
+        ConnectionStrings.DefaultConnection: ${{ secrets.CONNECTION_STRING_DEV }}
 
     - name: Deploy and run Server on webapp
       uses: azure/webapps-deploy@v2
