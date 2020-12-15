@@ -11,8 +11,8 @@ namespace Hotel.Server.Tests
         public void Test1()
         {
             // todo: kolla upp autofixture 
-            // fråga Mirko
-            var controller = new WeatherForecastController(null);
+            // tar bort arrange-delen
+            var controller = new WeatherForecastController(null, null);
 
             var result = controller.GetFoo();
 
