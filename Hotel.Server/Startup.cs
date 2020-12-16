@@ -1,9 +1,11 @@
+using Hotel.Server.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Server
 {
@@ -24,6 +26,10 @@ namespace Hotel.Server
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hotel.Server", Version = "v1" });
             });
+
+            services.AddDbContext<HotelContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

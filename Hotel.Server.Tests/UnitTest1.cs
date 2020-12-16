@@ -12,7 +12,11 @@ namespace Hotel.Server.Tests
         {
             // todo: kolla upp autofixture 
             // tar bort arrange-delen
+<<<<<<< HEAD
             var controller = new BookingController();
+=======
+            var controller = new WeatherForecastController(null);
+>>>>>>> development
 
             var result = controller.GetFoo();
 
