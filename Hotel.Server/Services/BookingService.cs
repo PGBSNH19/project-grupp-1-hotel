@@ -18,17 +18,20 @@ namespace Hotel.Server.Services
 
         public Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request)
         {
-            throw new NotImplementedException();
+
         }
 
         public Task<RoomInfo[]> GetAvailableRoomsAsync(RoomAvailabilityRequest request)
         {
-            throw new NotImplementedException();
+            var unavailablerooms = await repo.GetUnavailableRooms(request);
+            var rooms = await repo.GetAvailableRoomTypesAsync(unavailablerooms);
+            return rooms;
         }
 
         public async Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber)
         {
-            var result = await repo.GetByBookingNumberAsync(bookingNumber);
+            var booking = await repo.GetByBookingNumberAsync(bookingNumber);
+            var result = booking.ToDto();
             return result;
         }
     }
