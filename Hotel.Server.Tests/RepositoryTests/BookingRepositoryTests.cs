@@ -57,5 +57,34 @@ namespace Hotel.Server.Tests.RepositoryTests
 
             Assert.True(res.Length == expected);
         }
+
+        [Theory]
+        [InlineData("foo")]
+        [InlineData("bar")]
+        public async void GetByBookingNumberAsync_BookingsExists_ReturnExpectedObjects(string bookingNumber)
+        {
+            var repo = GetRepoMockSetup();
+
+            var result = await repo.GetByBookingNumberAsync(bookingNumber);
+            var expected = bookingNumber;
+
+            Assert.True(result.BookingNumber == expected);
+            Assert.IsType<Booking>(result);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("12jm9kd9")]
+        [InlineData("#0)\")\")#=")]
+        public async void GetByBookingNumberAsync_BadOrNonExistingParameters_ReturnsNull(string bookingNumber)
+        {
+            var repo = GetRepoMockSetup();
+
+            var result = await repo.GetByBookingNumberAsync(bookingNumber);
+            var expected = bookingNumber;
+
+            Assert.Null(result);
+        }
     }
 }

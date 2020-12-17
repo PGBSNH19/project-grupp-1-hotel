@@ -6,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Hotel.Server.Repositories;
+using Hotel.Server.Repositories.Interfaces;
+using Hotel.Server.Services.Interfaces;
+using Hotel.Server.Services;
 
 namespace Hotel.Server
 {
@@ -30,6 +34,9 @@ namespace Hotel.Server
             services.AddDbContext<HotelContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

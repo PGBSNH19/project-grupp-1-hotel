@@ -12,5 +12,6 @@ namespace Hotel.Server.Repositories.Interfaces
     {
         IQueryable<int> GetUnavailableRoomIds(RoomAvailabilityRequest request);
         IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs);
+        Task<Booking> GetByBookingNumberAsync(string bookingnumber);
     }
 }
