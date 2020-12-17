@@ -3,14 +3,14 @@ namespace Hotel.Shared.Models.Request
 {
     public class BookingRequest 
     {
-        public DateTime CheckInDate { get; set; } = DateTime.Now;
-        public DateTime CheckOutDate { get; set; } = DateTime.Now.AddDays(1);
+        public DateTime CheckInDate { get; set; } 
+        public DateTime CheckOutDate { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public int Guests { get; set; } = 1;
+        public int Guests { get; set; }
         public bool Breakfast { get; set; }
         public bool SpaAccess { get; set; }
         public int DoubleBeds { get; set; }
