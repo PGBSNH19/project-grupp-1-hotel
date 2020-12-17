@@ -1,15 +1,15 @@
 using Hotel.Server.Persistence;
+using Hotel.Server.Repositories;
+using Hotel.Server.Repositories.Interfaces;
+using Hotel.Server.Services;
+using Hotel.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Hotel.Server.Repositories;
-using Hotel.Server.Repositories.Interfaces;
-using Hotel.Server.Services.Interfaces;
-using Hotel.Server.Services;
 
 namespace Hotel.Server
 {

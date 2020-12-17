@@ -30,8 +30,9 @@ namespace Hotel.Server.Tests.RepositoryTests
             var repo = GetRepoMockSetup();
 
             var request = new RoomAvailabilityRequest // intersect bookings on at least one extreme
-            { 
-                CheckInDate = DateTime.Parse("Dec 14, 2020"), CheckOutDate = DateTime.Parse("Dec 16, 2022")
+            {
+                CheckInDate = DateTime.Parse("Dec 14, 2020"),
+                CheckOutDate = DateTime.Parse("Dec 16, 2022")
             };
             var result = repo.GetUnavailableRoomIds(request);
             var res = result.ToArray();

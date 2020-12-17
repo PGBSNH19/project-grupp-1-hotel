@@ -28,14 +28,15 @@ namespace Hotel.Server.Services
             if (request.CheckOutDate < DateTime.Now)
                 return new ServiceResponse<BookingInfo>("Check out date cannot be set earlier than today.");
 
-            var query = repo.GetUnavailableRoomIds(new RoomAvailabilityRequest { 
-                CheckInDate = request.CheckInDate, 
-                CheckOutDate = request.CheckOutDate 
+            var query = repo.GetUnavailableRoomIds(new RoomAvailabilityRequest
+            {
+                CheckInDate = request.CheckInDate,
+                CheckOutDate = request.CheckOutDate
             });
             var availableroom = repo.GetAvailableRooms(query)
                 .Where(e => e.Beds == request.Beds && e.DoubleBeds == request.DoubleBeds)
                 .FirstOrDefault();
-            if (availableroom == null) 
+            if (availableroom == null)
                 return new ServiceResponse<BookingInfo>("Found no room with requested specifications.");
 
             var entity = request.ToDomain();
@@ -46,13 +47,13 @@ namespace Hotel.Server.Services
             {
                 await repo.AddAsync(entity);
                 await repo.Complete();
-            } 
+            }
             catch (Exception ex)
             {
                 Log.Error("Could not create new Booking {@Message}", ex.Message);
                 return new ServiceResponse<BookingInfo>($"Could not create new Booking: {ex.Message}");
             }
-            
+
             return new ServiceResponse<BookingInfo>(entity.ToDto());
         }
 
@@ -61,9 +62,9 @@ namespace Hotel.Server.Services
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@request}", request);
 
             if (request.CheckInDate < DateTime.Now)
-                return new ServiceResponse<List<RoomInfo>> ("Check in date cannot be set earlier than today.");
+                return new ServiceResponse<List<RoomInfo>>("Check in date cannot be set earlier than today.");
             if (request.CheckOutDate < DateTime.Now)
-                return new ServiceResponse<List<RoomInfo>> ("Check out date cannot be set earlier than today.");
+                return new ServiceResponse<List<RoomInfo>>("Check out date cannot be set earlier than today.");
 
             var unavailablequery = repo.GetUnavailableRoomIds(request);
             var roomTypes = await repo.GetAvailableRooms(unavailablequery)
@@ -82,7 +83,7 @@ namespace Hotel.Server.Services
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@bookingNumber}", bookingNumber);
             var booking = await repo.GetByBookingNumberAsync(bookingNumber);
-            if(booking == null)
+            if (booking == null)
             {
                 return null;
             }
