@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel.Server.Tests", "Hotel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel.Server", "Hotel.Server\Hotel.Server.csproj", "{25828A5A-31C4-45FE-A8C1-90EC63FBF368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Shared", "Hotel.Shared\Hotel.Shared.csproj", "{8A336CF7-9B7B-49FE-8A5A-65DDC89CF862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hotel.Shared", "Hotel.Shared\Hotel.Shared.csproj", "{8A336CF7-9B7B-49FE-8A5A-65DDC89CF862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
