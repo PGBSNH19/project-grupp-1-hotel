@@ -1,7 +1,10 @@
-﻿using Hotel.Server.Models.Info;
+﻿using Hotel.Server.Models;
+using Hotel.Server.Models.Info;
 using Hotel.Server.Models.Request;
+using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +24,14 @@ namespace Hotel.Server.Services
 
         }
 
-        public Task<RoomInfo[]> GetAvailableRoomsAsync(RoomAvailabilityRequest request)
+        public async Task<RoomInfo[]> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request)
         {
-            var unavailablerooms = await repo.GetUnavailableRooms(request);
-            var rooms = await repo.GetAvailableRoomTypesAsync(unavailablerooms);
-            return rooms;
+            var unavailablequery = repo.GetUnavailableRoomIds(request);
+            var roomTypes = await repo.GetAvailableRooms(unavailablequery)
+                .Select(s => s.ToDto())
+                .ToArrayAsync();
+            
+            return roomTypes;
         }
 
         public async Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber)

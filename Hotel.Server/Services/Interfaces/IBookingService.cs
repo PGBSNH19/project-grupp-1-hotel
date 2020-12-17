@@ -11,7 +11,7 @@ namespace Hotel.Server.Services.Interfaces
     public interface IBookingService
     {
         Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request);
-        Task<RoomInfo[]> GetAvailableRoomsAsync(RoomAvailabilityRequest request);
+        Task<RoomInfo[]> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request);
         Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber);
     }
 }

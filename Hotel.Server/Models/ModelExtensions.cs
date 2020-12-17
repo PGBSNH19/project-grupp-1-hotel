@@ -9,6 +9,17 @@ namespace Hotel.Server.Models
 {
     public static class ModelExtensions
     {
+        public static RoomInfo ToDto(this Room room) => new RoomInfo
+        {
+            Beds = room.Beds,
+            DoubleBeds = room.DoubleBeds,
+            IsCondo = room.IsCondo,
+            IsSuite = room.IsSuite,
+            Smoking = room.Smoking,
+            Pets = room.Pets,
+            ImageUrl = room.ImageUrl
+        };
+
         public static BookingInfo ToDto(this Booking booking) => new BookingInfo
         {
             Id = booking.Id,
