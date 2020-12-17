@@ -1,0 +1,11 @@
+﻿<CheckinForm/>
+<div class="image-container">
+    <img src="/Images/@Images[ImageIndex]" asp-append-version="true" id="img" />
+    <button @onclick="@SlideRight" class="btn-right">@NextIndicator</button>
+    <button @onclick="@SlideLeft" class="btn-left">@BackIndicator</button>
+    <div class="image-text">
+        <p class="title">WELCOME TO OUR HOTEL</p>
+        <p class="description">Please feel free to let us know if you need anything</p>
+    </div>
+</div>
+
