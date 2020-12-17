@@ -1,0 +1,33 @@
+﻿body {
+}
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+.main {
+    background: #3C2F2F;
+}
+p {
+    color: #BE9B7B;
+}
+
+.link {
+    color: #BE9B7B;
+}
+
+.main a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.copy {
+    color: #BE9B7B;
+}
