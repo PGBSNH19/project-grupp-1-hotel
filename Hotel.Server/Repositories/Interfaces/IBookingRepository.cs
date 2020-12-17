@@ -10,7 +10,8 @@ namespace Hotel.Server.Repositories.Interfaces
 {
     public interface IBookingRepository : IBaseRepository
     {
-        IQueryable<int> GetUnavailableRoomIdsAsync(RoomAvailabilityRequest request);
-        IQueryable<Room> GetAvailableRoomsAsync(IQueryable<int> unavailableIDs);
+        IQueryable<int> GetUnavailableRoomIds(RoomAvailabilityRequest request);
+        IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs);
+        Task<Booking> GetByBookingNumberAsync(string bookingnumber);
     }
 }

@@ -33,7 +33,7 @@ namespace Hotel.Server.Tests.RepositoryTests
             { 
                 CheckInDate = DateTime.Parse("Dec 14, 2020"), CheckOutDate = DateTime.Parse("Dec 16, 2020")
             };
-            var result = repo.GetUnavailableRoomIdsAsync(request);
+            var result = repo.GetUnavailableRoomIds(request);
             var res = result.ToArray();
             var expected = 1;
 
@@ -50,12 +50,41 @@ namespace Hotel.Server.Tests.RepositoryTests
                 CheckInDate = DateTime.Parse("Dec 14, 2020"),
                 CheckOutDate = DateTime.Parse("Dec 16, 2020")
             };
-            var ids = repo.GetUnavailableRoomIdsAsync(request);
-            var result = repo.GetAvailableRoomsAsync(ids);
+            var ids = repo.GetUnavailableRoomIds(request);
+            var result = repo.GetAvailableRooms(ids);
             var res = result.ToArray();
             var expected = 2;
 
             Assert.True(res.Length == expected);
+        }
+
+        [Theory]
+        [InlineData("foo")]
+        [InlineData("bar")]
+        public async void GetByBookingNumberAsync_BookingsExists_ReturnExpectedObjects(string bookingNumber)
+        {
+            var repo = GetRepoMockSetup();
+
+            var result = await repo.GetByBookingNumberAsync(bookingNumber);
+            var expected = bookingNumber;
+
+            Assert.True(result.BookingNumber == expected);
+            Assert.IsType<Booking>(result);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("12jm9kd9")]
+        [InlineData("#0)\")\")#=")]
+        public async void GetByBookingNumberAsync_BadOrNonExistingParameters_ReturnsNull(string bookingNumber)
+        {
+            var repo = GetRepoMockSetup();
+
+            var result = await repo.GetByBookingNumberAsync(bookingNumber);
+            var expected = bookingNumber;
+
+            Assert.Null(result);
         }
     }
 }

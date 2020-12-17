@@ -10,8 +10,8 @@ namespace Hotel.Server.Tests
     public static class MockData
     {
         public static List<Booking> MockBookings => new List<Booking> {
-                new Booking { Id = 1, CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
-                new Booking { Id = 2, CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
+                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
+                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
             };
 
         public static List<Room> MockRooms => new List<Room> {

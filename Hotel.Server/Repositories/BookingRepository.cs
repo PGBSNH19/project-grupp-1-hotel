@@ -13,26 +13,28 @@ namespace Hotel.Server.Repositories
 {
     public class BookingRepository : BaseRepository, IBookingRepository
     {
-
         public BookingRepository(HotelContext ctx) : base(ctx) 
         { }
 
-        public  IQueryable<int> GetUnavailableRoomIdsAsync(RoomAvailabilityRequest request)
+        public IQueryable<int> GetUnavailableRoomIds(RoomAvailabilityRequest request)
         {
-            //var ids = await ctx.Bookings
-            //    .Where(e => !(request.CheckOutDate <= e.CheckInDate || request.CheckInDate >= e.CheckOutDate)).Select(e => e.Id).ToArrayAsync();
             var ids = ctx.Bookings
                 .Where(e => !(request.CheckOutDate <= e.CheckInDate || request.CheckInDate >= e.CheckOutDate) && e.Room != null)
                 .Include(e => e.Room)
                 .Select(e => e.Room.Id);
-
             return ids;
         }
 
-        public IQueryable<Room> GetAvailableRoomsAsync(IQueryable<int> unavailableIDs)
+        public IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs)
         {
             var query = ctx.Rooms.Where(r => !unavailableIDs.Contains(r.Id));
             return query;
+        }
+
+        public async Task<Booking> GetByBookingNumberAsync(string bookingnumber)
+        {
+            var result = await ctx.Bookings.FirstOrDefaultAsync(e => e.BookingNumber == bookingnumber);
+            return result;
         }
     }
 }
