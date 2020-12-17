@@ -1,7 +1,8 @@
-﻿using Hotel.Server.Models.Info;
+﻿using Hotel.Server.Models;
+using Hotel.Server.Models.Info;
 using Hotel.Server.Models.Request;
 
-namespace Hotel.Server.Models
+namespace Hotel.Server.Extensions
 {
     public static class ModelExtensions
     {

@@ -1,4 +1,4 @@
-﻿using Hotel.Server.Models;
+﻿using Hotel.Server.Extensions;
 using Hotel.Server.Models.Info;
 using Hotel.Server.Models.Request;
 using Hotel.Server.Repositories.Interfaces;
@@ -33,14 +33,13 @@ namespace Hotel.Server.Services
                 CheckInDate = request.CheckInDate,
                 CheckOutDate = request.CheckOutDate
             });
+
             var availableroom = repo.GetAvailableRooms(query)
-                .Where(e => e.Beds == request.Beds && e.DoubleBeds == request.DoubleBeds)
-                .FirstOrDefault();
+                .Where(e => e.Beds == request.Beds && e.DoubleBeds == request.DoubleBeds).FirstOrDefault();
             if (availableroom == null)
                 return new ServiceResponse<BookingInfo>("Found no room with requested specifications.");
 
             var entity = request.ToDomain();
-            entity.BookingNumber = Guid.NewGuid().ToString();
             entity.Room = availableroom;
 
             try
@@ -82,11 +81,10 @@ namespace Hotel.Server.Services
         public async Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber)
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@bookingNumber}", bookingNumber);
+
             var booking = await repo.GetByBookingNumberAsync(bookingNumber);
-            if (booking == null)
-            {
-                return null;
-            }
+            if (booking == null) return null;
+
             var result = booking.ToDto();
 
             return result;
