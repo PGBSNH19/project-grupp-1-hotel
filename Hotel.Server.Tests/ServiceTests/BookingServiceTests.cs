@@ -49,7 +49,6 @@ namespace Hotel.Server.Tests.ServiceTests
             Assert.IsType<ServiceResponse<BookingInfo>>(result);
         }
 
-
         [Fact]
         public async void GetAvailableRoomTypesAsync_IfAllRoomsIsAvailable_ReturnAllDistinctRoomTypes()
         {
@@ -67,7 +66,7 @@ namespace Hotel.Server.Tests.ServiceTests
         }
 
         [Fact]
-        public async void GetAvailableRoomTypesAsync_IfAllRoomsIsBooked_ReturnCountZero()
+        public async void GetAvailableRoomTypesAsync_IfAllRoomsAreBooked_ReturnNoRooms()
         {
             List<Room> rooms = new List<Room>
             {
@@ -76,19 +75,17 @@ namespace Hotel.Server.Tests.ServiceTests
             };
             List<Booking> bookings = new List<Booking>
             {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
-                new Booking { Id = 2, BookingNumber = "foo",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") }
+                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 20, 2022") },
+                new Booking { Id = 2, BookingNumber = "foo",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 20, 2022") }
             };
-
             var service = GetRepoMockSetup(bookings, rooms);
-
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[0];
 
             var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
-            var resultCount = result.Entity.Count;
             var expected = 0;
 
-            Assert.Equal(expected, resultCount);
+            Assert.True(result.Entity.Count == expected);
+            Assert.IsType<List<RoomInfo>>(result.Entity);
         }
 
         [Fact]
@@ -102,13 +99,10 @@ namespace Hotel.Server.Tests.ServiceTests
             };
             List<Booking> bookings = new List<Booking>
             {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 26, 2020") },
-                new Booking { Id = 2, BookingNumber = "bar",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 26, 2020") }
+                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 26, 2022") },
+                new Booking { Id = 2, BookingNumber = "bar",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 26, 2022") }
             };
-
             var service = GetRepoMockSetup(bookings, rooms);
-
-
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[3];
 
             var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
@@ -126,10 +120,9 @@ namespace Hotel.Server.Tests.ServiceTests
             };
             List<Booking> bookings = new List<Booking>
             {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
+                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 20, 2022") },
             };
             var service = GetRepoMockSetup(bookings, rooms);
-
 
             var result = await service.GetByBookingNumberAsync("foo");
             var expected = "foo";
@@ -146,10 +139,9 @@ namespace Hotel.Server.Tests.ServiceTests
             };
             List<Booking> bookings = new List<Booking>
             {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
+                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2022"), CheckOutDate = DateTime.Parse("Dec 20, 2022") },
             };
             var service = GetRepoMockSetup(bookings, rooms);
-
 
             var result = await service.GetByBookingNumberAsync("bar");
 
