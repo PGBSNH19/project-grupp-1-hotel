@@ -130,7 +130,7 @@ namespace Hotel.Server.Tests.ServiceTests
 
             var result = await service.GetByBookingNumberAsync("bar");
 
-            Assert.Null(result.BookingNumber);
+            Assert.Null(result);
         }
     }
 }
