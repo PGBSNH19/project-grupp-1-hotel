@@ -1,3 +1,10 @@
 ﻿@page "/booking"
 <h3>BookingPage</h3>
-<CustomerForm BookingRequest="@BookingRequest" OnValidSubmit="@CreateBooking"></CustomerForm>
+@if (ConfirmedBooking == null)
+{
+    <CustomerForm BookingRequest="@BookingRequest" OnValidSubmit="@CreateBooking"></CustomerForm>
+}
+else
+{
+    <ConfirmationPage ConfirmedBooking="@ConfirmedBooking"></ConfirmationPage>
+}

@@ -7,6 +7,7 @@ namespace Hotel.Server.Models.Request
 {
     public class BookingRequest
     {
+        public string BookingNumber { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         public string FirstName { get; set; }

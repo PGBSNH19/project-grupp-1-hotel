@@ -10,18 +10,7 @@ namespace Hotel.Client.Pages.Booking
 {
     public partial class ConfirmationPage
     {
-        [Parameter] public BookingRequest MyInformation { get; set; }
+        [Parameter] public BookingInfo ConfirmedBooking { get; set; } = new BookingInfo();
         [Parameter] public string MyName { get; set; }
-        [Parameter] public string MyEmail { get; set; }
-        
-        public void SetFields()
-        {
-            MyInformation = new BookingRequest
-            {
-                Email = MyEmail,
-                FirstName = MyName
-            };
-        }
-
     }
 }

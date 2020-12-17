@@ -1,5 +1,14 @@
-﻿@page "/booking/confirmation/{MyName}/{MyEmail}"
+﻿@page "/booking/confirmation"
+
+<h1>Thank you, we've received your booking!</h1>
+<h2><b>Number of guests:</b> @ConfirmedBooking.Guests </h2>
+@if (ConfirmedBooking.Breakfast != null || ConfirmedBooking.SpaAccess != null)
+{
+    <h2>You have added the following options: </h2>
+    <h3>@ConfirmedBooking.Breakfast</h3>
+}
+<h2>@ConfirmedBooking.Email</h2>
 
 
-<h3>Booking succeded!</h3>
-@MyInformation.FirstName
+
+
