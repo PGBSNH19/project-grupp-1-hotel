@@ -82,7 +82,12 @@ namespace Hotel.Server.Services
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@bookingNumber}", bookingNumber);
             var booking = await repo.GetByBookingNumberAsync(bookingNumber);
+            if(booking == null)
+            {
+                return null;
+            }
             var result = booking.ToDto();
+
             return result;
         }
     }
