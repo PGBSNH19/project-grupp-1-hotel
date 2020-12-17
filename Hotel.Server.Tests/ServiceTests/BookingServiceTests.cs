@@ -81,7 +81,6 @@ namespace Hotel.Server.Tests.ServiceTests
             };
             var service = GetRepoMockSetup(bookings, rooms);
 
-
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[0];
 
             var result = service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
