@@ -13,6 +13,7 @@ namespace Hotel.Server.Models.Request
         public int Guests { get; set; }
         public bool Breakfast { get; set; }
         public bool SpaAccess { get; set; }
+        public int Beds { get; set; }
         public int DoubleBeds { get; set; }
         public bool IsCondo { get; set; }
         public bool IsSuite { get; set; }
