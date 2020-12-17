@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hotel.Server.Models.Request;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,25 +16,27 @@ namespace Hotel.Server.Controllers
         [Route("/{bookingNumber}")]
         public async Task<IActionResult> GetBookingByBookingNumber(string bookingNumber)
         {
+            if (String.IsNullOrEmpty(bookingNumber)) return BadRequest();
+
+
             return Ok();
         }
 
         [HttpGet]
         [Route("/check/")]
-        public async Task<IActionResult> GetAvailableRooms()
+        public async Task<IActionResult> GetAvailableRooms([FromBody] RoomAvailabilityRequest roomAvailability)
         {
+            if (roomAvailability == null) return BadRequest();
+
+
             return Ok();
         }
       
         [HttpPost]
-        public async Task<IActionResult> PostBooking()
+        public async Task<IActionResult> PostBooking([FromBody] BookingRequest bookingRequest)
         {
-            return Ok();
-        }
+            if (bookingRequest == null) return BadRequest();
 
-        [HttpGet]
-        public ActionResult GetFoo()
-        {
             return Ok();
         }
     }
