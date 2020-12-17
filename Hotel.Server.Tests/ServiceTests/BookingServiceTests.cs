@@ -1,8 +1,10 @@
 ﻿using Hotel.Server.Models;
+using Hotel.Server.Models.Info;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services;
+using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
 using Moq;
 using Moq.EntityFrameworkCore;
@@ -25,6 +27,28 @@ namespace Hotel.Server.Tests.ServiceTests
             var bookingRepository = new BookingRepository(ctx.Object);
             return new BookingService(bookingRepository);
         }
+
+        [Fact] public async void CreateAsync_IncomingBookingRequestPasses_ReturnsBooking()
+        {
+            var service = GetRepoMockSetup(new List<Booking>(), MockData.MockRooms);
+            var bookingRequest = MockData.MockBookingRequest;
+
+            var result = await service.CreateAsync(bookingRequest);
+
+            Assert.IsType<ServiceResponse<BookingInfo>>(result);
+        }
+
+        [Fact]
+        public async void CreateAsync_IncomingBookingRequestDoesNotPassDueToNoAvailableRooms_ReturnsNoSuccess()
+        {
+            var service = GetRepoMockSetup(new List<Booking>(), MockData.MockRooms);
+            var bookingRequest = MockData.MockBookingRequest;
+
+            var result = await service.CreateAsync(bookingRequest);
+
+            Assert.IsType<ServiceResponse<BookingInfo>>(result);
+        }
+
 
         [Fact]
         public void GetAvailableRoomTypesAsync_IfNoRoomIsBooked_ReturnAllDistinctRoomTypes()

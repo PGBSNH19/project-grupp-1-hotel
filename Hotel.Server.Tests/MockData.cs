@@ -29,5 +29,23 @@ namespace Hotel.Server.Tests
             new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 20, 2020"), CheckOutDate = DateTime.Parse("Dec 24, 2020"), Guests = 1},
             new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 22, 2020"), CheckOutDate = DateTime.Parse("Dec 26, 2020"), Guests = 3},
         };
+
+        public static BookingRequest MockBookingRequest => new BookingRequest
+        {
+            Address = "Test Avenue 126", // booking info
+            CheckInDate = DateTime.Parse("Dec 22, 2020"),
+            CheckOutDate = DateTime.Parse("Dec 26, 2020"),
+            Email = "test.testsson@gmail.com",
+            FirstName = "Hotello",
+            LastName = "Testovich",
+            Guests = 1,
+            PhoneNumber = "+46738429270",
+
+            Beds = 1, // room info
+            DoubleBeds = 1,
+            SpaAccess = false,
+            IsSuite = false,
+            Breakfast = true
+        };
     }
 }

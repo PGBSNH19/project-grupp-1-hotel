@@ -59,6 +59,12 @@ namespace Hotel.Server.Services
         public async Task<ServiceResponse<List<RoomInfo>>> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request)
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@request}", request);
+
+            if (request.CheckInDate < DateTime.Now)
+                return new ServiceResponse<List<RoomInfo>> ("Check in date cannot be set earlier than today.");
+            if (request.CheckOutDate < DateTime.Now)
+                return new ServiceResponse<List<RoomInfo>> ("Check out date cannot be set earlier than today.");
+
             var unavailablequery = repo.GetUnavailableRoomIds(request);
             var roomTypes = await repo.GetAvailableRooms(unavailablequery)
                 .Select(s => new { Beds = s.Beds, DoubleBeds = s.DoubleBeds })
