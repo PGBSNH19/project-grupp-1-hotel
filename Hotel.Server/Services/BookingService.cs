@@ -15,7 +15,6 @@ namespace Hotel.Server.Services
 {
     public class BookingService : IBookingService
     {
-
         private readonly IBookingRepository repo;
 
         public BookingService(IBookingRepository repo) => this.repo = repo;
@@ -57,15 +56,20 @@ namespace Hotel.Server.Services
             return new ServiceResponse<BookingInfo>(entity.ToDto());
         }
 
-        public async Task<ServiceResponse<RoomInfo[]>> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request)
+        public async Task<ServiceResponse<List<RoomInfo>>> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request)
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@request}", request);
             var unavailablequery = repo.GetUnavailableRoomIds(request);
             var roomTypes = await repo.GetAvailableRooms(unavailablequery)
+                .Select(s => new { Beds = s.Beds, DoubleBeds = s.DoubleBeds })
                 .Distinct()
-                .Select(s => s.ToDto())
                 .ToArrayAsync();
-            return new ServiceResponse<RoomInfo[]>(roomTypes);
+
+            List<RoomInfo> roomtypes = new List<RoomInfo>(); // map the objects
+            foreach (var roomtype in roomTypes)
+                roomtypes.Add(new RoomInfo { Beds = roomtype.Beds, DoubleBeds = roomtype.DoubleBeds });
+
+            return new ServiceResponse<List<RoomInfo>>(roomtypes);
         }
 
         public async Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber)
