@@ -19,6 +19,10 @@ namespace Hotel.Client.Pages.Booking
         [Inject] NavigationManager NavigationManager { get; set; }
         BookingInfo ConfirmedBooking { get; set; }
 
+        [Parameter] public RoomInfo[] AvailableRooms { get; set; }
+
+        
+
         public async Task CreateBooking()
         {
             try { 

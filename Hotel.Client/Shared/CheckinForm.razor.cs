@@ -19,6 +19,7 @@ namespace Hotel.Client.Shared
         private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         private RoomInfo[] Room { get; set; } // todo: pass this data to next component to show rooms
+
         async Task GetRoom()
         {
             Room = await Http.GetFromJsonAsync<RoomInfo[]>
