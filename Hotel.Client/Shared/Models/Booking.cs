@@ -4,7 +4,7 @@ namespace Hotel.Shared.Models
 {
     public class Booking
     {
-	    public int Id { get; set; }
+        public int Id { get; set; }
         public bool IsCanceled { get; private set; } = false;
         public Room Room { get; set; }
         public DateTime CheckInDate { get; set; }
