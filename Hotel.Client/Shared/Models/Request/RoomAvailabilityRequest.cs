@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Hotel.Server.Models.Request
+namespace Hotel.Shared.Models.Request
 {
     public class RoomAvailabilityRequest
     {

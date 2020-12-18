@@ -1,4 +1,4 @@
-﻿namespace Hotel.Server.Models
+﻿namespace Hotel.Shared.Models
 {
     public class Room
     {
