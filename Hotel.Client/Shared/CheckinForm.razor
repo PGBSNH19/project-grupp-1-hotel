@@ -4,7 +4,7 @@
         <div class="form-group">
             <label>Guests</label>
             <div>
-                <InputSelect @bind-Value="@AvailableRoom.Guests" class="p-1">
+                <InputSelect @bind-Value="@AvailableRoom.Guests" class="form-control-sm w-100">
                     @foreach (var i in numberOfGuest)
                     {<option>@i</option>}
                 </InputSelect>
@@ -15,7 +15,7 @@
             <div>
                 <label>Check in</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckInDate"></InputDate>
+                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
                 </div>
             </div>
@@ -24,11 +24,14 @@
             <div>
                 <label>Check out</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate"></InputDate>
+                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
                 </div>
             </div>
         </div>
-        <button @onclick="@GetRoom" class="btn btn-success"> Search</button>
+        <div class="search-btn">
+            <button @onclick="@GetRoom" class="btn btn-outline-primary btn-sm h-50 mt-4">Search</button>
+        </div>
     </div>
 </EditForm>
+
