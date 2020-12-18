@@ -3,8 +3,9 @@
 }
 
 .top-row {
-    height: 3.5rem;
+    /*height: 3.5rem;*/
     background-color: #BE9B7B;
+/*    display: block;*/
 }
 
 .navbar-brand {
@@ -20,6 +21,8 @@
 
 .nav {
     background-color: #BE9B7B;
+    flex-direction: column;
+    display: flex;
 }
 
 .nav-item {
@@ -28,7 +31,7 @@
 }
 
     .nav-item:first-of-type {
-        padding-top: 1rem;
+        padding-top: 0.5rem;
     }
 
     .nav-item:last-of-type {
@@ -54,7 +57,11 @@
     color: black;
 }
 
-@media (min-width: 641px) {
+@media (min-width: 640px) {
+    .top-row {
+        display: none;
+    }
+
     .navbar-toggler {
         display: none;
     }
@@ -62,5 +69,18 @@
     .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
+    }
+    .nav {
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+    }
+
+        .nav-item {
+        padding-top: 0.5rem;
+    }
+
+    .nav-item:last-of-type {
+        padding-bottom: 0.5rem;
     }
 }
