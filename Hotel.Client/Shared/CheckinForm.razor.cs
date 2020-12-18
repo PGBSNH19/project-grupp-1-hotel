@@ -18,11 +18,21 @@ namespace Hotel.Client.Shared
         [Inject] HttpClient Http { get; set; }
         private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-        private RoomInfo[] Room { get; set; } // todo: pass this data to next component to show rooms
+        private List<int> numberOfGuest = new List<int> {1,2,3,4 };
+        private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
         async Task GetRoom()
         {
-            Room = await Http.GetFromJsonAsync<RoomInfo[]>
-                 ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate}/checkout/{AvailableRoom.CheckOutDate}");
+            if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
+            {
+                // todo: toast notification
+            }
+            else
+            {
+                Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
+                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate}/checkout/{AvailableRoom.CheckOutDate}");
+            }
+
         }
+
     }
 }
