@@ -1,5 +1,4 @@
-﻿using System;
-namespace Hotel.Server.Models
+﻿namespace Hotel.Server.Models
 {
     public class Room
     {

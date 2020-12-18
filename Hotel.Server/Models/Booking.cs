@@ -4,7 +4,7 @@ namespace Hotel.Server.Models
 {
     public class Booking
     {
-	    public int Id { get; set; }
+        public int Id { get; set; }
         public bool IsCanceled { get; private set; } = false;
         public string BookingNumber { get; set; }
         public Room Room { get; set; }

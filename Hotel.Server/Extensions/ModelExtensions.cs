@@ -1,11 +1,8 @@
-﻿using Hotel.Server.Models.Info;
+﻿using Hotel.Server.Models;
+using Hotel.Server.Models.Info;
 using Hotel.Server.Models.Request;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Hotel.Server.Models
+namespace Hotel.Server.Extensions
 {
     public static class ModelExtensions
     {
@@ -24,7 +21,7 @@ namespace Hotel.Server.Models
         {
             Id = booking.Id,
             BookingNumber = booking.BookingNumber,
-            CheckInDate = booking.CheckInDate, 
+            CheckInDate = booking.CheckInDate,
             CheckOutDate = booking.CheckOutDate,
             Email = booking.Email,
             Guests = booking.Guests,
