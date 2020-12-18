@@ -3,6 +3,7 @@
     position:relative;
     justify-content:center;
     flex-wrap:wrap;
+    margin-bottom:10px;
 }
 
 #img {
