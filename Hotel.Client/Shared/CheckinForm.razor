@@ -1,4 +1,4 @@
-﻿<EditForm Model="@AvailableRoom" OnValidSubmit="@OnValidSubmit">
+﻿<EditForm Model="@AvailableRoom" OnValidSubmit="GetRoom">
     <div id="main">
         <DataAnnotationsValidator />
         <div class="form-group">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="search-btn">
-            <button @onclick="@GetRoom" class="btn btn-outline-primary btn-sm h-50 mt-4">Search</button>
+            <button type="submit" class="btn btn-outline-primary btn-sm h-50 mt-4">Search</button>
         </div>
     </div>
 </EditForm>
