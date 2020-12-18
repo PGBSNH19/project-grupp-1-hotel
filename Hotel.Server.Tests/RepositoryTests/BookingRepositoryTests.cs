@@ -30,8 +30,9 @@ namespace Hotel.Server.Tests.RepositoryTests
             var repo = GetRepoMockSetup();
 
             var request = new RoomAvailabilityRequest // intersect bookings on at least one extreme
-            { 
-                CheckInDate = DateTime.Parse("Dec 14, 2020"), CheckOutDate = DateTime.Parse("Dec 16, 2020")
+            {
+                CheckInDate = DateTime.Parse("Dec 14, 2020"),
+                CheckOutDate = DateTime.Parse("Dec 16, 2022")
             };
             var result = repo.GetUnavailableRoomIds(request);
             var res = result.ToArray();
@@ -47,8 +48,8 @@ namespace Hotel.Server.Tests.RepositoryTests
 
             var request = new RoomAvailabilityRequest // intersect bookings on at least one extreme
             {
-                CheckInDate = DateTime.Parse("Dec 14, 2020"),
-                CheckOutDate = DateTime.Parse("Dec 16, 2020")
+                CheckInDate = DateTime.Now,
+                CheckOutDate = DateTime.Now.AddDays(1)
             };
             var ids = repo.GetUnavailableRoomIds(request);
             var result = repo.GetAvailableRooms(ids);
@@ -82,7 +83,6 @@ namespace Hotel.Server.Tests.RepositoryTests
             var repo = GetRepoMockSetup();
 
             var result = await repo.GetByBookingNumberAsync(bookingNumber);
-            var expected = bookingNumber;
 
             Assert.Null(result);
         }

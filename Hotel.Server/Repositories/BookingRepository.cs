@@ -1,12 +1,10 @@
 ﻿using Hotel.Server.Models;
-using Hotel.Server.Models.Info;
 using Hotel.Server.Models.Request;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +12,7 @@ namespace Hotel.Server.Repositories
 {
     public class BookingRepository : BaseRepository, IBookingRepository
     {
-        public BookingRepository(HotelContext ctx) : base(ctx) 
+        public BookingRepository(HotelContext ctx) : base(ctx)
         { }
 
         public IQueryable<int> GetUnavailableRoomIds(RoomAvailabilityRequest request)
