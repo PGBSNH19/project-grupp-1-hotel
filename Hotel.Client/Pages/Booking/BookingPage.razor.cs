@@ -20,6 +20,12 @@ namespace Hotel.Client.Pages.Booking
         
         BookingInfo ConfirmedBooking { get; set; }
 
+        protected override async Task OnInitializedAsync()
+        {
+            Console.WriteLine(AppState.AvailabilityRequest.Guests);
+            Console.WriteLine(AppState.AvailabilityRequest.CheckInDate);
+            Console.WriteLine(AppState.AvailabilityRequest.CheckOutDate);
+        }
         public async Task CreateBooking()
         {
             try { 
