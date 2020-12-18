@@ -2,6 +2,7 @@ namespace Hotel.Server.Models.Info
 {
     public class RoomInfo
     {
+        public int Id { get; set; }
         public int Beds { get; set; }
         public int DoubleBeds { get; set; }
         public bool IsCondo { get; set; }

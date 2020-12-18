@@ -12,8 +12,8 @@ namespace Hotel.Server.Persistence
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
 
-        public HotelContext(DbContextOptions options) : base(options)
-        { }
+        public HotelContext(DbContextOptions options) : base(options) { }
+        public HotelContext() { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

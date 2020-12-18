@@ -1,10 +1,10 @@
 using System;
-namespace Hotel.Server.Models.Request
+namespace Hotel.Shared.Models.Request
 {
     public class BookingRequest 
     {
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
+        public DateTime CheckInDate { get; set; } 
+        public DateTime CheckOutDate { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -13,7 +13,6 @@ namespace Hotel.Server.Models.Request
         public int Guests { get; set; }
         public bool Breakfast { get; set; }
         public bool SpaAccess { get; set; }
-        public int Beds { get; set; }
         public int DoubleBeds { get; set; }
         public bool IsCondo { get; set; }
         public bool IsSuite { get; set; }

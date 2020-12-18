@@ -1,0 +1,45 @@
+﻿#main {
+    display:flex;
+    margin-bottom: 10px;
+}
+
+.form-group{
+    padding-right:10px;
+    width:100%;
+}
+
+@media all and (max-width:700px){
+    #main{
+        flex-wrap:wrap;
+        font-size:12px;
+    }
+    .h-50 {
+        height: 30px !important;
+    }
+
+    .mt-4, .my-4{
+        margin-top:1px !important;
+    }
+
+    .btn{
+        width:100% !important;
+    }
+    .search-btn{
+        width:100%;
+    }
+    .form-group {
+        padding-right: 0px !important;
+        margin-bottom:6px;
+    }
+}
+
+@media all and (min-width:700px)
+{
+    .mt-4, .my-4 {
+        margin-top: 1.9rem !important;
+    }
+
+    .h-50 {
+        height: 41% !important;
+    }
+}
