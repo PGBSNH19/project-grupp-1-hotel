@@ -1,34 +1,34 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Hotel.Client</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿    <div class="top-row pl-4 navbar navbar-dark">
+        @*<a class="navbar-brand" href="/">Hotel NR#1</a>*@
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Home" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="booking">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Book a room
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="restaurant">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Restaurant
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="spa">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> View SPA
-            </NavLink>
-        </li>
-    </ul>
-</div>
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="nav">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="booking">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Book a room
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="restaurant">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Restaurant
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="spa">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> View SPA
+                </NavLink>
+            </li>
+        </ul>
+    </div>
 
 @code {
     private bool collapseNavMenu = true;

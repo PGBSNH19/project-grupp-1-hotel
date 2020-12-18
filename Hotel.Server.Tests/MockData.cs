@@ -8,8 +8,8 @@ namespace Hotel.Server.Tests
     public static class MockData
     {
         public static List<Booking> MockBookings => new List<Booking> {
-                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2022") },
-                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2022") },
+                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
+                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
             };
 
         public static List<Room> MockRooms => new List<Room> {
@@ -20,18 +20,18 @@ namespace Hotel.Server.Tests
 
         public static List<RoomAvailabilityRequest> MockRoomAvailabilityRequest => new List<RoomAvailabilityRequest>
         {
-            new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 17, 2022"), CheckOutDate = DateTime.Parse("Dec 18, 2022"), Guests = 1},
-            new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 20, 2022"), CheckOutDate = DateTime.Parse("Dec 24, 2022"), Guests = 3},
-            new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 20, 2022"), CheckOutDate = DateTime.Parse("Dec 24, 2022"), Guests = 2},
-            new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 20, 2022"), CheckOutDate = DateTime.Parse("Dec 24, 2022"), Guests = 1},
-            new RoomAvailabilityRequest {CheckInDate = DateTime.Parse("Dec 22, 2022"), CheckOutDate = DateTime.Parse("Dec 26, 2022"), Guests = 3},
+            new RoomAvailabilityRequest {CheckInDate = DateTime.Now.AddDays(2), CheckOutDate = DateTime.Now.AddDays(3), Guests = 1},
+            new RoomAvailabilityRequest {CheckInDate = DateTime.Now.AddDays(5), CheckOutDate = DateTime.Now.AddDays(9), Guests = 3},
+            new RoomAvailabilityRequest {CheckInDate = DateTime.Now.AddDays(5), CheckOutDate = DateTime.Now.AddDays(9), Guests = 2},
+            new RoomAvailabilityRequest {CheckInDate = DateTime.Now.AddDays(5), CheckOutDate = DateTime.Now.AddDays(9), Guests = 1},
+            new RoomAvailabilityRequest {CheckInDate = DateTime.Now.AddDays(7), CheckOutDate = DateTime.Now.AddDays(11), Guests = 3},
         };
 
         public static BookingRequest MockBookingRequest => new BookingRequest
         {
             Address = "Test Avenue 126", // booking info
-            CheckInDate = DateTime.Parse("Dec 22, 2022"),
-            CheckOutDate = DateTime.Parse("Dec 26, 2022"),
+            CheckInDate = DateTime.Now.AddDays(7),
+            CheckOutDate = DateTime.Now.AddDays(11),
             Email = "test.testsson@gmail.com",
             FirstName = "Hotello",
             LastName = "Testovich",
