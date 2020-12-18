@@ -1,5 +1,6 @@
 ﻿using Hotel.Server.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Hotel.Server.Persistence
 {
@@ -182,6 +183,23 @@ namespace Hotel.Server.Persistence
             });
 
             var booking = builder.Entity<Booking>();
+            booking.HasData(new
+            {
+                Id = 1,
+                IsCanceled = false,
+                BookingNumber = "foo",
+                CheckInDate = DateTime.Parse("Dec 15, 1780"),
+                CheckOutDate = DateTime.Parse("Dec 20, 1780"),
+                FirstName = "Old",
+                LastName = "Old guy name",
+                Email = "mail@testsson.com",
+                PhoneNumber = "+462971937492",
+                Address = "Old Avenue 5",
+                Guests = 1,
+                Breakfast = true,
+                SpaAccess = false,
+                Created = DateTime.Now
+            }); 
             booking.HasKey(e => e.Id);
         }
     }
