@@ -41,6 +41,7 @@ namespace Hotel.Server.Controllers
         [Route("/check/guests/{guests}/checkin/{checkIn}/checkout/{checkOut}")]
         public async Task<IActionResult> GetAvailableRooms(int guests, DateTime checkIn, DateTime checkOut)
         {
+            Log.Information("Controller method starting: [BookingController] GetAvailableRooms");
             try
             {
                 var roomAvailability = new RoomAvailabilityRequest
@@ -64,7 +65,9 @@ namespace Hotel.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> PostBooking([FromBody] BookingRequest bookingRequest)
         {
-            if (bookingRequest == null) return BadRequest();
+            Log.Information("Controller method starting: [BookingController] PostBooking");
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             var result = await _bookingService.CreateAsync(bookingRequest);
 
