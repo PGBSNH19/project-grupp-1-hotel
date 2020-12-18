@@ -1,16 +1,14 @@
-﻿using Hotel.Server.Models;
+﻿using Hotel.Server.Extensions;
+using Hotel.Server.Models;
+using Hotel.Server.Models.Info;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
-using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services;
-using Hotel.Server.Services.Interfaces;
+using Hotel.Server.Services.Communication;
 using Moq;
 using Moq.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hotel.Server.Tests.ServiceTests
@@ -27,7 +25,30 @@ namespace Hotel.Server.Tests.ServiceTests
         }
 
         [Fact]
-        public async void GetAvailableRoomTypesAsync_IfAllRoomsIsAvailable_ReturnAllDistinctRoomTypes()
+        public async void CreateAsync_IncomingBookingRequestPasses_ReturnsBooking()
+        {
+            var service = GetRepoMockSetup(new List<Booking>(), MockData.MockRooms);
+            var bookingRequest = MockData.MockBookingRequest;
+
+            var result = await service.CreateAsync(bookingRequest);
+
+            Assert.IsType<ServiceResponse<BookingInfo>>(result);
+        }
+
+        [Fact]
+        public async void CreateAsync_IncomingBookingRequestDoesNotPassDueToNoAvailableRooms_ReturnsNoSuccess()
+        {
+            var service = GetRepoMockSetup(new List<Booking>(), new List<Room>());
+            var bookingRequest = MockData.MockBookingRequest;
+
+            var result = await service.CreateAsync(bookingRequest);
+
+            Assert.IsType<ServiceResponse<BookingInfo>>(result);
+            Assert.True(result.Success == false);
+        }
+
+        [Fact]
+        public async void GetAvailableRoomTypesAsync_IfAllRoomsAreAvailable_ReturnAllDistinctRoomTypes()
         {
             var service = GetRepoMockSetup(new List<Booking>(), MockData.MockRooms);
 
@@ -43,70 +64,47 @@ namespace Hotel.Server.Tests.ServiceTests
         }
 
         [Fact]
-        public async void GetAvailableRoomTypesAsync_IfAllRoomsIsBooked_ReturnCountZero()
+        public async void GetAvailableRoomTypesAsync_IfAllRoomsAreBooked_ReturnNoRooms()
         {
-            List<Room> rooms = new List<Room>
-            {
-               new Room{Id = 1, Beds = 1, DoubleBeds = 0, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false },
-               new Room{Id = 2, Beds = 2, DoubleBeds = 1, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false }
-            };
-            List<Booking> bookings = new List<Booking>
-            {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
-                new Booking { Id = 2, BookingNumber = "foo",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") }
-            };
-
+            var rooms = MockData.MockRooms;
+            _ = rooms.PopLast();
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
             var service = GetRepoMockSetup(bookings, rooms);
-
-
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[0];
 
             var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
-            var resultCount = result.Entity.Count;
             var expected = 0;
 
-            Assert.Equal(expected, resultCount);
+            Assert.True(result.Entity.Count == expected);
+            Assert.IsType<List<RoomInfo>>(result.Entity);
         }
 
         [Fact]
-        public async void GetAvailableRoomTypesAsync_IfRoomsIsBooked_ReturnDistinctRooms()
+        public async void GetAvailableRoomTypesAsync_EarlierBookedRoomsHasNoImpact_ReturnDistinctRooms()
         {
-            List<Room> rooms = new List<Room>
-            {
-               new Room{Id = 1, Beds = 1, DoubleBeds = 0, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false },
-               new Room{Id = 2, Beds = 2, DoubleBeds = 1, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false },
-               new Room{Id = 3, Beds = 1, DoubleBeds = 1, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false }
-            };
-            List<Booking> bookings = new List<Booking>
-            {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 26, 2020") },
-                new Booking { Id = 2, BookingNumber = "bar",Room = rooms[1], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 26, 2020") }
-            };
-
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
             var service = GetRepoMockSetup(bookings, rooms);
-
-
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[3];
 
             var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
-            var expected = 1;
+            var expected = 3;
 
             Assert.Equal(expected, result.Entity.Count);
+            Assert.IsType<List<RoomInfo>>(result.Entity);
         }
 
         [Fact]
         public async void GetByBookingNumberAsync_BookingExists_ReturnBookingNumber()
         {
-            List<Room> rooms = new List<Room>
-            {
-               new Room{Id = 1, Beds = 1, DoubleBeds = 0, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false },
-            };
-            List<Booking> bookings = new List<Booking>
-            {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
-            };
+            var rooms = MockData.MockRooms.PopLast().PopLast();
+            var bookings = MockData.MockBookings.PopLast();
+            bookings.First().Room = rooms.First();
             var service = GetRepoMockSetup(bookings, rooms);
-
 
             var result = await service.GetByBookingNumberAsync("foo");
             var expected = "foo";
@@ -117,16 +115,9 @@ namespace Hotel.Server.Tests.ServiceTests
         [Fact]
         public async void GetByBookingNumberAsync_BookingNotExists_ReturnNull()
         {
-            List<Room> rooms = new List<Room>
-            {
-               new Room{Id = 1, Beds = 1, DoubleBeds = 0, IsCondo = false, IsSuite = false, ImageUrl = "", Pets = false, Smoking = false },
-            };
-            List<Booking> bookings = new List<Booking>
-            {
-                new Booking { Id = 1, BookingNumber = "foo",Room = rooms[0], CheckInDate = DateTime.Parse("Dec 15, 2020"), CheckOutDate = DateTime.Parse("Dec 20, 2020") },
-            };
+            var rooms = new List<Room>();
+            var bookings = new List<Booking>();
             var service = GetRepoMockSetup(bookings, rooms);
-
 
             var result = await service.GetByBookingNumberAsync("bar");
 
