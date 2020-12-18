@@ -86,7 +86,6 @@ namespace Hotel.Server.Services
             if (booking == null) return null;
 
             var result = booking.ToDto();
-
             return result;
         }
     }
