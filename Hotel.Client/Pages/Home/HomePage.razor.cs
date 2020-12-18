@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Hotel.Client.Pages.Home
@@ -21,7 +19,7 @@ namespace Hotel.Client.Pages.Home
 
         private void SlideRight()
         {
-            if (ImageIndex == Images.Count- 1)
+            if (ImageIndex == Images.Count - 1)
             {
                 ImageIndex = 0;
             }

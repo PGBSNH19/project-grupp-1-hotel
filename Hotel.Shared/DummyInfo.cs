@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hotel.Shared
+﻿namespace Hotel.Shared
 {
     public class DummyInfo
     {
