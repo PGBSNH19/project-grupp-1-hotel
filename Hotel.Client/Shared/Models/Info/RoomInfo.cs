@@ -1,4 +1,4 @@
-namespace Hotel.Server.Models.Info
+namespace Hotel.Client.Shared.Models.Info
 {
     public class RoomInfo
     {

@@ -1,8 +1,9 @@
-﻿using Hotel.Server.Models.Info;
-using Hotel.Shared.Models.Request;
+﻿using Hotel.Client.Shared.Models.Info;
+using Hotel.Client.Shared.Models.Request;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -16,7 +17,6 @@ namespace Hotel.Client.Shared
         [Parameter] public EventCallback OnValidSubmit { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] HttpClient Http { get; set; }
-        private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         private List<int> numberOfGuest = new List<int> {1,2,3,4 };
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms

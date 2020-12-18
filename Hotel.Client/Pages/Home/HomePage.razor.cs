@@ -1,5 +1,11 @@
-﻿using System;
+﻿using Hotel.Client.Shared.Models.Info;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace Hotel.Client.Pages.Home
@@ -12,8 +18,13 @@ namespace Hotel.Client.Pages.Home
         public string BackIndicator = "<<";
         Timer timer;
 
-        protected override void OnInitialized()
+        [Inject] HttpClient Http { get; set; }
+        [Inject] IConfiguration Config { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
+            var result = await Http.GetFromJsonAsync<BookingInfo>($"{Config["BaseApiUrl"]}api/v1.0/booking/foo");
+            Console.WriteLine(result.Email);
             StartTimer(3000);
         }
 
