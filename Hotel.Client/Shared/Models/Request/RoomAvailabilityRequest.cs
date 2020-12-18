@@ -6,11 +6,13 @@ namespace Hotel.Shared.Models.Request
     public class RoomAvailabilityRequest
     {
         [Required]
-        [Range(0, 4)]
+        [Range(1, 4)]
         public int Guests { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime CheckInDate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime CheckOutDate { get; set; }
     }
 }

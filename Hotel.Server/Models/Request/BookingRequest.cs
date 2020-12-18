@@ -9,28 +9,30 @@ namespace Hotel.Server.Models.Request
         [Required]
         public string BookingNumber { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime CheckInDate { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime CheckOutDate { get; set; }
         [Required]
-        [StringLength(20, ErrorMessage = "First Name cannot be longer than 20 characters")]
+        [MaxLength(20), MinLength(2)]
         public string FirstName { get; set; }
         [Required]
-        [StringLength(20, ErrorMessage = "Last Name cannot be longer than 20 characters")]
+        [MaxLength(20), MinLength(2)]
         public string LastName { get; set; }
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [MaxLength(25), MinLength(6)]
         public string Email { get; set; }
         [Required]
-        [StringLength(20, ErrorMessage = "Phone Number cannot be longer than 20 characters")]
+        [RegularExpression(@"^(\+)?([0-9]{6,17})$", ErrorMessage = "Phone number not valid. Must have length between 6 and 17 and may only contain digits and plus sign.")]
         public string PhoneNumber { get; set; }
         [Required]
-        [StringLength(30, ErrorMessage = "Address cannot be longer than 30 characters")]
+        [MaxLength(30), MinLength(4)]
         public string Address { get; set; }
         [Required]
-        [Range(0, 4)]
+        [Range(1, 4)]
         public int Guests { get; set; }
-        [Required]
         public bool Breakfast { get; set; } = false;
         public bool SpaAccess { get; set; } = false;
         #endregion
