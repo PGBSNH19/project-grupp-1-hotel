@@ -38,12 +38,13 @@ namespace Hotel.Server.Tests.ServiceTests
         [Fact]
         public async void CreateAsync_IncomingBookingRequestDoesNotPassDueToNoAvailableRooms_ReturnsNoSuccess()
         {
-            var service = GetRepoMockSetup(new List<Booking>(), MockData.MockRooms);
+            var service = GetRepoMockSetup(new List<Booking>(), new List<Room>());
             var bookingRequest = MockData.MockBookingRequest;
 
             var result = await service.CreateAsync(bookingRequest);
 
             Assert.IsType<ServiceResponse<BookingInfo>>(result);
+            Assert.True(result.Success == false);
         }
 
         [Fact]

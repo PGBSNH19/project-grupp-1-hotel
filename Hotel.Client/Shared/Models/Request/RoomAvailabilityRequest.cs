@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace Hotel.Shared.Models.Request
 {
     public class RoomAvailabilityRequest
