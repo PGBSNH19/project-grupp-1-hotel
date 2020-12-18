@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Hotel.Server.Models.Request
+using System;
+namespace Hotel.Shared.Models.Request
 {
-    public class BookingRequest
+    public class BookingRequest 
     {
-        public string BookingNumber { get; set; }
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
+        public DateTime CheckInDate { get; set; } 
+        public DateTime CheckOutDate { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

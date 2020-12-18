@@ -1,0 +1,28 @@
+﻿#main{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    background-color:rosybrown;
+    color:white;
+}
+
+.form-group {
+    margin: 3px 4px;
+    justify-content: center;
+}
+
+button{
+    height:31px;
+    font-size:14px;
+    text-align:center;
+    border-radius:7px;
+    padding:6px;
+    outline:none;
+    margin-top:28px;
+}
+
+
+.form-group label{
+    margin-bottom:2px;
+}
+
