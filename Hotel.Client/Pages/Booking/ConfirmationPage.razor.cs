@@ -1,5 +1,5 @@
-﻿using Hotel.Server.Models.Info;
-using Hotel.Server.Models.Request;
+﻿using Hotel.Client.Shared.Models.Info;
+using Hotel.Client.Shared.Models.Request;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;

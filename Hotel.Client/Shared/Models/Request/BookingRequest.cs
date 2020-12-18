@@ -1,8 +1,9 @@
 using System;
-namespace Hotel.Shared.Models.Request
+namespace Hotel.Client.Shared.Models.Request
 {
     public class BookingRequest 
     {
+        public string BookingNumber { get; set; }
         public DateTime CheckInDate { get; set; } 
         public DateTime CheckOutDate { get; set; } 
         public string FirstName { get; set; }

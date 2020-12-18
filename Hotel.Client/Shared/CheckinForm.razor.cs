@@ -1,10 +1,8 @@
-﻿using Hotel.Server.Models.Info;
+﻿using Hotel.Client.Shared.Models.Info;
 using Hotel.Shared.Models.Request;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;

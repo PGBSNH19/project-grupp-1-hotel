@@ -1,9 +1,6 @@
-﻿using Hotel.Server.Models.Request;
+﻿
+using Hotel.Client.Shared.Models.Request;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Hotel.Client.Pages.Booking
 {
