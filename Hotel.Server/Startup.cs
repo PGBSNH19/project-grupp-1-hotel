@@ -7,6 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Hotel.Server.Controllers;
+using Hotel.Server.Services.Interfaces;
+using Hotel.Server.Services;
+using Hotel.Server.Repositories.Interfaces;
+using Hotel.Server.Repositories;
 
 namespace Hotel.Server
 {
