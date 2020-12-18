@@ -1,41 +1,47 @@
 ﻿<EditForm Model="@BookingRequest" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <InputText placeholder="First name" class="form-control" @bind-Value="@BookingRequest.FirstName"></InputText>
-                <ValidationMessage For="@(() => BookingRequest.FirstName)"></ValidationMessage>
-            </div>
-            <div class="form-group col-md-6">
-                <InputText placeholder="Last name" class="form-control" @bind-Value="@BookingRequest.LastName"></InputText>
-                <ValidationMessage For="@(() => BookingRequest.LastName)"></ValidationMessage>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <InputText placeholder="First name" class="form-control" @bind-Value="@BookingRequest.FirstName"></InputText>
+            <ValidationMessage For="@(() => BookingRequest.FirstName)"></ValidationMessage>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <InputText type="email" placeholder="Email" class="form-control" @bind-Value="@BookingRequest.Email"></InputText>
-                <ValidationMessage For="@(() => BookingRequest.Email)"></ValidationMessage>
-            </div>
-            <div class="form-group col-md-6">
-                <InputText placeholder="Phone number" class="form-control" @bind-Value="@BookingRequest.PhoneNumber"></InputText>
-                <ValidationMessage For="@(() => BookingRequest.PhoneNumber)"></ValidationMessage>
-            </div>
+        <div class="form-group col-md-6">
+            <InputText placeholder="Last name" class="form-control" @bind-Value="@BookingRequest.LastName"></InputText>
+            <ValidationMessage For="@(() => BookingRequest.LastName)"></ValidationMessage>
         </div>
-        <div class="form-group">
-            <h5>Include in my booking:</h5>
-            <div class="form-check">
-                <InputCheckbox class="form-check-input" @bind-Value="@BookingRequest.Breakfast"></InputCheckbox>
-                <label class="form-check-label" for="gridCheck">
-                    Breakfast buffet 360 SEK
-                </label>
-            </div>
-            <div class="form-check">
-                <InputCheckbox class="form-check-input" @bind-Value="@BookingRequest.Breakfast"></InputCheckbox>
-                <label class="form-check-label" for="gridCheck">
-                    Spa entrance 899 SEK
-                </label>
-            </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <InputText type="email" placeholder="Email" class="form-control" @bind-Value="@BookingRequest.Email"></InputText>
+            <ValidationMessage For="@(() => BookingRequest.Email)"></ValidationMessage>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
- 
+        <div class="form-group col-md-6">
+            <InputText placeholder="Phone number" class="form-control" @bind-Value="@BookingRequest.PhoneNumber"></InputText>
+            <ValidationMessage For="@(() => BookingRequest.PhoneNumber)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <InputText placeholder="Address" class="form-control" @bind-Value="@BookingRequest.Address"></InputText>
+            <ValidationMessage For="@(() => BookingRequest.Address)"></ValidationMessage>
+        </div>       
+    </div>
+    <div class="form-group">
+        <h5>Include in my booking:</h5>
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" @bind-Value="@BookingRequest.Breakfast"></InputCheckbox>
+            <label class="form-check-label" for="gridCheck">
+                Breakfast buffet 360 SEK
+            </label>
+        </div>
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" @bind-Value="@BookingRequest.Breakfast"></InputCheckbox>
+            <label class="form-check-label" for="gridCheck">
+                Spa entrance 899 SEK
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
+
 </EditForm>

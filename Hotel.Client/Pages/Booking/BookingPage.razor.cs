@@ -8,6 +8,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 
+
 namespace Hotel.Client.Pages.Booking
 {
     public partial class BookingPage
@@ -20,14 +21,18 @@ namespace Hotel.Client.Pages.Booking
 
         public async Task CreateBooking()
         {
-            BookingRequest.BookingNumber = Guid.NewGuid().ToString();
-            var result = await Http.PostAsJsonAsync("/booking", BookingRequest);
-            if (result.IsSuccessStatusCode)
-            {
-                ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingRequest.BookingNumber}");
+            try { 
+                BookingRequest.BookingNumber = Guid.NewGuid().ToString();
+                var result = await Http.PostAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/", BookingRequest);
+                if (result.IsSuccessStatusCode)
+                {
+                    ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingRequest.BookingNumber}");
+                }
             }
-
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);                
+            }
         }       
     }
 }
