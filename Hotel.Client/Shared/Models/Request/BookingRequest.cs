@@ -25,7 +25,7 @@ namespace Hotel.Shared.Models.Request
         [MaxLength(25), MinLength(6)]
         public string Email { get; set; }
         [Required]
-        [RegularExpression(@"^(\+)?([0-9]{6,17})$", ErrorMessage = "Phone number not valid. Must have length between 6 and 17 and may only contain digits and plus sign.")]
+        [RegularExpression(@"^(\+)?([0-9]{7,15})$", ErrorMessage = "Phone number not valid. Must have length between 6 and 17 and may only contain digits and plus sign.")]
         public string PhoneNumber { get; set; }
         [Required]
         [MaxLength(30), MinLength(4)]
