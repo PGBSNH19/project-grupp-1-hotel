@@ -16,12 +16,7 @@ namespace Hotel.Client.Pages.Booking
         BookingRequest BookingRequest = new BookingRequest();
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
         BookingInfo ConfirmedBooking { get; set; }
-
-        [Parameter] public RoomInfo[] AvailableRooms { get; set; }
-
-        
 
         public async Task CreateBooking()
         {
