@@ -23,10 +23,12 @@ namespace Hotel.Client.Shared
        
         async Task GetRoom()
         {
+            AppState.SetAvailabilityRequest(AvailableRoom);
             
             Room = await Http.GetFromJsonAsync<RoomInfo[]>
                  ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate}/checkout/{AvailableRoom.CheckOutDate}");
 
+            AppState.SetRooms(Room);
         }
     }
 }
