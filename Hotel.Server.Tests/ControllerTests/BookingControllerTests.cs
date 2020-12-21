@@ -65,12 +65,15 @@ namespace Hotel.Server.Tests.ControllerTests
             Assert.IsType<NoContentResult>(result);
         }
 
-        [Fact]
-        public async void GetAvailableRooms_IncomingRequestsDatesAreNotValid_RetunsBadRequest()
+        [Theory]
+        [InlineData(1, "2012-01-03", "aee")]
+        [InlineData(1, "Lolipop", "2012-03-05")]
+        [InlineData(3, "WrongDate", "wrongdate")]
+        public async void GetAvailableRooms_IncomingRequestsDatesAreNotValid_RetunsBadRequest(int guests, string checkinDate, string checkoutDate)
         {
             var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockRooms);
 
-            var result = await controller.GetAvailableRooms(1, new DateTime(), DateTime.Parse("Dec 24, 2023"));
+            var result = await controller.GetAvailableRooms(guests, checkinDate, checkoutDate);
 
             Assert.IsType<BadRequestResult>(result);
         }

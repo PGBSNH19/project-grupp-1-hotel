@@ -39,7 +39,7 @@ namespace Hotel.Server.Controllers
 
         [HttpGet]
         [Route("check/guests/{guests}/checkin/{checkIn}/checkout/{checkOut}")]
-        public async Task<IActionResult> GetAvailableRooms(int guests, DateTime checkIn, DateTime checkOut)
+        public async Task<IActionResult> GetAvailableRooms(int guests, string checkIn, string checkOut)
         {
             Log.Information("Controller method starting: [BookingController] GetAvailableRooms");
             try
@@ -47,8 +47,8 @@ namespace Hotel.Server.Controllers
                 var roomAvailability = new RoomAvailabilityRequest
                 {
                     Guests = guests,
-                    CheckInDate = checkIn,
-                    CheckOutDate = checkOut             
+                    CheckInDate = DateTime.Parse(checkIn),
+                    CheckOutDate = DateTime.Parse(checkOut)             
                 };
                 var result = await _bookingService.GetAvailableRoomTypesAsync(roomAvailability);
                 if (result.Entity.Any())
