@@ -44,7 +44,7 @@ namespace Hotel.Server.Tests.ControllerTests
         [Theory]
         [InlineData("foo")]
         [InlineData("bar")]
-        public async void GetBookingByBookingNumber_IncomingBookingNumberExist_RetunsOkResult(string bookingNumber)
+        public async void GetBookingByBookingNumber_IncomingBookingNumberExist_ReturnsOkResult(string bookingNumber)
         {
             var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockRooms);
 
@@ -56,20 +56,20 @@ namespace Hotel.Server.Tests.ControllerTests
         [Theory]
         [InlineData("NoId")]
         [InlineData("NoId2")]
-        public async void GetBookingByBookingNumber_IncomingBookingNumberDoesNotExist_RetunsNotFound(string bookingNumber)
+        public async void GetBookingByBookingNumber_IncomingBookingNumberDoesNotExist_ReturnsNotFound(string bookingNumber)
         {
             var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockRooms);
 
             var result = await controller.GetBookingByBookingNumber(bookingNumber);
 
-            Assert.IsType<NoContentResult>(result);
+            Assert.IsType<NotFoundResult>(result);
         }
 
         [Theory]
         [InlineData(1, "2012-01-03", "aee")]
         [InlineData(1, "Lolipop", "2012-03-05")]
         [InlineData(3, "WrongDate", "wrongdate")]
-        public async void GetAvailableRooms_IncomingRequestsDatesAreNotValid_RetunsBadRequest(int guests, string checkinDate, string checkoutDate)
+        public async void GetAvailableRooms_IncomingRequestsDatesAreNotValid_ReturnsBadRequest(int guests, string checkinDate, string checkoutDate)
         {
             var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockRooms);
 

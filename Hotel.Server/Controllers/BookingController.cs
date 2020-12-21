@@ -32,7 +32,7 @@ namespace Hotel.Server.Controllers
             var result = await _bookingService.GetByBookingNumberAsync(bookingNumber);
 
             if (result == null)
-                return NoContent();
+                return NotFound();
 
             return Ok(result);
         }
