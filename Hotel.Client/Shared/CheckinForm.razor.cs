@@ -17,6 +17,7 @@ namespace Hotel.Client.Shared
         [Parameter] public EventCallback OnValidSubmit { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] HttpClient Http { get; set; }
+        [Inject] NavigationManager NavigationManager { get; set; }
 
         private List<int> numberOfGuest = new List<int> {1,2,3,4 };
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
@@ -32,8 +33,17 @@ namespace Hotel.Client.Shared
 
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
                      ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate}/checkout/{AvailableRoom.CheckOutDate}");
-                     
-                AppState.SetRooms(Rooms);
+                
+                if(Rooms != null)
+                {
+                    AppState.SetRooms(Rooms);
+                    NavigationManager.NavigateTo("booking");
+                }
+                else
+                {
+                    // todo: toast notification
+                }
+
             }
 
         }

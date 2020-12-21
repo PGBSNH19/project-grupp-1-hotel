@@ -1,5 +1,5 @@
 ﻿using Hotel.Client.Shared.Models.Info;
-using Hotel.Shared.Models.Request;
+using Hotel.Client.Shared.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
