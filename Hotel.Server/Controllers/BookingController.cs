@@ -22,7 +22,7 @@ namespace Hotel.Server.Controllers
         }
 
         [HttpGet]
-        [Route("/{bookingNumber}")]
+        [Route("{bookingNumber}")]
         public async Task<IActionResult> GetBookingByBookingNumber(string bookingNumber)
         {
             Log.Information("Controller method starting: [BookingController] GetBookingByBookingNumber");
@@ -38,7 +38,7 @@ namespace Hotel.Server.Controllers
         }
 
         [HttpGet]
-        [Route("/check/guests/{guests}/checkin/{checkIn}/checkout/{checkOut}")]
+        [Route("check/guests/{guests}/checkin/{checkIn}/checkout/{checkOut}")]
         public async Task<IActionResult> GetAvailableRooms(int guests, DateTime checkIn, DateTime checkOut)
         {
             Log.Information("Controller method starting: [BookingController] GetAvailableRooms");
