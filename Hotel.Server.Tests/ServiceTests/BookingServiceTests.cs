@@ -7,6 +7,7 @@ using Hotel.Server.Services;
 using Hotel.Server.Services.Communication;
 using Moq;
 using Moq.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -96,6 +97,74 @@ namespace Hotel.Server.Tests.ServiceTests
 
             Assert.Equal(expected, result.Entity.Count);
             Assert.IsType<List<RoomInfo>>(result.Entity);
+        }
+
+        [Fact]
+        public async void GetAvailableRoomTypesAsync_CheckOutDateBeforeCheckinDate_ReturnNoSuccess()
+        {
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
+            var service = GetRepoMockSetup(bookings, rooms);
+            var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[1];
+            roomAvailablilityRequest.CheckInDate = DateTime.Parse("Dec 13, 2022");
+            roomAvailablilityRequest.CheckOutDate = DateTime.Parse("Dec 12, 2022");
+
+            var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
+
+            Assert.True(result.Success == false);
+        }
+
+        [Fact]
+        public async void GetAvailableRoomTypesAsync_CheckOutDateSameDateAsCheckinDate_ReturnNoSuccess()
+        {
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
+            var service = GetRepoMockSetup(bookings, rooms);
+            var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[1];
+            roomAvailablilityRequest.CheckInDate = DateTime.Now;
+            roomAvailablilityRequest.CheckOutDate = DateTime.Now;
+
+            var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
+
+            Assert.True(result.Success == false);
+        }
+
+        [Fact]
+        public async void GetAvailableRoomTypesAsync_CheckInDateEarlierThanToday_ReturnNoSuccess()
+        {
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
+            var service = GetRepoMockSetup(bookings, rooms);
+            var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[1];
+            roomAvailablilityRequest.CheckInDate = DateTime.Now.AddDays(-1);
+            roomAvailablilityRequest.CheckOutDate = DateTime.Now.AddDays(2); 
+
+            var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
+
+            Assert.True(result.Success == false);
+        }
+
+        [Fact]
+        public async void GetAvailableRoomTypesAsync_CheckOutDateEarlierThanToday_ReturnNoSuccess()
+        {
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
+            var service = GetRepoMockSetup(bookings, rooms);
+            var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[1];
+            roomAvailablilityRequest.CheckInDate = DateTime.Now;
+            roomAvailablilityRequest.CheckOutDate = DateTime.Now.AddDays(-1);
+
+            var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
+
+            Assert.True(result.Success == false);
         }
 
         [Fact]
