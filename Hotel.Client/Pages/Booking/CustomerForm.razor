@@ -2,6 +2,13 @@
 <EditForm Model="@BookingRqs" OnValidSubmit="CreateBooking">
     <DataAnnotationsValidator />
 
+    <InputNumber type="hidden" @bind-Value="@AppState.AvailabilityRequest.Guests"></InputNumber>
+    <ValidationMessage For="@(() => BookingRqs.Guests)"></ValidationMessage>
+    <InputDate type="hidden" @bind-Value="@AppState.AvailabilityRequest.CheckInDate"></InputDate>
+    <ValidationMessage For="@(() => BookingRqs.CheckInDate)"></ValidationMessage>
+    <InputDate type="hidden" @bind-Value="@AppState.AvailabilityRequest.CheckOutDate"></InputDate>
+    <ValidationMessage For="@(() => BookingRqs.CheckOutDate)"></ValidationMessage>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <InputText placeholder="First name" class="form-control" @bind-Value="@BookingRqs.FirstName"></InputText>
@@ -29,7 +36,7 @@
         </div>
     </div>
     <div class="form-group">
-    <h5>Include in my booking:</h5>
+        <h5>Include in my booking:</h5>
 
         <div class="form-check">
             <InputCheckbox class="form-check-input" @bind-Value="@BookingRqs.Breakfast"></InputCheckbox>

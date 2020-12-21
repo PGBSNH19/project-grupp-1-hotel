@@ -6,7 +6,7 @@ namespace Hotel.Client.Shared.Models.Request
     public class BookingRequest
     {
         #region Booking specifications
-        [Required]
+        //[Required]
         public string BookingNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
@@ -38,9 +38,9 @@ namespace Hotel.Client.Shared.Models.Request
         #endregion
 
         #region Room specifications
-        [Required]
+        //[Required]
         public int Beds { get; set; }
-        [Required]
+        //[Required]
         public int DoubleBeds { get; set; }
         public bool IsCondo { get; set; }
         public bool IsSuite { get; set; }
