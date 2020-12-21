@@ -20,26 +20,22 @@ namespace Hotel.Client.Pages.Booking
         
         BookingInfo ConfirmedBooking { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            Console.WriteLine(AppState.AvailabilityRequest.Guests);
-            Console.WriteLine(AppState.AvailabilityRequest.CheckInDate);
-            Console.WriteLine(AppState.AvailabilityRequest.CheckOutDate);
-        }
-        public async Task CreateBooking()
-        {
-            try { 
-                BookingRequest.BookingNumber = Guid.NewGuid().ToString();
-                var result = await Http.PostAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/", BookingRequest);
-                if (result.IsSuccessStatusCode)
-                {
-                    ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingRequest.BookingNumber}");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);                
-            }
-        }       
+        //public async Task CreateBooking()
+        //{
+        //    Console.WriteLine(BookingRequest.PhoneNumber);
+        //    try
+        //    {
+        //        BookingRequest.BookingNumber = Guid.NewGuid().ToString();
+        //        var result = await Http.PostAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/", BookingRequest);
+        //        if (result.IsSuccessStatusCode)
+        //        {
+        //            ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingRequest.BookingNumber}");
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //    }
+        //}
     }
 }

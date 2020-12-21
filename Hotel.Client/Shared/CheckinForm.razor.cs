@@ -36,6 +36,7 @@ namespace Hotel.Client.Shared
                 
                 if(Rooms != null)
                 {
+              
                     AppState.SetRooms(Rooms);
                     NavigationManager.NavigateTo("booking");
                 }

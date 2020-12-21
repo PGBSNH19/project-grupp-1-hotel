@@ -12,9 +12,16 @@ namespace Hotel.Client.Shared
         public event Action OnChange;
         public RoomInfo[] Rooms { get; private set; }
         public RoomAvailabilityRequest AvailabilityRequest { get; set; }
+        public BookingInfo ConfirmedBooking { get; set; }
         public void SetRooms(RoomInfo[] rooms)
         {
             Rooms = rooms;
+            NotifyStateChanged();
+        }
+
+        public void SetConfirmedBooking(BookingInfo confirmedBooking)
+        {
+            ConfirmedBooking = confirmedBooking;
             NotifyStateChanged();
         }
 
