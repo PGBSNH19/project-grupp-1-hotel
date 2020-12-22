@@ -13,9 +13,7 @@ namespace Hotel.Server.Controllers
     [Route("api/v1.0/[controller]")]
     public class BookingController : Controller
     {
-
         private readonly IBookingService _bookingService;
-
         public BookingController(IBookingService bookingService)
         {
             _bookingService = bookingService;
