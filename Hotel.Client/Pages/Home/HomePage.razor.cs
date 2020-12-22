@@ -30,10 +30,8 @@ namespace Hotel.Client.Pages.Home
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            var result = await Http.GetFromJsonAsync<BookingInfo>($"{Config["BaseApiUrl"]}api/v1.0/booking/foo");
-            Console.WriteLine(result.Email);
             StartTimer(3000);
         }
 
@@ -72,22 +70,22 @@ namespace Hotel.Client.Pages.Home
             StateHasChanged();
         }
 
-        async Task GetRoom()
+        private async Task GetRoom()
         {
-            if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
+            if (AvailableRoom.CheckInDate >= AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now || AvailableRoom.CheckOutDate <= DateTime.Now)
             {
                 // todo: toast notification
+                AppState.Flush(); // reset booking data on bad search
             }
             else
             {
-                AppState.SetAvailabilityRequest(AvailableRoom);
-
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
                      ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
 
-
                 if (Rooms != null)
                 {
+                    AppState.Flush(); // reset booking data on no results
+                    AppState.SetAvailabilityRequest(AvailableRoom);
                     AppState.SetRooms(Rooms);
                     NavigationManager.NavigateTo("booking");
                 }

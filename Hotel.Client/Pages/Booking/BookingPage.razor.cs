@@ -16,30 +16,16 @@ namespace Hotel.Client.Pages.Booking
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
-        [Parameter] public RoomAvailabilityRequest AvailableRoom { get; set; } = new RoomAvailabilityRequest();
-
-        [Inject] NavigationManager NavigationManager { get; set; }
+        RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest(); // continue here
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
 
         protected override void OnInitialized()
-        {
-            if(AppState.AvailabilityRequest == null)
-            {
-                AppState.BookingRequest = new BookingRequest() { 
-                    Guests = 1, 
-                    CheckInDate = DateTime.Now,
-                    CheckOutDate = DateTime.Now.AddDays(1)
-                };
-            }
-            else
-            {
-                AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
-                AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
-                AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;
-                StateHasChanged();
-
-            }
+        { 
+            AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
+            AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
+            AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;
+            StateHasChanged();
         }
 
         public async Task CreateBooking()
@@ -62,21 +48,20 @@ namespace Hotel.Client.Pages.Booking
 
         async Task GetRoom()
         {
-            if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
+            if (AvailabilityRequest.CheckInDate >= AvailabilityRequest.CheckOutDate || AvailabilityRequest.CheckInDate < DateTime.Now || AvailabilityRequest.CheckOutDate <= DateTime.Now)
             {
                 // todo: toast notification
+                AppState.Flush(); // reset booking data on bad search
             }
             else
             {
-                AppState.SetAvailabilityRequest(AvailableRoom);
-
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
-                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
-
+                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yy-MM-dd")}");
 
                 if (Rooms != null)
                 {
-
+                    AppState.Flush(); // reset booking data on no results
+                    AppState.SetAvailabilityRequest(AvailabilityRequest);
                     AppState.SetRooms(Rooms);
                     StateHasChanged();
                 }
@@ -84,10 +69,7 @@ namespace Hotel.Client.Pages.Booking
                 {
                     // todo: toast notification
                 }
-
             }
-
         }
-
     }
 }

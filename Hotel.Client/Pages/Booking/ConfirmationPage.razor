@@ -1,5 +1,5 @@
-﻿<h1>Thank you, we've received your booking with booking number @ConfirmedBooking.BookingNumber</h1>
-<h2><b>Number of guests:</b> @ConfirmedBooking.Guests </h2>
+﻿<h4>Thank you, we've received your booking with booking number <b>@ConfirmedBooking.BookingNumber</b></h4>
+<h3><b>Number of guests:</b> @ConfirmedBooking.Guests </h3>
 @if (ConfirmedBooking.Breakfast != false || ConfirmedBooking.SpaAccess != false)
 {
     <h2>You have added the following options: </h2>
@@ -12,7 +12,7 @@
         <h3>Spa</h3>
     }
 }
-<h2>@ConfirmedBooking.Email</h2>
+<h3>@ConfirmedBooking.Email</h3>
 
 
 

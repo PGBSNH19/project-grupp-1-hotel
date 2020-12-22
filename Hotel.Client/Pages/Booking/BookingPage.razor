@@ -1,6 +1,5 @@
 ﻿@page "/booking"
-<CheckinForm EventCallback="GetRoom" AvailableRoom="AppState.AvailabilityRequest" />
-
+<CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
 
 @if (ConfirmedBooking == null)
 {
@@ -25,7 +24,6 @@
     {
         <h2 class="display-4">Please make a search to be able to pick a roomtype</h2>
     }
-
 }
 else
 {
