@@ -27,7 +27,22 @@ Systemets Frontend byggs i **Blazor WebAssembly**. Backend Server är ett **.NET
 
 Swagger används som dokumentation av vårat server API.
 
-*länk och instruktioner för att köra **Swagger** ska tillkomma*
+Dokumentationen går att nå genom att bygga och köra API:et i en docker container i development mode.
+Första steget är att ställa sig i rotmappen för projektet och bygga en image genom detta kommando:
+
+```powershell
+docker build -t hotelapi ./Hotel.Server
+```
+
+Därefter köra containern med följande kommando.
+
+```powershell
+docker run -d -p 8080:80 --name hotelapi --env ASPNETCORE_ENVIRONMENT=Development hotelapi
+```
+
+När det är gjort ska det gå att nå dokumentationen på: 
+
+- http://localhost:8080/swagger/index.html
 
 <h2>Övriga resurser</h2>
 
