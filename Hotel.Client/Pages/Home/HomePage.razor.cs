@@ -80,7 +80,7 @@ namespace Hotel.Client.Pages.Home
             else
             {
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
-                     ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
+                     ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")}");
 
                 if (Rooms != null)
                 {
