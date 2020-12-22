@@ -30,6 +30,7 @@ namespace Hotel.Server.Extensions
 
         public static Booking ToDomain(this BookingRequest booking) => new Booking
         {
+            BookingNumber = booking.BookingNumber,
             CheckInDate = booking.CheckInDate,
             CheckOutDate = booking.CheckOutDate,
             FirstName = booking.FirstName,
