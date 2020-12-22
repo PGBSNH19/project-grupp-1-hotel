@@ -1,5 +1,4 @@
-﻿using Hotel.Server.Models.Info;
-using Hotel.Server.Models.Request;
+﻿using Hotel.Shared;
 using Hotel.Server.Services.Communication;
 using System.Collections.Generic;
 using System.Threading.Tasks;

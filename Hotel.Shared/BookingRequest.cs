@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Hotel.Client.Shared.Models.Request
+namespace Hotel.Shared
 {
     public class BookingRequest
     {

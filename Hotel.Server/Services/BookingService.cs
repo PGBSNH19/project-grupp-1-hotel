@@ -1,6 +1,4 @@
 ﻿using Hotel.Server.Extensions;
-using Hotel.Server.Models.Info;
-using Hotel.Server.Models.Request;
 using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
@@ -10,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hotel.Shared;
 
 namespace Hotel.Server.Services
 {

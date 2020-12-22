@@ -1,5 +1,5 @@
 ﻿using Hotel.Server.Models;
-using Hotel.Server.Models.Request;
+using Hotel.Shared;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Moq;

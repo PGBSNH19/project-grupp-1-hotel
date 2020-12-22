@@ -1,6 +1,6 @@
 ﻿using Hotel.Server.Extensions;
 using Hotel.Server.Models;
-using Hotel.Server.Models.Info;
+using Hotel.Shared;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Services;
