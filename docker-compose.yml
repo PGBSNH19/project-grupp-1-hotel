@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   # ui
   client:
@@ -15,9 +15,34 @@ services:
     image: "hotel-server:latest"
     ports:
       - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings:DefaultConnection=Server=hoteldb,1433;Database=HotelDB;User Id=sa;Password=Admin123!;
+    depends_on:
+      - db
+      - migrations
     restart: always
     networks:
       - shared
+  db:
+    container_name: hoteldb
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:
+      SA_PASSWORD: "Admin123!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    depends_on:
+      - migrations
+    networks:
+      - shared
+  migrations:
+    build:
+      context: .
+      dockerfile: Migrations.Dockerfile
+    networks:
+      - shared
+
 networks:
   shared:
     driver: bridge
