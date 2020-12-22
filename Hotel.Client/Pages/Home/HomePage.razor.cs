@@ -1,4 +1,4 @@
-﻿using Hotel.Client.Shared.Models.Info;
+﻿using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;

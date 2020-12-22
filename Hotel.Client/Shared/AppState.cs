@@ -1,21 +1,22 @@
-﻿using Hotel.Client.Shared.Models.Info;
-using Hotel.Client.Shared.Models.Request;
+﻿using Hotel.Client.ViewModel;
+using Hotel.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Hotel.Client.Shared
 {
     public class AppState
     {
         public event Action OnChange;
-        public RoomInfo[] Rooms { get; private set; }
+        public List<RoomViewModel> Rooms { get; private set; }
         public RoomAvailabilityRequest AvailabilityRequest { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
+        
         public void SetRooms(RoomInfo[] rooms)
         {
-            Rooms = rooms;
+            Rooms = new List<RoomViewModel>();
+            foreach (var room in rooms)
+                Rooms.Add(new RoomViewModel { RoomInfo = room });
             NotifyStateChanged();
         }
 

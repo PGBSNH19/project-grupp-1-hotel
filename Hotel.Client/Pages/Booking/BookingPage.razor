@@ -1,7 +1,6 @@
 ﻿@page "/booking"
 @inject AppState AppState
-<CheckinForm />
-
+<CheckinForm AvailableRoom="AppState.AvailabilityRequest" />
 
 <h1 class="display-4">ROOMS</h1>
 
@@ -10,7 +9,7 @@
         @foreach (var room in AppState.Rooms)
         {
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                @room.RoomInfos().RoomType
+                @room.RoomType
                 <span class="badge badge-light"><button class="btn btn-info">Choose</button></span>
             </li>
 
@@ -20,7 +19,6 @@
 
 @if (ConfirmedBooking == null)
 {
-    <CheckinForm />
     <CustomerForm></CustomerForm>
 }
 else

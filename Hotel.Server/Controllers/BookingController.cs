@@ -1,8 +1,7 @@
-﻿using Hotel.Server.Models.Request;
-using Hotel.Server.Services.Interfaces;
+﻿using Hotel.Server.Services.Interfaces;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Serilog;

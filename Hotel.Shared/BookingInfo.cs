@@ -1,5 +1,5 @@
 using System;
-namespace Hotel.Server.Models.Info
+namespace Hotel.Shared
 {
     public class BookingInfo
     {

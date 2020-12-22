@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>Hotel.Shared.SchoolProject</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

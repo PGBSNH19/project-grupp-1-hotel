@@ -1,10 +1,9 @@
-using Hotel.Client.Shared;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Hotel.Client.Shared.Models.Request
+namespace Hotel.Shared
 {
-    public class RoomAvailabilityRequest 
+    public class RoomAvailabilityRequest
     {
         [Required]
         [Range(1, 4)]
