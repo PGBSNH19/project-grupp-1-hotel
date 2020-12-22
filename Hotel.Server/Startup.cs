@@ -10,10 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Hotel.Server.Controllers;
-using System.Reflection;
-using System.IO;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Hotel.Server
 {

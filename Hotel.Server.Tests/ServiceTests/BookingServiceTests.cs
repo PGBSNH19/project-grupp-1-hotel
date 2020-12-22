@@ -1,10 +1,10 @@
 ﻿using Hotel.Server.Extensions;
 using Hotel.Server.Models;
-using Hotel.Shared;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Services;
 using Hotel.Server.Services.Communication;
+using Hotel.Shared;
 using Moq;
 using Moq.EntityFrameworkCore;
 using System;
@@ -143,7 +143,7 @@ namespace Hotel.Server.Tests.ServiceTests
             var service = GetRepoMockSetup(bookings, rooms);
             var roomAvailablilityRequest = MockData.MockRoomAvailabilityRequest[1];
             roomAvailablilityRequest.CheckInDate = DateTime.Now.AddDays(-1);
-            roomAvailablilityRequest.CheckOutDate = DateTime.Now.AddDays(2); 
+            roomAvailablilityRequest.CheckOutDate = DateTime.Now.AddDays(2);
 
             var result = await service.GetAvailableRoomTypesAsync(roomAvailablilityRequest);
 

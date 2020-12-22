@@ -1,5 +1,5 @@
-﻿using Hotel.Shared;
-using Hotel.Server.Services.Communication;
+﻿using Hotel.Server.Services.Communication;
+using Hotel.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

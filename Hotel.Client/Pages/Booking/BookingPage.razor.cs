@@ -6,7 +6,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
 
 namespace Hotel.Client.Pages.Booking
 {
@@ -16,12 +15,11 @@ namespace Hotel.Client.Pages.Booking
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
-        RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest(); // continue here
-
-        private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
+        RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest();
+        private RoomInfo[] Rooms { get; set; }
 
         protected override void OnInitialized()
-        { 
+        {
             AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
             AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
             AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;
