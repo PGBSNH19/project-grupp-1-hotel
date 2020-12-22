@@ -1,17 +1,15 @@
-﻿@page "/booking/confirmation"
-
-<h1>Thank you, we've received your booking!</h1>
+﻿<h1>Thank you, we've received your booking with booking number @ConfirmedBooking.BookingNumber</h1>
 <h2><b>Number of guests:</b> @ConfirmedBooking.Guests </h2>
 @if (ConfirmedBooking.Breakfast != false || ConfirmedBooking.SpaAccess != false)
 {
     <h2>You have added the following options: </h2>
     @if (ConfirmedBooking.Breakfast != false)
     {
-        <h3>@ConfirmedBooking.Breakfast</h3>
+        <h3>Breakfast</h3>
     }
     @if (ConfirmedBooking.SpaAccess != false)
     {
-        <h3>@ConfirmedBooking.SpaAccess</h3>
+        <h3>Spa</h3>
     }
 }
 <h2>@ConfirmedBooking.Email</h2>

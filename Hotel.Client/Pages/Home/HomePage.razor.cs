@@ -1,4 +1,5 @@
-﻿using Hotel.Shared;
+﻿using Hotel.Client.Shared;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -20,6 +21,14 @@ namespace Hotel.Client.Pages.Home
 
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Config { get; set; }
+
+        [Inject] AppState AppState { get; set; }
+        public BookingInfo ConfirmedBooking { get; set; }
+        public RoomAvailabilityRequest AvailableRoom { get; set; } = new RoomAvailabilityRequest();
+
+        [Inject] NavigationManager NavigationManager { get; set; }
+
+        private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
 
         protected override async Task OnInitializedAsync()
         {
@@ -61,6 +70,34 @@ namespace Hotel.Client.Pages.Home
             int num = random.Next(0, Images.Count);
             ImageIndex = num;
             StateHasChanged();
+        }
+
+        async Task GetRoom()
+        {
+            if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
+            {
+                // todo: toast notification
+            }
+            else
+            {
+                AppState.SetAvailabilityRequest(AvailableRoom);
+
+                Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
+                     ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
+
+
+                if (Rooms != null)
+                {
+                    AppState.SetRooms(Rooms);
+                    NavigationManager.NavigateTo("booking");
+                }
+                else
+                {
+                    // todo: toast notification
+                }
+
+            }
+
         }
     }
 }

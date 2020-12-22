@@ -1,43 +1,43 @@
 ﻿
-<EditForm Model="@AppState.BookingRequest" OnValidSubmit="CreateBooking">
+<EditForm Model="@AppState.BookingRequest" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator /> 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <InputText placeholder="First name" class="form-control" @bind-Value="@BookingRqs.FirstName"></InputText>
-            <ValidationMessage For="@(() => BookingRqs.FirstName)"></ValidationMessage>
+            <InputText placeholder="First name" class="form-control" @bind-Value="@AppState.BookingRequest.FirstName"></InputText>
+            <ValidationMessage For="@(() => AppState.BookingRequest.FirstName)"></ValidationMessage>
         </div>
         <div class="form-group col-md-6">
-            <InputText placeholder="Last name" class="form-control" @bind-Value="@BookingRqs.LastName"></InputText>
-            <ValidationMessage For="@(() => BookingRqs.LastName)"></ValidationMessage>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <InputText type="email" placeholder="Email" class="form-control" @bind-Value="@BookingRqs.Email"></InputText>
-            <ValidationMessage For="@(() => BookingRqs.Email)"></ValidationMessage>
-        </div>
-        <div class="form-group col-md-6">
-            <InputText placeholder="Phone number" class="form-control" @bind-Value="@BookingRqs.PhoneNumber"></InputText>
-            <ValidationMessage For="@(() => BookingRqs.PhoneNumber)"></ValidationMessage>
+            <InputText placeholder="Last name" class="form-control" @bind-Value="@AppState.BookingRequest.LastName"></InputText>
+            <ValidationMessage For="@(() => AppState.BookingRequest.LastName)"></ValidationMessage>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <InputText placeholder="Address" class="form-control" @bind-Value="@BookingRqs.Address"></InputText>
-            <ValidationMessage For="@(() => BookingRqs.Address)"></ValidationMessage>
+            <InputText type="email" placeholder="Email" class="form-control" @bind-Value="@AppState.BookingRequest.Email"></InputText>
+            <ValidationMessage For="@(() => AppState.BookingRequest.Email)"></ValidationMessage>
+        </div>
+        <div class="form-group col-md-6">
+            <InputText placeholder="Phone number" class="form-control" @bind-Value="@AppState.BookingRequest.PhoneNumber"></InputText>
+            <ValidationMessage For="@(() => AppState.BookingRequest.PhoneNumber)"></ValidationMessage>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <InputText placeholder="Address" class="form-control" @bind-Value="@AppState.BookingRequest.Address"></InputText>
+            <ValidationMessage For="@(() => AppState.BookingRequest.Address)"></ValidationMessage>
         </div>
     </div>
     <div class="form-group">
         <h5>Include in my booking:</h5>
 
         <div class="form-check">
-            <InputCheckbox class="form-check-input" @bind-Value="@BookingRqs.Breakfast"></InputCheckbox>
+            <InputCheckbox class="form-check-input" @bind-Value="@AppState.BookingRequest.Breakfast"></InputCheckbox>
             <label class="form-check-label" for="gridCheck">
                 Breakfast buffet 360 SEK
             </label>
         </div>
         <div class="form-check">
-            <InputCheckbox class="form-check-input" @bind-Value="@BookingRqs.SpaAccess"></InputCheckbox>
+            <InputCheckbox class="form-check-input" @bind-Value="@AppState.BookingRequest.SpaAccess"></InputCheckbox>
             <label class="form-check-label" for="gridCheck">
                 Spa entrance 899 SEK
             </label>
