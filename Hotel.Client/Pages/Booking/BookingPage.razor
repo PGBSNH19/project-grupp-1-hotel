@@ -1,25 +1,29 @@
 ﻿@page "/booking"
-@inject AppState AppState
-<CheckinForm AvailableRoom="AppState.AvailabilityRequest" />
-
-<h1 class="display-4">ROOMS</h1>
-
-<div class="lead">
-    <ul class="list-group">
-        @foreach (var room in AppState.Rooms)
-        {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                @room.RoomType
-                <span class="badge badge-light"><button class="btn btn-info">Choose</button></span>
-            </li>
-
-        }
-    </ul>
-</div>
+<CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
 
 @if (ConfirmedBooking == null)
 {
-    <CustomerForm></CustomerForm>
+    <h1 class="display-4">Rooms</h1>
+    if (AppState.Rooms != null)
+    {
+        <div class="lead">
+            <ul class="list-group">
+                @foreach (var room in AppState.Rooms)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @room.RoomType
+                        <span class="badge badge-light"><button class="btn btn-info" @onclick="@(() => AppState.SetPickedRoom(room.RoomInfo))">Choose</button></span>
+                    </li>
+
+                }
+            </ul>
+        </div>
+        <CustomerForm OnValidSubmit="@CreateBooking"></CustomerForm>
+    }
+    else
+    {
+        <h2 class="display-4">Please make a search to be able to pick a roomtype</h2>
+    }
 }
 else
 {

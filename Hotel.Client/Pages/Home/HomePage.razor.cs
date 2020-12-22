@@ -1,4 +1,5 @@
-﻿using Hotel.Shared;
+﻿using Hotel.Client.Shared;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -21,10 +22,16 @@ namespace Hotel.Client.Pages.Home
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Config { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        [Inject] AppState AppState { get; set; }
+        public BookingInfo ConfirmedBooking { get; set; }
+        public RoomAvailabilityRequest AvailableRoom { get; set; } = new RoomAvailabilityRequest();
+
+        [Inject] NavigationManager NavigationManager { get; set; }
+
+        private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
+
+        protected override void OnInitialized()
         {
-            var result = await Http.GetFromJsonAsync<BookingInfo>($"{Config["BaseApiUrl"]}api/v1.0/booking/foo");
-            Console.WriteLine(result.Email);
             StartTimer(3000);
         }
 
@@ -61,6 +68,34 @@ namespace Hotel.Client.Pages.Home
             int num = random.Next(0, Images.Count);
             ImageIndex = num;
             StateHasChanged();
+        }
+
+        private async Task GetRoom()
+        {
+            if (AvailableRoom.CheckInDate >= AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now || AvailableRoom.CheckOutDate <= DateTime.Now)
+            {
+                // todo: toast notification
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else
+            {
+                Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
+                     ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
+
+                if (Rooms != null)
+                {
+                    AppState.Flush(); // reset booking data on no results
+                    AppState.SetAvailabilityRequest(AvailableRoom);
+                    AppState.SetRooms(Rooms);
+                    NavigationManager.NavigateTo("booking");
+                }
+                else
+                {
+                    // todo: toast notification
+                }
+
+            }
+
         }
     }
 }
