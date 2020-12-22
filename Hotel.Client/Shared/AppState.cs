@@ -11,7 +11,16 @@ namespace Hotel.Client.Shared
         public List<RoomViewModel> Rooms { get; private set; }
         public RoomAvailabilityRequest AvailabilityRequest { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
+        public RoomInfo PickedRoom { get; set; }
+        public BookingRequest BookingRequest { get; set; }
         
+        public void SetPickedRoom(RoomInfo pickedRoom)
+        {
+            PickedRoom = pickedRoom;
+            BookingRequest.Beds = pickedRoom.Beds;
+            BookingRequest.DoubleBeds = pickedRoom.DoubleBeds;
+        }
+
         public void SetRooms(RoomInfo[] rooms)
         {
             Rooms = new List<RoomViewModel>();

@@ -1,4 +1,5 @@
-﻿using Hotel.Shared;
+﻿using Hotel.Client.Shared;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,26 +11,29 @@ namespace Hotel.Client.Pages.Booking
 {
     public partial class CustomerForm
     {
-        //[Parameter] public BookingRequest BookingRequest { get; set; } = new BookingRequest();
-        //[Parameter] public EventCallback OnValidSubmit { get; set; }
-
         BookingRequest BookingRqs = new BookingRequest();
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
-
+        [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
 
 
+        protected override void OnInitialized()
+        {
+            AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
+            AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
+            AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;          
+        }
+
         public async Task CreateBooking()
         {
-            Console.WriteLine(BookingRqs.PhoneNumber);
             try
             {
-                BookingRqs.BookingNumber = Guid.NewGuid().ToString();
-                var result = await Http.PostAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/", BookingRqs);
+                AppState.BookingRequest.BookingNumber = Guid.NewGuid().ToString();
+                var result = await Http.PostAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/", AppState.BookingRequest);
                 if (result.IsSuccessStatusCode)
                 {
-                    ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingRqs.BookingNumber}");
+                    ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{AppState.BookingRequest.BookingNumber}");
                 }
             }
             catch (Exception e)
