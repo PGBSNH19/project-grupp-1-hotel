@@ -22,7 +22,8 @@ namespace Hotel.Client.Shared
             BookingRequest.BookingNumber = "iiiwww";
         }
 
-        public void Flush() {
+        public void Flush()
+        {
             Rooms = null;
             ConfirmedBooking = null;
             PickedRoom = null;
@@ -52,6 +53,6 @@ namespace Hotel.Client.Shared
         }
 
         private void NotifyStateChanged() => OnChange?.Invoke();
-        
+
     }
 }

@@ -2,13 +2,13 @@
 using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
+using Hotel.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hotel.Shared;
 
 namespace Hotel.Server.Services
 {
