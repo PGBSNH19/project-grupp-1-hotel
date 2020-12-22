@@ -1,6 +1,5 @@
 ﻿using Hotel.Server.Models;
-using Hotel.Server.Models.Info;
-using Hotel.Server.Models.Request;
+using Hotel.Shared;
 
 namespace Hotel.Server.Extensions
 {

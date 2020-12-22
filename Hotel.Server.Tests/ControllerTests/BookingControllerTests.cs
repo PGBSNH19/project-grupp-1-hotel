@@ -1,18 +1,13 @@
 ﻿using Hotel.Server.Controllers;
 using Hotel.Server.Models;
-using Hotel.Server.Models.Info;
-using Hotel.Server.Models.Request;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Services;
-using Hotel.Server.Services.Communication;
-using Hotel.Server.Services.Interfaces;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace Hotel.Server.Tests.ControllerTests
