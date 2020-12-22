@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Serilog;
 using Microsoft.AspNetCore.Http;
-using Hotel.Server.Models.Info;
 
 namespace Hotel.Server.Controllers
 {
