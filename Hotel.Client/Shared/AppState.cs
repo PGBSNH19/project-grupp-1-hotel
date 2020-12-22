@@ -11,7 +11,7 @@ namespace Hotel.Client.Shared
         public List<RoomViewModel> Rooms { get; private set; }
         public RoomAvailabilityRequest AvailabilityRequest { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
-        
+
         public void SetRooms(RoomInfo[] rooms)
         {
             Rooms = new List<RoomViewModel>();
@@ -33,6 +33,6 @@ namespace Hotel.Client.Shared
         }
 
         private void NotifyStateChanged() => OnChange?.Invoke();
-        
+
     }
 }

@@ -18,7 +18,7 @@ namespace Hotel.Client.Shared
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] AppState AppState { get; set; }
 
-        private List<int> numberOfGuest = new List<int> { 1,2,3,4 };
+        private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4 };
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
         async Task GetRoom()
         {

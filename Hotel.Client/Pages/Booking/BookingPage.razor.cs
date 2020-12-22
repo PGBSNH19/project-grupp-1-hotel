@@ -10,7 +10,7 @@ namespace Hotel.Client.Pages.Booking
         BookingRequest BookingRequest = new BookingRequest();
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
-        
+
         BookingInfo ConfirmedBooking { get; set; }
 
         //public async Task CreateBooking()

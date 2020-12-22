@@ -199,7 +199,7 @@ namespace Hotel.Server.Persistence
                 Breakfast = true,
                 SpaAccess = false,
                 Created = DateTime.Now
-            }); 
+            });
             booking.HasKey(e => e.Id);
         }
     }

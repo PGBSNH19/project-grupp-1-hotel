@@ -1,7 +1,7 @@
 ﻿using Hotel.Server.Models;
-using Hotel.Shared;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories.Interfaces;
+using Hotel.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;

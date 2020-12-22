@@ -1,12 +1,11 @@
 ﻿using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Serilog;
-using Microsoft.AspNetCore.Http;
-using Hotel.Server.Models.Info;
 
 namespace Hotel.Server.Controllers
 {
@@ -34,7 +33,7 @@ namespace Hotel.Server.Controllers
         public async Task<IActionResult> GetBookingByBookingNumber(string bookingNumber)
         {
             Log.Information("Controller method starting: [BookingController] GetBookingByBookingNumber");
-            if (String.IsNullOrEmpty(bookingNumber)) 
+            if (String.IsNullOrEmpty(bookingNumber))
                 return BadRequest();
 
             var result = await _bookingService.GetByBookingNumberAsync(bookingNumber);
@@ -62,7 +61,7 @@ namespace Hotel.Server.Controllers
                 {
                     Guests = guests,
                     CheckInDate = DateTime.Parse(checkIn),
-                    CheckOutDate = DateTime.Parse(checkOut)             
+                    CheckOutDate = DateTime.Parse(checkOut)
                 };
                 var result = await _bookingService.GetAvailableRoomTypesAsync(roomAvailability);
                 if (result.Entity.Any())
@@ -73,7 +72,7 @@ namespace Hotel.Server.Controllers
             catch
             {
                 return BadRequest();
-            }            
+            }
         }
 
         ///<summary>
@@ -90,7 +89,7 @@ namespace Hotel.Server.Controllers
 
             var result = await _bookingService.CreateAsync(bookingRequest);
 
-            if(result.Entity != null)
+            if (result.Entity != null)
                 return Ok(result.Entity);
 
             return BadRequest(result.Message);
