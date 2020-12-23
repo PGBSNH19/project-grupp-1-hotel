@@ -8,9 +8,6 @@
 * THEN the room selection page should show
 
 
-
-
-
 * Given the lists of available rooms
 * AND a room is selected
 * AND additional choices have been made
@@ -19,16 +16,10 @@
 * THEN my booking should be processed
 
 
-
-
-
 * GIVEN that my booking has been processed
 * AND my booking was finished
 * WHEN I leave the application
 * THEN I should be notified by e-mail
-
-
-
 
 
 * GIVEN that a booking exists

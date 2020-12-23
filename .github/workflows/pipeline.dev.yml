@@ -1,0 +1,82 @@
+name: Development CI/CD
+on:
+  push:
+    branches: [ development ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Continous Integration
+    # checks out repo under $GITHUB_WORKSPACE
+    steps:
+    - uses: actions/checkout@v2
+
+    # set up a dotnet core cli
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0'
+
+    # restore dependencies and tools
+    - name: Dotnet restore
+      run: dotnet restore
+
+    # dotnet build
+    - name: Dotnet build
+      run: dotnet build --configuration Release --no-restore
+
+    # failing tests stops the pipeline
+    - name: Dotnet Test
+      run: dotnet test --no-restore --verbosity normal
+
+    # Continous Deployment
+    - name: Appsettings variable substitution for Server
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: Hotel.Server/appsettings.json
+      env:
+        ConnectionStrings.DefaultConnection: ${{ secrets.CONNECTION_STRING_DEV }}
+
+    - name: Appsettings variable substitution for Client
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: Hotel.Client/wwwroot/appsettings.json
+      env:
+        BaseApiUrl: ${{ secrets.BASE_API_URL_DEV }}
+
+    - name: Login to container registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}
+        username: ${{ secrets.REGISTRY_DEV }}
+        password: ${{ secrets.REGISTRY_PASSWORD_DEV }}
+
+    - name: Build Docker image of Server and push to Registry
+      run:  |
+        docker build Hotel.Server/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/server:${{ github.sha }}
+
+    - name: Build Docker image of Client and push to Registry
+      run: | 
+        docker build Hotel.Client/ -t ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER_DEV}}/client:${{ github.sha }}
+
+    - name: Login to Azure CLI 
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy and run Server on webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: hotelserverdev
+        publish-profile: ${{ secrets.SERVER_PUBLISH_PROFILE_DEV }}
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/server:${{ github.sha }}
+
+    - name: Deploy and run Client on webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: hotelclientdev
+        publish-profile: ${{ secrets.CLIENT_PUBLISH_PROFILE_DEV }}
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER_DEV }}/client:${{ github.sha }}
