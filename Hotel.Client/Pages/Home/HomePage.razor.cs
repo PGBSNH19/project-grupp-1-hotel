@@ -1,4 +1,5 @@
 ﻿using Hotel.Client.Shared;
+using Hotel.Client.Toast;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace Hotel.Client.Pages.Home
 
         [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
+        [Inject] ToastService Toast { get; set; }
         public RoomAvailabilityRequest AvailableRoom { get; set; } = new RoomAvailabilityRequest();
 
         [Inject] NavigationManager NavigationManager { get; set; }
@@ -74,7 +76,7 @@ namespace Hotel.Client.Pages.Home
         {
             if (AvailableRoom.CheckInDate >= AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now || AvailableRoom.CheckOutDate <= DateTime.Now)
             {
-                // todo: toast notification
+                Toast.ShowToast("Invalid Date", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search
             }
             else
@@ -91,7 +93,7 @@ namespace Hotel.Client.Pages.Home
                 }
                 else
                 {
-                    // todo: toast notification
+                    Toast.ShowToast("No Available Room", ToastLevel.Error);
                 }
 
             }
