@@ -34,7 +34,7 @@ namespace Hotel.Server.Controllers
                 return BadRequest();
             }
 
-            return Ok(reviews);
+            return Ok(reviews.Entity);
         }
     }
 }
