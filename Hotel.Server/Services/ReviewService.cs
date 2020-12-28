@@ -5,6 +5,7 @@ using Hotel.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Serilog;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Services
@@ -27,7 +28,26 @@ namespace Hotel.Server.Services
 
         public async Task<ServiceResponse<List<ReviewInfo>>> GetRandomReviewsAsync()
         {
-            throw new NotImplementedException();
+            Log.Information("ReviewService processing request for GetRandomReviewsAsync");
+            var request = await _reviewRepository.GetThreeReviews();
+
+            if (request.Any())
+            {
+                List<ReviewInfo> reviews = new List<ReviewInfo>();
+                foreach (var review in request)
+                {
+                    reviews.Add(new ReviewInfo 
+                    { 
+                        Created = review.Created, 
+                        Description = review.Description, 
+                        FirstName = review.FirstName, 
+                        LastName = review.LastName, 
+                        Grade = review.Grade 
+                    });
+                }
+                return new ServiceResponse<List<ReviewInfo>>(reviews);
+            }
+            return null;
         }
     }
 }

@@ -17,5 +17,19 @@ namespace Hotel.Server.Controllers
         {
             _reviewService = reviewService;
         }
+
+        [HttpGet]
+        [Route("random")]
+        public async Task<IActionResult> GetThreeRandomReviews()
+        {
+            var reviews = await _reviewService.GetRandomReviewsAsync();
+
+            if(reviews == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(reviews);
+        }
     }
 }
