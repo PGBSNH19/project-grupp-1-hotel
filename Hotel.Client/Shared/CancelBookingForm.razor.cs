@@ -12,7 +12,7 @@ namespace Hotel.Client.Shared
     public partial class CancelBookingForm
     {
         public string BookingNumber { get; set; }
-        [Parameter] public EventCallback<string> EventCallback { get; set; }
+        [Parameter] public EventCallback EventCallback { get; set; }
         [Inject] AppState AppState { get; set; }
         [Inject] HttpClient Http { get; set; }
         [Inject] IConfiguration Configuration { get; set; }
