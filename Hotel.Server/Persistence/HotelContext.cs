@@ -8,6 +8,7 @@ namespace Hotel.Server.Persistence
     {
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
 
         public HotelContext(DbContextOptions options) : base(options) { }
         public HotelContext() { }
@@ -201,6 +202,20 @@ namespace Hotel.Server.Persistence
                 Created = DateTime.Now
             });
             booking.HasKey(e => e.Id);
+
+            var review = builder.Entity<Review>();
+            review.HasKey(e => e.Id);
+            review.HasIndex(u => u.BookingNumber).IsUnique();
+            review.HasData(new
+            {
+                Id = 1,
+                Description = "The booking process was very simple and easy to navigate. Our family higly reccomends this hotel!",
+                Grade = 5,
+                Anonymous = true,
+                FirstName = "",
+                LastName = "",
+                BookingNumber = "foo"
+            });
         }
     }
 }
