@@ -18,6 +18,11 @@ namespace Hotel.Server.Controllers
             _reviewService = reviewService;
         }
 
+        ///<summary>
+        ///Returns three random reviews with grades greater or equal to 4
+        ///</summary>
+        ///<response code="200">Three random reviews was found and returned</response>
+        ///<response code="400">Request failed, read error messages</response>
         [HttpGet]
         [Route("random")]
         public async Task<IActionResult> GetThreeRandomReviews()
