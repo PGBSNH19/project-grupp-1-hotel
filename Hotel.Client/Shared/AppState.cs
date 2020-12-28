@@ -11,6 +11,7 @@ namespace Hotel.Client.Shared
         public List<RoomViewModel> Rooms { get; private set; }
         public RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest();
         public BookingInfo ConfirmedBooking { get; set; }
+        public BookingInfo CancelBooking { get; set; }
         public RoomInfo PickedRoom { get; set; }
         public BookingRequest BookingRequest { get; set; } = new BookingRequest();
 
@@ -43,6 +44,12 @@ namespace Hotel.Client.Shared
         public void SetConfirmedBooking(BookingInfo confirmedBooking)
         {
             ConfirmedBooking = confirmedBooking;
+            NotifyStateChanged();
+        }
+
+        public void SetCancelBooking(BookingInfo cancelBooking)
+        {
+            CancelBooking = cancelBooking;
             NotifyStateChanged();
         }
 
