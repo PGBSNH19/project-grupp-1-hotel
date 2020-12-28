@@ -4,6 +4,7 @@ namespace Hotel.Shared
     public class BookingInfo
     {
         public int Id { get; set; }
+        public bool IsCanceled { get; set; }
         public string BookingNumber { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
