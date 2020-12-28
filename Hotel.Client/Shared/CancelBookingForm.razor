@@ -1,16 +1,13 @@
 ﻿<EditForm Model="@BookingInfo" OnValidSubmit="EventCallback">
-    <div id="main">
         <DataAnnotationsValidator />
         <div class="form-group">
-            <label>BookingNumber</label>
             <div>
-                <InputSelect @bind-Value="@BookingNumber" class="form-control-sm w-100">
-                </InputSelect>
+                <InputText @bind-Value="@BookingNumber" class="form-control-sm w-100">
+                </InputText>
                 <ValidationMessage For="@(() => BookingNumber)" />
             </div>
         </div>
         <div class="search-btn">
             <button type="submit" class="btn btn-outline-light btn-sm h-50 mt-4">Search</button>
         </div>
-    </div>
 </EditForm>

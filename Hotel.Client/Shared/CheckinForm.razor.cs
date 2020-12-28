@@ -31,7 +31,7 @@ namespace Hotel.Client.Shared
                 AppState.SetAvailabilityRequest(AvailableRoom);
 
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
-                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yy-MM-dd")}");
+                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")}");
 
                 if (Rooms != null)
                 {

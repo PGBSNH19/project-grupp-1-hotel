@@ -54,7 +54,7 @@ namespace Hotel.Client.Pages.Booking
             else
             {
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
-                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yy-MM-dd")}");
+                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yyyy-MM-dd")}");
 
                 if (Rooms != null)
                 {
