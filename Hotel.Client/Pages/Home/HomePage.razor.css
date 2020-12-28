@@ -1,9 +1,14 @@
 ﻿.image-container {
-     display:flex;
+    display:flex;
     position:relative;
     justify-content:center;
     flex-wrap:wrap;
     margin-bottom:10px;
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .oi {
@@ -16,23 +21,19 @@
     opacity: 1;
 }
 
-#img {
-    width: 100%;
-}
-
 .btn-right {
     position: absolute;
     top: 45%;
     right: 0%;
     background-color: rgba(255, 255, 255, 0.15);
-    font-size:12px;
-    outline:none;
-    color:navajowhite;
+    outline: none;
+    color: navajowhite;
     border: 0;
     top: 0%;
     height: 100%;
     display: flex;
     align-items: center;
+    z-index: 10;
 }
 
 .btn-right:hover {
@@ -44,7 +45,6 @@
     top: 45%;
     left: 0%;
     background-color: rgba(255, 255, 255, 0.15);
-    font-size: 12px;
     outline: none;
     color: navajowhite;
     border: 0;
@@ -52,6 +52,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+    z-index: 10;
 }
 
 .btn-left:hover {
@@ -60,46 +61,19 @@
 
 .image-text {
     position: absolute;
-    top: 20%;
-    padding: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-size: 15px;
+    background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.35));
     color: aliceblue;
-    background: black;
-    opacity: 0.5;
-    box-shadow: 1px 3px 45px 63px #000000;
 }
 
-.title {
-    font-size: 20px !important;
-}
-
-.description {
-    font-size: 16px !important;
-}
-
-@media all and (max-width: 900px) {
-    #img {
-        height: 55vh;
-    }
-}
-
-@media all and (max-width: 700px) {
-    #img {
-        height: 36vh;
-    }
-
-    .title {
-        font-size: 10px !important;
-    }
-
-    .description {
-        font-size: 9px !important;
-    }
-
-    .image-text {
-       
-        box-shadow: 1px 1px 21px 22px #000000;
+@media all and (min-width: 540px) {
+    .image-container {
+        height: 400px;
     }
 
     .oi {
@@ -113,8 +87,8 @@
     }
 }
 
-@media all and (min-width: 1200px){
-    #img {
-        height: 70vh;
+@media all and (min-width: 900px) {
+    .image-container {
+        height: 450px;
     }
 }
