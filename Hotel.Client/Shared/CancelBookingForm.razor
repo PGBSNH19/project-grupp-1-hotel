@@ -1,13 +1,16 @@
-﻿<EditForm Model="@BookingInfo" OnValidSubmit="EventCallback">
-        <DataAnnotationsValidator />
-        <div class="form-group">
-            <div>
-                <InputText @bind-Value="@BookingNumber" class="form-control-sm w-100">
-                </InputText>
-                <ValidationMessage For="@(() => BookingNumber)" />
-            </div>
-        </div>
-        <div class="search-btn">
-            <button type="submit" class="btn btn-outline-light btn-sm h-50 mt-4">Search</button>
-        </div>
-</EditForm>
+﻿    <input type="text" placeholder="Enter Bookingnumber" @bind-value="@BookingNumber"/>
+    <button class="search-btn" @onclick="@OnClickInternal">Search</button>
+
+@code {
+
+    [Parameter] public EventCallback<string> OnClick { get; set; }
+
+    async Task OnClickInternal()
+    {
+        if (OnClick.HasDelegate)
+        {
+            await OnClick.InvokeAsync(BookingNumber);
+        }
+    }
+}
+

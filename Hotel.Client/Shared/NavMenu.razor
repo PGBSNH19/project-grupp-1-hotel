@@ -17,8 +17,10 @@
                     <span class="oi oi-list-rich" aria-hidden="true"></span> Book a room
                 </NavLink>
             </li>
-            <li class="nav-item px-3">
-                    <CancelBookingForm Booking=@Booking EventCallback="@GetBooking" /> 
+            <li class="nav-item px-3 @NavMenuCssClass" @onclick="ToggleNavMenu">
+                <div class="nav-link">
+                    <CancelBookingForm OnClick="TryCancelBooking" /> 
+                </div>
             </li>
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="restaurant">
@@ -34,6 +36,7 @@
     </div>
 
 @code {
+    [Inject] NavigationManager Nav { get; set; }
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -42,11 +45,10 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+    string BookingNumber;
 
-    private void GetBooking()
+    private void TryCancelBooking(string bookingNumber)
     {
-
+        Nav.NavigateTo($"booking/cancel/{bookingNumber}");
     }
-    [Parameter]
-    public string Booking { get; set; }
 }
