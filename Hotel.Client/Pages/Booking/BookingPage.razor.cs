@@ -1,4 +1,5 @@
 ﻿using Hotel.Client.Shared;
+using Hotel.Client.Toast;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace Hotel.Client.Pages.Booking
         RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest();
         private RoomInfo[] Rooms { get; set; }
 
+        [Inject] ToastService Toast { get; set; }
         protected override void OnInitialized()
         {
             AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
@@ -37,6 +39,10 @@ namespace Hotel.Client.Pages.Booking
                     ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{AppState.BookingRequest.BookingNumber}");
                     StateHasChanged();
                 }
+                else
+                {
+                    Toast.ShowToast("Booking Failed", ToastLevel.Error);
+                }
             }
             catch (Exception e)
             {
@@ -48,7 +54,7 @@ namespace Hotel.Client.Pages.Booking
         {
             if (AvailabilityRequest.CheckInDate >= AvailabilityRequest.CheckOutDate || AvailabilityRequest.CheckInDate < DateTime.Now || AvailabilityRequest.CheckOutDate <= DateTime.Now)
             {
-                // todo: toast notification
+                Toast.ShowToast("Invalid Date", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search
             }
             else
@@ -65,7 +71,7 @@ namespace Hotel.Client.Pages.Booking
                 }
                 else
                 {
-                    // todo: toast notification
+                    Toast.ShowToast("No Available Room", ToastLevel.Error);
                 }
             }
         }

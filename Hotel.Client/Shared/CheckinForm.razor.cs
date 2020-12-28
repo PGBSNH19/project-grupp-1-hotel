@@ -1,4 +1,5 @@
-﻿using Hotel.Shared;
+﻿using Hotel.Client.Toast;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -19,12 +20,13 @@ namespace Hotel.Client.Shared
         [Inject] NavigationManager Nav { get; set; }
 
         private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4 };
+        [Inject] ToastService toast { get; set; }
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
         async Task GetRoom()
         {
             if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
             {
-                // todo: toast notification
+                toast.ShowToast("Invalid Date", ToastLevel.Error);
             }
             else
             {
@@ -40,7 +42,7 @@ namespace Hotel.Client.Shared
                 }
                 else
                 {
-                    // todo: toast notification
+                    toast.ShowToast("No Room Available", ToastLevel.Error);
                 }
 
             }

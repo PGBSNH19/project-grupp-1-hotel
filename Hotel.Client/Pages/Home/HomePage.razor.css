@@ -7,8 +7,13 @@
 }
 
 .oi {
-    font-size: 5rem;
+    font-size: 2rem;
     color: white;
+    opacity: 0.6;
+}
+
+.oi:hover {
+    opacity: 1;
 }
 
 #img {
@@ -30,9 +35,9 @@
     align-items: center;
 }
 
-    .btn-right:hover {
-        background-color: rgba(255, 255, 255, 0.25);
-    }
+.btn-right:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
 
 .btn-left {
     position: absolute;
@@ -95,6 +100,16 @@
     .image-text {
        
         box-shadow: 1px 1px 21px 22px #000000;
+    }
+
+    .oi {
+        font-size: 1.5rem;
+        color: white;
+        opacity: 0.6;
+    }
+
+    .oi:hover {
+        opacity: 1;
     }
 }
 
