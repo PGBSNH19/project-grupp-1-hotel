@@ -214,7 +214,8 @@ namespace Hotel.Server.Persistence
                 Anonymous = true,
                 FirstName = "",
                 LastName = "",
-                BookingNumber = "foo"
+                BookingNumber = "foo",
+                Created = DateTime.Now
             });
         }
     }
