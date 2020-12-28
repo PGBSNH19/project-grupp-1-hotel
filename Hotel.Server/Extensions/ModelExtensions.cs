@@ -5,6 +5,23 @@ namespace Hotel.Server.Extensions
 {
     public static class ModelExtensions
     {
+        public static Review ToDomain(this ReviewRequest request) => new Review
+        {
+            Description = request.Description,
+            Grade = request.Grade,
+            Anonymous = request.Anonymous,
+            BookingNumber = request.BookingNumber
+        };
+
+        public static ReviewInfo ToDto(this Review review) => new ReviewInfo
+        {
+            Description = review.Description,
+            Grade = review.Grade,
+            FirstName = review.FirstName,
+            LastName = review.LastName,
+            Created = review.Created
+        };
+
         public static RoomInfo ToDto(this Room room) => new RoomInfo
         {
             Beds = room.Beds,
