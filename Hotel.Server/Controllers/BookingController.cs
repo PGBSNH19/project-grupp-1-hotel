@@ -41,6 +41,7 @@ namespace Hotel.Server.Controllers
 
             return Ok(result);
         }
+
         ///<summary>
         ///Retrives available rooms by number of guests and between check in and check out dates 
         ///</summary>
