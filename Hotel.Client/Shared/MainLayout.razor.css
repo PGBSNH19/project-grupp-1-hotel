@@ -8,6 +8,9 @@
 .main {
     flex: 1;
     background-color: #FFF4E6;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
 }
 
     .top-row {

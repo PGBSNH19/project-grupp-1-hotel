@@ -1,0 +1,19 @@
+﻿<div class="avg-review-row">
+    <div class="stars">
+        @for(int i = 1; i <= Math.Ceiling(Average); i++)
+        {
+        <span>★</span>
+        }
+    </div>
+    <div class="average-grade">@Average.ToString("0.0")</div>
+</div>
+
+@code 
+{
+    [Parameter] public double Average { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+    }
+}
