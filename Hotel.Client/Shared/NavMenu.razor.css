@@ -73,7 +73,7 @@
     .nav {
         display: flex;
         flex-direction: row !important;
-        align-items: center;
+        align-items: flex-start;
     }
 
         .nav-item {
