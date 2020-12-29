@@ -1,0 +1,17 @@
+﻿.avg-review-row {
+    display: flex;
+    padding: 2rem 0;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.stars {
+    color: #3C2F2F;
+}
+
+.average-grade {
+    color: gray;
+}
