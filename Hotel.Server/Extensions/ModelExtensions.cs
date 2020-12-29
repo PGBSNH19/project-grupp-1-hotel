@@ -42,7 +42,8 @@ namespace Hotel.Server.Extensions
             Email = booking.Email,
             Guests = booking.Guests,
             Breakfast = booking.Breakfast,
-            SpaAccess = booking.SpaAccess
+            SpaAccess = booking.SpaAccess,
+            Room = booking.Room.ToDto()
         };
 
         public static Booking ToDomain(this BookingRequest booking) => new Booking

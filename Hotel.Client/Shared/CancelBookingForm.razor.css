@@ -8,8 +8,6 @@
 }
 
 .form-group{
-    padding-right:10px;
-    width:100%;
 }
 
 @media all and (max-width:700px){
@@ -33,7 +31,6 @@
     }
     .form-group {
         padding-right: 0px !important;
-        margin-bottom:6px;
     }
 }
 

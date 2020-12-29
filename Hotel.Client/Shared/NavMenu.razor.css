@@ -21,7 +21,7 @@
 
 .nav {
     background-color: #BE9B7B;
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
 }
 
@@ -73,7 +73,7 @@
     .nav {
         display: flex;
         flex-direction: row !important;
-        align-items: center;
+        align-items: flex-start;
     }
 
         .nav-item {
