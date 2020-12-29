@@ -21,7 +21,7 @@
 
 .nav {
     background-color: #BE9B7B;
-    flex-direction: column;
+    flex-direction: row;
     display: flex;
 }
 

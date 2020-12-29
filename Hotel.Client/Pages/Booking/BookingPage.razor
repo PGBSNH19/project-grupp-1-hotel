@@ -1,12 +1,12 @@
 ﻿@page "/booking"
-<CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
 
 @if (ConfirmedBooking == null)
 {
-    <h1 class="display-4">Rooms</h1>
+    <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
+    <h1 class="display-4">Booking</h1>
     if (AppState.Rooms != null)
     {
-        <div class="lead">
+        <div class="lead pb-4">
             <ul class="list-group">
                 @foreach (var room in AppState.Rooms)
                 {
@@ -18,14 +18,17 @@
                 }
             </ul>
         </div>
-        <CustomerForm OnValidSubmit="@CreateBooking"></CustomerForm>
+        <div class="pt-4">
+            <CustomerForm OnValidSubmit="@CreateBooking"></CustomerForm>
+        </div>
     }
     else
     {
-        <h2 class="display-4">Please make a search to be able to pick a roomtype</h2>
+        <p>For us to show you available rooms, please tell us how many you are and what dates you intend to stay.</p>
     }
 }
 else
 {
     <ConfirmationPage ConfirmedBooking="@ConfirmedBooking"></ConfirmationPage>
+    <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
 }
