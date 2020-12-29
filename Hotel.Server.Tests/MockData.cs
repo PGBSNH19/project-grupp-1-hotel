@@ -44,5 +44,19 @@ namespace Hotel.Server.Tests
             IsSuite = false,
             Breakfast = true
         };
+
+        public static List<Review> MockReviews => new List<Review>
+        {
+            new Review
+            {
+                Id = 1,
+                Description = "The most awesome hotel that I have ever visited, heads up to receptionist for being kind!",
+                Grade = 5,
+                Anonymous = false,
+                FirstName = "Hasse",
+                LastName = "Tagesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361be7c2"
+            }
+        };
     }
 }
