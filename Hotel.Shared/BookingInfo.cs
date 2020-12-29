@@ -8,6 +8,8 @@ namespace Hotel.Shared
         public string BookingNumber { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
+        public RoomInfo Room { get; set; }
+
 
         public string Email { get; set; }
         public int Guests { get; set; }
