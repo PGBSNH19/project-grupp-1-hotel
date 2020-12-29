@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Serilog;
 using System.Threading.Tasks;
+using Hotel.Server.Extensions;
 
 namespace Hotel.Server.Services
 {
@@ -36,15 +37,9 @@ namespace Hotel.Server.Services
                 List<ReviewInfo> reviews = new List<ReviewInfo>();
                 foreach (var review in request)
                 {
-                    reviews.Add(new ReviewInfo 
-                    { 
-                        Created = review.Created, 
-                        Description = review.Description, 
-                        FirstName = review.FirstName, 
-                        LastName = review.LastName, 
-                        Grade = review.Grade 
-                    });
+                    reviews.Add(ModelExtensions.ToDto(review));
                 }
+
                 return new ServiceResponse<List<ReviewInfo>>(reviews);
             }
             return null;
