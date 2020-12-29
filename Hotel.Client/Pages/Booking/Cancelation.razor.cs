@@ -23,9 +23,10 @@ namespace Hotel.Client.Pages.Booking
         protected override async Task OnInitializedAsync()
         {
             Nav.LocationChanged += HandleLocationChanged;
-            if (String.IsNullOrEmpty(bookingNumber))
+            if (!String.IsNullOrEmpty(bookingNumber))
             {
-                Toast.ShowToast("Booking Number does not exist, please enter a booking number ", ToastLevel.Warning);
+                Toast.ShowToast("Booking Number does not exist, please enter a booking number ", ToastLevel.Error);
+                Console.WriteLine("Toasting");
             }
             else
             {
