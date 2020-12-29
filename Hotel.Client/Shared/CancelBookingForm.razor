@@ -1,16 +1,5 @@
 ﻿    <input type="text" placeholder="Enter Bookingnumber" @bind-value="@BookingNumber"/>
-    <button class="search-btn" @onclick="@OnClickInternal">Search</button>
-
-@code {
-
-    [Parameter] public EventCallback<string> OnClick { get; set; }
-
-    async Task OnClickInternal()
-    {
-        if (OnClick.HasDelegate)
-        {
-            await OnClick.InvokeAsync(BookingNumber);
-        }
-    }
-}
+    <button @onclick="@OnClickInternal">
+        <i class="fa fa-search"></i>
+    </button>
 
