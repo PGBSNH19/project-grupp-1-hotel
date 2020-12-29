@@ -56,7 +56,27 @@ namespace Hotel.Server.Tests
                 FirstName = "Hasse",
                 LastName = "Tagesson",
                 BookingNumber = "f10db40a-8906-4788-99c8-8292361be7c2"
-            }
+            },
+            new Review
+            {
+                Id = 2,
+                Description = "Awesome service",
+                Grade = 4,
+                Anonymous = false,
+                FirstName = "Tage",
+                LastName = "Hassesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361be7h3"
+            },
+            new Review
+            {
+                Id = 3,
+                Description = "Friendly staff and extraordinary food in the restaurant.",
+                Grade = 5,
+                Anonymous = false,
+                FirstName = "TageHasse",
+                LastName = "TageHassesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
+            },
         };
     }
 }

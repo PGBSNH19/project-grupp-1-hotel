@@ -44,6 +44,35 @@ namespace Hotel.Server.Tests.RepositoryTests
             Assert.Null(result.FirstOrDefault());
         }
 
+        [Fact]
+        public void GetThreeReviews_ReviewsWithGradeOverFourExists_ReturnThreeReviews()
+        {
+            var repo = GetRepoMockSetup();
+            var result = repo.GetThreeReviews();
+
+            var expected = 3;
+
+            Assert.Equal(result.Result.Count(), expected);
+        }
+
+        [Fact]
+        public void GetThreeReviews_ReviewsWithGradeOverFourDoNotExists_ReturnCountZero()
+        {
+            var ctx = new Mock<HotelContext>();
+            var reviews = MockData.MockReviews;
+            reviews[0].Grade = 1;
+            reviews[1].Grade = 1;
+            reviews[2].Grade = 1;
+            ctx.Setup(x => x.Reviews).ReturnsDbSet(reviews);
+            var repo = new ReviewRepository(ctx.Object);
+
+            var result = repo.GetThreeReviews();
+            var expected = 0;
+
+
+            Assert.Equal(result.Result.Count(), expected);
+        }
+
 
     }
 }
