@@ -1,18 +1,23 @@
 ﻿@page "/booking/cancel/{bookingNumber}"
+@page "/booking/cancel"
 
 <h3>Cancel Booking</h3>
 
-@if (bookinginfo != null)
+@if (bookinginfo == null)
 {
-    <p>@bookinginfo.Email</p>
-}
-else if (!bookinginfo.IsCanceled)
-{
-<p>Toast Message "You are about to cancel your booking, please enter your e-mail address to confirm"</p>
+        <p>Not found booking information</p>
 }
 else
 {
-    <p>Toast Message "Not Found"</p>
+        <p>@bookinginfo.Id</p>
+        <p>@bookinginfo.BookingNumber</p>
+        <p>@bookinginfo.CheckInDate</p>
+        <p>@bookinginfo.CheckOutDate</p>
+        <p>@bookinginfo.Room</p>
+        <p>@bookinginfo.Email</p>
+        <p>@bookinginfo.Guests</p>
+        <p>@bookinginfo.Breakfast</p>
+        <p>@bookinginfo.SpaAccess</p>
 }
 
 @code {
