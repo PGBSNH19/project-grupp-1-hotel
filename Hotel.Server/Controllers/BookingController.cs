@@ -75,9 +75,9 @@ namespace Hotel.Server.Controllers
         }
 
         ///<summary>
-        ///Retrives available rooms by number of guests and between check in and check out dates 
+        ///Posts booking to databse
         ///</summary>
-        ///<response code="200">Room/rooms avaible for customer</response>
+        ///<response code="200">Post successful</response>
         ///<response code="404">Post Body was not valid or save to database failure, read return message for more information</response>
         [HttpPost]
         public async Task<IActionResult> PostBooking([FromBody] BookingRequest bookingRequest)
