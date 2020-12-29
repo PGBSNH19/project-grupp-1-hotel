@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Moq.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Hotel.Server.Tests.ControllerTests
@@ -41,7 +42,11 @@ namespace Hotel.Server.Tests.ControllerTests
         [InlineData("bar")]
         public async void GetBookingByBookingNumber_IncomingBookingNumberExist_ReturnsOkResult(string bookingNumber)
         {
-            var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockRooms);
+            var rooms = MockData.MockRooms;
+            var bookings = MockData.MockBookings;
+            bookings[0].Room = rooms[0];
+            bookings[1].Room = rooms[1];
+            var controller = GetRepoMockSetup(bookings, rooms);
 
             var result = await controller.GetBookingByBookingNumber(bookingNumber);
 
