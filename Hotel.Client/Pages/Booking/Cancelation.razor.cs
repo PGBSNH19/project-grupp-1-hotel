@@ -22,37 +22,34 @@ namespace Hotel.Client.Pages.Booking
         public BookingInfo bookinginfo { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            Nav.LocationChanged += HandleLocationChanged;
-            if (!String.IsNullOrEmpty(bookingNumber))
+            if (String.IsNullOrEmpty(bookingNumber))
             {
-                Toast.ShowToast("Booking Number does not exist, please enter a booking number ", ToastLevel.Error);
-                Console.WriteLine("Toasting");
+                Toast.ShowToast("Booking Number does not exist, please enter a booking number ", ToastLevel.Warning);
+                Nav.NavigateTo("/");
             }
             else
             {
                 await LoadBooking();
                 StateHasChanged();
-
+                bookingNumber = String.Empty;
             }
         }
 
         public async Task LoadBooking()
         {
-            StateHasChanged();
             bookinginfo = null;
-            bookinginfo = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{bookingNumber}");
-            StateHasChanged();
-            Console.WriteLine(bookingNumber);
-            bookingNumber = null;
-        }
 
-        private async void HandleLocationChanged(object sender, LocationChangedEventArgs e)
-        {
-            if (Nav.ToBaseRelativePath(Nav.Uri).StartsWith("booking/cancel"))
+            try
             {
-                await LoadBooking();
-                StateHasChanged();
+                bookinginfo = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{bookingNumber}");
             }
+            catch (Exception ex)
+            {
+                Toast.ShowToast("BLÄÄÄÄÄ", ToastLevel.Warning);
+                Nav.NavigateTo("/");
+                Console.WriteLine(ex.StackTrace);
+            }
+            Console.WriteLine(bookingNumber);
         }
     }
 }
