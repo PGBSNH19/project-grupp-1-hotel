@@ -10,7 +10,7 @@ namespace Hotel.Client.ViewModel
     public class CancelBookingViewModel
     {
         [Required]
-        [MaxLength(64, ErrorMessage = "Bookingnumber is too long"), MinLength(24, ErrorMessage = "Bookingnumber is too short")]
+        [RegularExpression(@"^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$", ErrorMessage = "BookingNumber must be correct format.")]
         public string BookingNumber { get; set; }
     }
 }
