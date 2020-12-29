@@ -21,10 +21,10 @@ namespace Hotel.Server.Services
         {
             Log.Information("ReviewService processing request for CreateAsync {@reviewRequest}", reviewRequest);
 
-            var bookingNumberControll = await _reviewRepository.GetByBookingNumberAsync(reviewRequest.BookingNumber);
+            var bookingNumberControl = await _reviewRepository.GetByBookingNumberAsync(reviewRequest.BookingNumber);
 
-            if (bookingNumberControll == null)
-                return new ServiceResponse<ReviewInfo>($"The bookingnumber dose not exsist");
+            if (bookingNumberControl == null)
+                return new ServiceResponse<ReviewInfo>($"The bookingnumber does not exist");
 
             if (_reviewRepository.GetReviewByBookingId(reviewRequest.BookingNumber).Any())
                 return new ServiceResponse<ReviewInfo>($"There is already a review posted with bookingnumber {reviewRequest.BookingNumber}");
@@ -33,8 +33,8 @@ namespace Hotel.Server.Services
 
             if (entity.Anonymous)
             {
-                entity.FirstName = bookingNumberControll.FirstName;
-                entity.LastName = bookingNumberControll.LastName;
+                entity.FirstName = bookingNumberControl.FirstName;
+                entity.LastName = bookingNumberControl.LastName;
             }
 
             try
