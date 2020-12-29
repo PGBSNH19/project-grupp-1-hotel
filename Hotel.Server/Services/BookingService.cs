@@ -18,6 +18,22 @@ namespace Hotel.Server.Services
 
         public BookingService(IBookingRepository repo) => this.repo = repo;
 
+        public async Task<ServiceResponse<BookingInfo>> CancelAsync(string bookingNumber, string email)
+        {
+            Log.Information("BookingService processing request for CancelAsync {@request}", bookingNumber);
+
+            var booking = await repo.GetByBookingNumberAsync(bookingNumber);
+            if (booking == null) return new ServiceResponse<BookingInfo>("Could not find any booking with given BookingNumber");
+            if (booking.Email != email) return new ServiceResponse<BookingInfo>("Email does not match Booking");
+
+            try
+            {
+                booking.Cancel();
+                await repo.Complete();
+                return new ServiceResponse<BookingInfo>(booking.ToDto());
+            } catch(Exception ex) { return new ServiceResponse<BookingInfo>($"Failure canceling Booking: {ex.Message}"); }
+        }
+
         public async Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request)
         {
             Log.Information("BookingService processing request for CreateAsync {@request}", request);
