@@ -1,8 +1,4 @@
-﻿body {
-}
-
-
-.footer {
+﻿.footer {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -13,21 +9,21 @@
 }
 
 .main {
-    background: #3C2F2F;
+    background: #8d6c4e;
 }
 p {
-    color: #BE9B7B;
+    color: #fff;
 }
 
 .link {
-    color: #BE9B7B;
+    color: #fff;
 }
 
 .main a:hover {
     background-color: rgba(255,255,255,0.1);
-    color: white;
+    color: black;
 }
 
 .copy {
-    color: #BE9B7B;
+    color: #fff;
 }

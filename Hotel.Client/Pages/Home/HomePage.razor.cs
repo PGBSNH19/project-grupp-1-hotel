@@ -32,12 +32,9 @@ namespace Hotel.Client.Pages.Home
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
 
-        protected double ReviewAverage;
-
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             StartTimer(3000);
-            ReviewAverage = await Http.GetFromJsonAsync<double>($"{Config["BaseApiUrl"]}api/v1.0/review/average");
         }
 
         private void SlideRight()

@@ -1,0 +1,15 @@
+﻿<div id="container">
+    <div class="user-info">
+        <p>@Reviews[ReviewIndex].FirstName @Reviews[ReviewIndex].LastName</p>
+        <p>@Reviews[ReviewIndex].Created</p>
+    </div>
+    <div class="review">
+        <p>@Reviews[ReviewIndex].Description</p>
+        <p id="star">
+            @foreach (var star in StarIcons)
+            {
+                <span class="@star.Star"></span>
+            }
+        </p>
+    </div>
+</div>
