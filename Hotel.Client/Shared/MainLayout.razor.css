@@ -2,12 +2,17 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: calc(100% - 64px);
+    background-color: #FFF4E6;
+    min-height: calc(100% - 64px);
 }
 
 .main {
     flex: 1;
-    background-color: #FFF4E6;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 1rem;
 }
 
     .top-row {
