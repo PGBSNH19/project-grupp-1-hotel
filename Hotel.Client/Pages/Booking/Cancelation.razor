@@ -6,10 +6,10 @@
 {
     <p>@bookinginfo.Email</p>
 }
-@*else if (bookinginfo.Email.Length >= 10 Implement is Canceled)
+else if (!bookinginfo.IsCanceled)
 {
 <p>Toast Message "You are about to cancel your booking, please enter your e-mail address to confirm"</p>
-}*@
+}
 else
 {
     <p>Toast Message "Not Found"</p>
