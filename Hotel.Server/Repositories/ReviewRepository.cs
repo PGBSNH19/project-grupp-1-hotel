@@ -25,7 +25,12 @@ namespace Hotel.Server.Repositories
         {
             throw new NotImplementedException();
         }
-   
+
+        public IQueryable<Review> GetReviewByBookingId(string bookingId)
+        {
+            return ctx.Reviews.Where(r => r.BookingNumber == bookingId);
+        }
+
         public async Task<List<Review>> GetThreeReviews()
         {
             var reviews = await ctx.Reviews.Where(r => r.Grade >= 4).OrderBy(r => Guid.NewGuid()).Take(3).ToListAsync();
