@@ -1,7 +1,3 @@
-﻿    <input type="text" placeholder="Enter Booking Number" @bind-value="@BookingNumber"/>
-    <button @onclick="@OnClickInternal">
-        <i class="fa fa-search"></i>
-    </button>
 ﻿<EditForm Model="@CancelBookingRequest" OnValidSubmit="OnClickInternal">
     <DataAnnotationsValidator />
     <div>
