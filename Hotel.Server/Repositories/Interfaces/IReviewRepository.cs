@@ -8,6 +8,7 @@ namespace Hotel.Server.Repositories.Interfaces
 {
     public interface IReviewRepository : IBaseRepository
     {
+        Task<List<Review>> GetThreeReviews();
         Task<Review[]> GetRandomReviewsAsync();
         IQueryable<Review> GetAverageGradeAsync();
     }
