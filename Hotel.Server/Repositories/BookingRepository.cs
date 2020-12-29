@@ -36,7 +36,7 @@ namespace Hotel.Server.Repositories
         public async Task<Booking> GetByBookingNumberAsync(string bookingnumber)
         {
             Log.Information("BookingRepository processing request for GetByBookingNumberAsync {@BookingNumber}", bookingnumber);
-            var result = await ctx.Bookings.FirstOrDefaultAsync(e => e.BookingNumber == bookingnumber);
+            var result = await ctx.Bookings.Include(e => e.Room).FirstOrDefaultAsync(e => e.BookingNumber == bookingnumber);
             return result;
         }
     }
