@@ -66,11 +66,12 @@ namespace Hotel.Client.Pages.Booking
             if(result.IsSuccessStatusCode)
             {
                 Toast.ShowToast($"You have canceled you booking with the booking number {bookingNumber}", ToastLevel.Success);
+                email = "";
+                StateHasChanged();
             }
             else
             {
-                Toast.ShowToast("Cant find your email", ToastLevel.Error);
-                Nav.NavigateTo("/");
+                Toast.ShowToast("Cant find your email, please enter your correct email", ToastLevel.Error);
             }
         }
     }
