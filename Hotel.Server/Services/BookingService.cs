@@ -4,10 +4,15 @@ using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Services
@@ -16,7 +21,14 @@ namespace Hotel.Server.Services
     {
         private readonly IBookingRepository repo;
 
-        public BookingService(IBookingRepository repo) => this.repo = repo;
+        private readonly IConfiguration _configuration;
+
+        public BookingService(IBookingRepository repo, IConfiguration configuration)
+        {
+            this.repo = repo;
+            _configuration = configuration;
+
+        }
 
         public async Task<ServiceResponse<BookingInfo>> CancelAsync(string bookingNumber, string email)
         {
@@ -63,6 +75,69 @@ namespace Hotel.Server.Services
             {
                 await repo.AddAsync(entity);
                 await repo.Complete();
+
+                try
+                {
+                    string checkin = entity.CheckInDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
+                    string checkout = entity.CheckOutDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
+                    var gmailPass = _configuration.GetSection("MailPassword").Value;
+                    string breakfastIncluded = "";
+                    string spaIncluded = "";
+
+                    if (entity.Breakfast)
+                    {
+                        breakfastIncluded = $"Breakfast - Included<br>";
+                    }
+                    if (entity.SpaAccess)
+                    {
+                        spaIncluded = $"Spa Access - Included<br>";
+                    }
+
+                    StringBuilder mailbody = new StringBuilder();
+                    mailbody.Append($"" +
+                        $"<div style='background: #eee; margin: 20px; padding: 20px;'>" +
+                        $"<center><h1>Hotell </h1><br>" +
+                        $"<h4> We look forward to your stay.</h4>" +
+                        $"<font> Check in is between 12:00 - 4:00 PM.<br>" +
+                        $"Checkout before 12:00 PM on your last day.<br>" +
+                        $"You have booked a room between the dates {checkin}" +
+                        $"- {checkout}.<br></font></center><br><br>" +
+                        $"<font><b> Your booking details:</b><br><br>" +
+                        $"Number of guests - {entity.Guests}<br>" +
+                        $"Check In - {checkin}<br>" +
+                        $"Check Out - {checkout}<br>" +
+                        $"{spaIncluded}" +
+                        $"{breakfastIncluded}</font></div>");
+
+                    MailMessage message = new MailMessage();
+                    message.To.Add(entity.Email);
+                    message.From = new MailAddress("hotellgruppett@gmail.com", "Hotell Group");
+                    message.Subject = $"Booking Details for {entity.FirstName} {entity.LastName}";
+                    message.Body = mailbody.ToString();
+                    message.IsBodyHtml = true;
+                    using (var smtp = new SmtpClient())
+                    {
+                        var credential = new NetworkCredential
+                        {
+                            UserName = "hotellgruppett@gmail.com",
+                            Password = gmailPass  
+                        };
+                        smtp.Credentials = credential;
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        smtp.Send(message);
+                    }
+                }
+                catch (Exception e)
+                {
+                    string msg = "Mail cannot be sent";
+                    msg += e.Message;
+                    Log.Debug("Error: Inside catch block of Mail sending");
+                    Log.Error("Error msg:" + e);
+                    Log.Error("Stack trace:" + e.StackTrace);
+                }
+              
             }
             catch (Exception ex)
             {
