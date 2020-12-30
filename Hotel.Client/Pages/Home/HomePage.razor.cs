@@ -32,12 +32,9 @@ namespace Hotel.Client.Pages.Home
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
 
-        protected double ReviewAverage;
-
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             StartTimer(3000);
-            ReviewAverage = await Http.GetFromJsonAsync<double>($"{Config["BaseApiUrl"]}api/v1.0/review/average");
         }
 
         private void SlideRight()
@@ -77,9 +74,19 @@ namespace Hotel.Client.Pages.Home
 
         private async Task GetRoom()
         {
-            if (AvailableRoom.CheckInDate >= AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now || AvailableRoom.CheckOutDate <= DateTime.Now)
+            if (AvailableRoom.CheckInDate.Date < DateTime.Now.Date)
             {
-                Toast.ShowToast("Invalid Date", ToastLevel.Error);
+                Toast.ShowToast("CheckInDate can't happen earlier than today.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailableRoom.CheckOutDate.Date <= DateTime.Now.Date)
+            {
+                Toast.ShowToast("CheckOutDate can't happen today or earlier.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailableRoom.CheckInDate.Date >= AvailableRoom.CheckOutDate.Date)
+            {
+                Toast.ShowToast("CheckInDate can't happen same day or after CheckInDate.", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search
             }
             else

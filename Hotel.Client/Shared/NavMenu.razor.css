@@ -1,15 +1,40 @@
-.navbar-toggler {
+.menu-wrap {
     background-color: #BE9B7B;
+}
+
+.menu-container {
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .top-row {
     /*height: 3.5rem;*/
     background-color: #BE9B7B;
-/*    display: block;*/
+    display: block;
+}
+
+.top-row-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+
+.navbar-toggler {
+    border: 0;
+    cursor: pointer;
+}
+
+.oi {
+    font-size: 2.5rem !important;
 }
 
 .oi {
@@ -39,27 +64,34 @@
     }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
-        border-radius: 4px;
+        color: #fBe8e2;
+        border-radius: 4px 4px 0 0;
         height: 3rem;
         display: flex;
         align-items: center;
         line-height: 3rem;
+        position: relative;
+        border-bottom: 1px solid #4B3832;
     }
 
+
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: black;
+    /*background-color: rgba(255,255,255,0.25);*/
+    color: #4B3832;
 }
 
 .nav-item ::deep a:hover {
     background-color: rgba(255,255,255,0.1);
-    color: black;
+    /*color: #4B3832;*/
 }
 
-@media (min-width: 640px) {
-    .top-row {
+@media (min-width: 980px) {
+/*    .top-row {
         display: none;
+    }*/
+
+    .menu-container {
+        flex-direction: row;
     }
 
     .navbar-toggler {
@@ -76,8 +108,30 @@
         align-items: flex-start;
     }
 
-        .nav-item {
+    .nav-item {
         padding-top: 0.5rem;
+    }
+    .nav-item ::deep a {
+        border-bottom: 0;
+    }
+    .nav-item ::deep a::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #4B3832;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: all 0.3s ease-in-out 0s;
+    }
+    .nav-item ::deep a:hover {
+        background-color: transparent;
+    }
+    .nav-item ::deep a:hover::before {
+        visibility: visible;
+        transform: scaleX(1);
     }
 
     .nav-item:last-of-type {

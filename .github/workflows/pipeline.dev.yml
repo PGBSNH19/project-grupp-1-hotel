@@ -37,6 +37,7 @@ jobs:
         files: Hotel.Server/appsettings.json
       env:
         ConnectionStrings.DefaultConnection: ${{ secrets.CONNECTION_STRING_DEV }}
+        MailPassword: ${{ secrets.EMAIL_PASSWORD }} 
 
     - name: Appsettings variable substitution for Client
       uses: microsoft/variable-substitution@v1

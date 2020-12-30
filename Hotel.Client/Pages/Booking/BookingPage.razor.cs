@@ -52,9 +52,19 @@ namespace Hotel.Client.Pages.Booking
 
         async Task GetRoom()
         {
-            if (AvailabilityRequest.CheckInDate >= AvailabilityRequest.CheckOutDate || AvailabilityRequest.CheckInDate < DateTime.Now || AvailabilityRequest.CheckOutDate <= DateTime.Now)
+            if (AvailabilityRequest.CheckInDate.Date < DateTime.Now.Date)
             {
-                Toast.ShowToast("Invalid Date", ToastLevel.Error);
+                Toast.ShowToast("CheckInDate can't happen earlier than today.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailabilityRequest.CheckOutDate.Date <= DateTime.Now.Date)
+            {
+                Toast.ShowToast("CheckOutDate can't happen today or earlier.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailabilityRequest.CheckInDate.Date >= AvailabilityRequest.CheckOutDate.Date)
+            {
+                Toast.ShowToast("CheckInDate can't happen same day or after CheckInDate.", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search
             }
             else
