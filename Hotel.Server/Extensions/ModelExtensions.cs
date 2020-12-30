@@ -39,6 +39,8 @@ namespace Hotel.Server.Extensions
             BookingNumber = booking.BookingNumber,
             CheckInDate = booking.CheckInDate,
             CheckOutDate = booking.CheckOutDate,
+            FirstName = booking.FirstName,
+            LastName = booking.LastName,
             Email = booking.Email,
             Guests = booking.Guests,
             Breakfast = booking.Breakfast,
