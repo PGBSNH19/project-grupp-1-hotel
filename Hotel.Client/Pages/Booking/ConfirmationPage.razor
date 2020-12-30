@@ -24,7 +24,7 @@
                     Check-in:
                 </div>
                 <div class="col right-column">
-                    @ConfirmedBooking.CheckInDate
+                    @CheckInDate()
                 </div>
             </div>
             <div class="row information-row">
@@ -32,7 +32,7 @@
                     Check-out:
                 </div>
                 <div class="col right-column">
-                    @ConfirmedBooking.CheckOutDate
+                    @CheckOutDate()
                 </div>
             </div>
             @if (ConfirmedBooking.Breakfast != false || ConfirmedBooking.SpaAccess != false)

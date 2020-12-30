@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -19,7 +20,14 @@ namespace Hotel.Server.Services
     {
         private readonly IBookingRepository repo;
 
-        public BookingService(IBookingRepository repo) => this.repo = repo;
+        private readonly IConfiguration _configuration;
+
+        public BookingService(IBookingRepository repo, IConfiguration configuration)
+        {
+            this.repo = repo;
+            _configuration = configuration;
+
+        }
 
         public async Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request)
         {
@@ -50,13 +58,15 @@ namespace Hotel.Server.Services
             {
                 await repo.AddAsync(entity);
                 await repo.Complete();
-                Console.WriteLine(entity.Email);
+
                 try
                 {
-                    var gmailPass = "Qa8e6aA!Nr$Hi2";
+                    string checkin = entity.CheckInDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
+                    string checkout = entity.CheckOutDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
+                    var gmailPass = _configuration.GetSection("MailPassword").Value;
+                    
                     MailMessage message = new MailMessage();
                     message.To.Add(entity.Email);
-
                     message.From = new MailAddress("hotellgruppett@gmail.com", "Hotell Group");
                     message.Subject = $"Booking Details for {entity.FirstName} {entity.LastName}";
                     message.Body = $"" +
@@ -65,12 +75,12 @@ namespace Hotel.Server.Services
                         $"<h4> We look forward to your stay.</h4>" +
                         $"<font> Check in is between 12:00 - 4:00 PM.<br>" +
                         $"Checkout before 12:00 PM on your last day.<br>" +
-                        $"You have booked a room between the dates {entity.CheckInDate}" +
-                        $"- {entity.CheckOutDate}.<br></font></center><br><br>" +
+                        $"You have booked a room between the dates {checkin}" +
+                        $"- {checkout}.<br></font></center><br><br>" +
                         $"<font><b> Your booking details:</b><br><br>" +
                         $"Number of guests - {entity.Guests}<br>" +
-                        $"Check In - {entity.CheckInDate}<br>" +
-                        $"Check Out - {entity.CheckOutDate}</font></div>";
+                        $"Check In - {checkin}<br>" +
+                        $"Check Out - {checkout}</font></div>";
                     message.IsBodyHtml = true;
                     using (var smtp = new SmtpClient())
                     {
