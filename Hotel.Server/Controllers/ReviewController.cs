@@ -51,6 +51,7 @@ namespace Hotel.Server.Controllers
             var result = await _reviewService.GetAverageGradeAsync();
             return Ok(result);
         }
+
         ///<summary>
         ///Post new review
         ///</summary>
