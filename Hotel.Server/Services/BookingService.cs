@@ -103,7 +103,8 @@ namespace Hotel.Server.Services
                             $"<font> Check in is between 12:00 - 4:00 PM.<br>" +
                             $"Checkout before 12:00 PM on your last day.<br>" +
                             $"You have booked a room between the dates {checkin}" +
-                            $"- {checkout}.<br></font></center><br><br>" +
+                            $"- {checkout}.<br></font><br><br>" +
+                            $"<b>Booking No<b>: {entity.BookingNumber} <br><br></center>" +
                             $"<font><b> Your booking details:</b><br><br>" +
                             $"Number of guests - {entity.Guests}<br>" +
                             $"Check In - {checkin}<br>" +
