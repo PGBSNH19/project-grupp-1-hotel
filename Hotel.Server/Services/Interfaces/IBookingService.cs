@@ -10,5 +10,6 @@ namespace Hotel.Server.Services.Interfaces
         Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request);
         Task<ServiceResponse<List<RoomInfo>>> GetAvailableRoomTypesAsync(RoomAvailabilityRequest request);
         Task<BookingInfo> GetByBookingNumberAsync(string bookingNumber);
+        Task<ServiceResponse<BookingInfo>> CancelAsync(string bookingNumber, string email);
     }
 }

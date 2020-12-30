@@ -7,9 +7,12 @@
     border-radius: 0.75rem;
 }
 
+.btn {
+    margin-left: .5rem;
+}
+
 .form-group{
-    padding-right:10px;
-    width:100%;
+    margin-bottom: 0;
 }
 
 @media all and (max-width:700px){
@@ -24,16 +27,11 @@
     .mt-4, .my-4{
         margin-top:1px !important;
     }
-
-    .btn{
-        width:100% !important;
-    }
     .search-btn{
         width:50%;
     }
     .form-group {
         padding-right: 0px !important;
-        margin-bottom:6px;
     }
 }
 

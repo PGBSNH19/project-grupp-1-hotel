@@ -1,4 +1,5 @@
 ﻿using Hotel.Server.Services.Interfaces;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
@@ -49,6 +50,25 @@ namespace Hotel.Server.Controllers
             Log.Information("Controller method starting: [ReviewController] GetAverage");
             var result = await _reviewService.GetAverageGradeAsync();
             return Ok(result);
+        }
+        ///<summary>
+        ///Post new review
+        ///</summary>
+        ///<response code="200">Post successful and saved in database</response>
+        ///<response code="400">Post failed, possiblie outcomes: RequestBody not valid, the bookingnumber does not exsist, there is already a review posted
+        ///with the posted bookingnumber or saved failed. Read error message</response>
+        [HttpPost]
+        public async Task<IActionResult> PostReview([FromBody] ReviewRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var postRequest = await _reviewService.CreateReviewAsync(request);
+
+            if (postRequest.Entity == null)
+                return BadRequest(postRequest.Message);
+
+            return Ok(postRequest.Entity);
         }
     }
 }

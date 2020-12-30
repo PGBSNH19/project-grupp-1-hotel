@@ -75,9 +75,9 @@ namespace Hotel.Server.Controllers
         }
 
         ///<summary>
-        ///Retrives available rooms by number of guests and between check in and check out dates 
+        ///Posts booking to databse
         ///</summary>
-        ///<response code="200">Room/rooms avaible for customer</response>
+        ///<response code="200">Post successful</response>
         ///<response code="404">Post Body was not valid or save to database failure, read return message for more information</response>
         [HttpPost]
         public async Task<IActionResult> PostBooking([FromBody] BookingRequest bookingRequest)
@@ -92,6 +92,27 @@ namespace Hotel.Server.Controllers
                 return Ok(result.Entity);
 
             return BadRequest(result.Message);
+        }
+
+        ///<summary>
+        ///Cancels a Booking with given BookingNumber and attached Emailaddress
+        ///</summary>
+        ///<response code="200">Returns canceled Booking</response>
+        ///<response code="404">Found no booking with BookingNumber/Email does not match Booking</response>
+        ///<response code="400">The input data was not correct, BookingNumber and Email cannot be empty or whitespace</response>
+        [HttpPut]
+        [Route("{bookingNumber}/cancel/{email}")]
+        public async Task<IActionResult> CancelBooking(string bookingNumber, string email)
+        {
+            Log.Information("Controller method starting: [BookingController] CancelBooking");
+            if (string.IsNullOrWhiteSpace(bookingNumber)) return BadRequest("BookingNumber not valid");
+            if (string.IsNullOrWhiteSpace(email)) return BadRequest("Email not valid");
+
+            var result = await _bookingService.CancelAsync(bookingNumber, email);
+            if (!result.Success) 
+                return NotFound(result.Message);
+
+            return Ok(result.Entity);
         }
     }
 }

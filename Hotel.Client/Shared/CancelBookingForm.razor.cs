@@ -1,4 +1,5 @@
 ﻿using Hotel.Shared;
+using Hotel.Client.ViewModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,8 +13,7 @@ namespace Hotel.Client.Shared
 {
     public partial class CancelBookingForm
     {
-        public string BookingNumber { get; set; }
-        [Parameter] public EventCallback EventCallback { get; set; }
+        [Parameter] public CancelBookingViewModel CancelBookingRequest { get; set; } = new CancelBookingViewModel();
 
         [Parameter] public EventCallback<string> OnClick { get; set; }
 
@@ -21,7 +21,7 @@ namespace Hotel.Client.Shared
         {
             if (OnClick.HasDelegate)
             {
-                await OnClick.InvokeAsync(BookingNumber);
+                await OnClick.InvokeAsync(CancelBookingRequest.BookingNumber);
             }
         }
     }
