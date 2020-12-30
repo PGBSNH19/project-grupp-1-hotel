@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Services
@@ -80,12 +81,20 @@ namespace Hotel.Server.Services
                     string checkin = entity.CheckInDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
                     string checkout = entity.CheckOutDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
                     var gmailPass = _configuration.GetSection("MailPassword").Value;
-                    
-                    MailMessage message = new MailMessage();
-                    message.To.Add(entity.Email);
-                    message.From = new MailAddress("hotellgruppett@gmail.com", "Hotell Group");
-                    message.Subject = $"Booking Details for {entity.FirstName} {entity.LastName}";
-                    message.Body = $"" +
+                    string breakfastIncluded = "";
+                    string spaIncluded = "";
+
+                    if (entity.Breakfast)
+                    {
+                        breakfastIncluded = $"Breakfast - Included<br>";
+                    }
+                    if (entity.SpaAccess)
+                    {
+                        spaIncluded = $"Spa Access - Included<br>";
+                    }
+
+                    StringBuilder mailbody = new StringBuilder();
+                    mailbody.Append($"" +
                         $"<div style='background: #eee; margin: 20px; padding: 20px;'>" +
                         $"<center><h1>Hotell </h1><br>" +
                         $"<h4> We look forward to your stay.</h4>" +
@@ -96,7 +105,15 @@ namespace Hotel.Server.Services
                         $"<font><b> Your booking details:</b><br><br>" +
                         $"Number of guests - {entity.Guests}<br>" +
                         $"Check In - {checkin}<br>" +
-                        $"Check Out - {checkout}</font></div>";
+                        $"Check Out - {checkout}<br>" +
+                        $"{spaIncluded}" +
+                        $"{breakfastIncluded}</font></div>");
+
+                    MailMessage message = new MailMessage();
+                    message.To.Add(entity.Email);
+                    message.From = new MailAddress("hotellgruppett@gmail.com", "Hotell Group");
+                    message.Subject = $"Booking Details for {entity.FirstName} {entity.LastName}";
+                    message.Body = mailbody.ToString();
                     message.IsBodyHtml = true;
                     using (var smtp = new SmtpClient())
                     {
