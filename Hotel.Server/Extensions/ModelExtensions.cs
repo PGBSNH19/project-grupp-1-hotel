@@ -36,6 +36,7 @@ namespace Hotel.Server.Extensions
         public static BookingInfo ToDto(this Booking booking) => new BookingInfo
         {
             Id = booking.Id,
+            IsCanceled = booking.IsCanceled,
             BookingNumber = booking.BookingNumber,
             CheckInDate = booking.CheckInDate,
             CheckOutDate = booking.CheckOutDate,

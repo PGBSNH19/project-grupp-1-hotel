@@ -5,21 +5,31 @@
 
 @if (bookinginfo == null)
 {
-        <p>Not found booking information</p>
+    <p>Not found booking information</p>
 }
 else
 {
-        <p>@bookinginfo.Id</p>
-        <p>@bookinginfo.BookingNumber</p>
-        <p>@bookinginfo.CheckInDate</p>
-        <p>@bookinginfo.CheckOutDate</p>
-        <p>@bookinginfo.Room</p>
-        <p>@bookinginfo.Email</p>
-        <p>@bookinginfo.Guests</p>
-        <p>@bookinginfo.Breakfast</p>
-        <p>@bookinginfo.SpaAccess</p>
+    if(!bookinginfo.IsCanceled)
+    { 
+        <div class="column">
+            <div class="col">Your Booking id is: <b>@bookinginfo.Id</b></div>
+            @*Todo: Update nuget with firstname and lastname to be able to show it in the cancel page*@
+
+            <div class="col">With the Check in Date: <b>@bookinginfo.CheckInDate.ToString("dd/M/yyyy")</b></div>
+            <div class="col">With the Check out Date: <b>@bookinginfo.CheckOutDate.ToString("dd/M/yyyy")</b></div>
+            <div class="col">Your room type is: <b>@roomViewModel.RoomType</b></div>
+            <br />
+                <input class="form-control mr-sm-2" type="search" placeholder="Enter your Email" @bind="email" aria-label="Search">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" @onclick="@DeleteBooking">Delete</button>
+
+        </div>
+    }
+    else
+    {
+        
+    }
 }
 
-@code {
+    @code {
 
-}
+    }
