@@ -64,9 +64,6 @@
             Review = new ReviewRequest();
             StateHasChanged();
         }
-        else
-        {
-            Toast.ShowToast("Wops! There was an error handling the request.", ToastLevel.Error);
-        }
+        else Toast.ShowToast("Wops! There was an error handling the request.", ToastLevel.Error);
     }
 }
