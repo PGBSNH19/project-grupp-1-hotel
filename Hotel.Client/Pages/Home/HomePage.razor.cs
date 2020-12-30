@@ -31,9 +31,11 @@ namespace Hotel.Client.Pages.Home
         [Inject] NavigationManager NavigationManager { get; set; }
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
+        protected double AverageGrade = 0;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
+            AverageGrade = await Http.GetFromJsonAsync<double>($"{Config["BaseApiUrl"]}api/v1.0/review/average");
             StartTimer(3000);
         }
 
