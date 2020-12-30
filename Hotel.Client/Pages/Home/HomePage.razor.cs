@@ -34,6 +34,7 @@ namespace Hotel.Client.Pages.Home
 
         protected override void OnInitialized()
         {
+            AppState.Flush();
             StartTimer(3000);
         }
 
@@ -94,9 +95,8 @@ namespace Hotel.Client.Pages.Home
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
                      ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")}");
 
-                if (Rooms != null)
+                if (Rooms.Length > 0)
                 {
-                    AppState.Flush(); // reset booking data on no results
                     AppState.SetAvailabilityRequest(AvailableRoom);
                     AppState.SetRooms(Rooms);
                     NavigationManager.NavigateTo("booking");
