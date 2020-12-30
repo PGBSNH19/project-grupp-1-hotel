@@ -1,15 +1,23 @@
 ﻿<div class="avg-review-row">
-        @if(Average != 0)
-        {
-            <div class="stars">
+    @if (Average != 0)
+    {
+        <div class="average-grade">Average grade @Average.ToString("0.0")</div>
+    }
 
-                @for(int i = 1; i <= Math.Ceiling(Average); i++)
-                {
+    <div class="heading">
+        <h2>Our guests are top rating us!</h2>
+    </div>
+
+    @if (Average != 0)
+    {
+        <div class="stars">
+
+            @for (int i = 1; i <= Math.Ceiling(Average); i++)
+            {
                 <span>★</span>
-                }
-            </div>
-            <div class="average-grade">Betyg @Average.ToString("0.0")</div>
-        }
+            }
+        </div>
+    }
 </div>
 
 @code 

@@ -2,7 +2,7 @@
     display: none;
     padding: 1.5rem;
     color: #fff;
-    z-index: 1;
+    z-index: 9999;
     width: 25rem;
     top: 2rem;
     border-radius: 1rem;
