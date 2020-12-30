@@ -5,6 +5,7 @@ using Hotel.Server.Repositories;
 using Hotel.Server.Services;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using Moq.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,13 +16,15 @@ namespace Hotel.Server.Tests.ControllerTests
 {
     public class BookingControllerTests
     {
-        private static BookingController GetRepoMockSetup(List<Booking> bookings, List<Room> rooms)
+        private BookingController GetRepoMockSetup(List<Booking> bookings, List<Room> rooms)
         {
             var ctx = new Mock<HotelContext>();
+            var config = new Mock<IConfiguration>();
             ctx.Setup(x => x.Rooms).ReturnsDbSet(rooms);
             ctx.Setup(x => x.Bookings).ReturnsDbSet(bookings);
             var bookingRepository = new BookingRepository(ctx.Object);
-            var service = new BookingService(bookingRepository);
+            var service = new BookingService(bookingRepository, config.Object);
+
             return new BookingController(service);
         }
 

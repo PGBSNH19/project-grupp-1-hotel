@@ -22,7 +22,7 @@ namespace Hotel.Server.Tests.ServiceTests
             ctx.Setup(x => x.Rooms).ReturnsDbSet(rooms);
             ctx.Setup(x => x.Bookings).ReturnsDbSet(bookings);
             var bookingRepository = new BookingRepository(ctx.Object);
-            return new BookingService(bookingRepository);
+            return new BookingService(bookingRepository, null);
         }
 
         [Fact]
