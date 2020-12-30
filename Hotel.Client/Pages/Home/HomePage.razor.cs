@@ -74,7 +74,7 @@ namespace Hotel.Client.Pages.Home
 
         private async Task GetRoom()
         {
-            if (AvailableRoom.CheckInDate >= AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now || AvailableRoom.CheckOutDate <= DateTime.Now)
+            if (AvailableRoom.CheckInDate.Date >= AvailableRoom.CheckOutDate.Date || AvailableRoom.CheckInDate.Date < DateTime.Now.Date || AvailableRoom.CheckOutDate.Date <= DateTime.Now.Date)
             {
                 Toast.ShowToast("Invalid Date", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search

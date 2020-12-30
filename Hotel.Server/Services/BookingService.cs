@@ -38,11 +38,11 @@ namespace Hotel.Server.Services
         {
             Log.Information("BookingService processing request for CreateAsync {@request}", request);
 
-            if (request.CheckInDate < DateTime.Now)
+            if (request.CheckInDate.Date < DateTime.Now.Date)
                 return new ServiceResponse<BookingInfo>("Check in date cannot be set earlier than today.");
-            if (request.CheckOutDate <= DateTime.Now)
+            if (request.CheckOutDate.Date <= DateTime.Now.Date)
                 return new ServiceResponse<BookingInfo>("Check out date cannot be set earlier than today.");
-            if (request.CheckInDate >= request.CheckOutDate)
+            if (request.CheckInDate.Date >= request.CheckOutDate.Date)
                 return new ServiceResponse<BookingInfo>("Check out date cannot occur before or same date as Check in date.");
 
             var query = repo.GetUnavailableRoomIds(new RoomAvailabilityRequest
@@ -77,11 +77,11 @@ namespace Hotel.Server.Services
         {
             Log.Information("BookingService processing request for GetAvailableRoomTypes {@request}", request);
 
-            if (request.CheckInDate < DateTime.Now)
+            if (request.CheckInDate.Date < DateTime.Now.Date)
                 return new ServiceResponse<List<RoomInfo>>("Check in date cannot be set earlier than today.");
-            if (request.CheckOutDate <= DateTime.Now)
+            if (request.CheckOutDate.Date <= DateTime.Now.Date)
                 return new ServiceResponse<List<RoomInfo>>("Check out date cannot be set earlier than today.");
-            if (request.CheckInDate >= request.CheckOutDate)
+            if (request.CheckInDate.Date >= request.CheckOutDate.Date)
                 return new ServiceResponse<List<RoomInfo>>("Check out date cannot occur before or same date as Check in date.");
 
             var unavailablequery = repo.GetUnavailableRoomIds(request);

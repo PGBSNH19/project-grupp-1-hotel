@@ -24,7 +24,7 @@ namespace Hotel.Client.Shared
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
         async Task GetRoom()
         {
-            if (AvailableRoom.CheckInDate > AvailableRoom.CheckOutDate || AvailableRoom.CheckInDate < DateTime.Now)
+            if (AvailableRoom.CheckInDate.Date > AvailableRoom.CheckOutDate.Date || AvailableRoom.CheckInDate.Date < DateTime.Now.Date)
             {
                 toast.ShowToast("Invalid Date", ToastLevel.Error);
             }
