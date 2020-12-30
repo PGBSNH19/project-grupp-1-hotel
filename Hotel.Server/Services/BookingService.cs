@@ -136,8 +136,7 @@ namespace Hotel.Server.Services
             var booking = await repo.GetByBookingNumberAsync(bookingNumber);
             if (booking == null) return null;
 
-            var result = booking.ToDto();
-            return result;
+            return booking.ToDto();
         }
     }
 }
