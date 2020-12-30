@@ -19,16 +19,16 @@ namespace Hotel.Client.Pages.Booking
         [Inject] ToastService Toast { get; set; }
         [Inject] NavigationManager Nav { get; set; }
         [Inject] AppState AppState { get; set; }
-        public RoomViewModel roomViewModel { get; set; }
+        public RoomViewModel RoomViewModel { get; set; }
 
         [Parameter]
-        public string bookingNumber { get; set; }
-        public BookingInfo bookinginfo { get; set; }
-        public string email { get; set; }
+        public string BookingNumber { get; set; }
+        public BookingInfo Bookinginfo { get; set; }
+        public string Email { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            if (String.IsNullOrEmpty(bookingNumber))
+            if (String.IsNullOrEmpty(BookingNumber))
             {
                 Toast.ShowToast("Please enter a booking number ", ToastLevel.Warning);
                 Nav.NavigateTo("/");
@@ -43,13 +43,13 @@ namespace Hotel.Client.Pages.Booking
 
         public async Task LoadBooking()
         {
-            bookinginfo = null;
+            Bookinginfo = null;
 
             try
             {
-                bookinginfo = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{bookingNumber}");
-                Console.WriteLine(bookinginfo.IsCanceled);
-                roomViewModel = new RoomViewModel { RoomInfo = bookinginfo.Room};
+                Bookinginfo = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingNumber}");
+                Console.WriteLine(Bookinginfo.IsCanceled);
+                RoomViewModel = new RoomViewModel { RoomInfo = Bookinginfo.Room};
             }
             catch (Exception ex)
             {
@@ -59,14 +59,14 @@ namespace Hotel.Client.Pages.Booking
             }
         }
 
-        public async Task DeleteBooking()
+        public async Task CancelBooking()
         {
-            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{bookingNumber}/cancel",email);
+            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{BookingNumber}/cancel",Email);
 
             if(result.IsSuccessStatusCode)
             {
-                Toast.ShowToast($"You have canceled you booking with the booking number {bookingNumber}", ToastLevel.Success);
-                email = "";
+                Toast.ShowToast($"You have canceled you booking with the booking number {BookingNumber}", ToastLevel.Success);
+                Email = "";
                 StateHasChanged();
             }
             else
