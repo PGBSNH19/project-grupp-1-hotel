@@ -1,17 +1,25 @@
 ﻿.avg-review-row {
-    display: flex;
-    padding: 2rem 0;
-    flex-direction: row;
-    justify-content: space-between;
+    padding: 2rem;
     width: 100%;
     max-width: 620px;
-    margin: 0 auto;
+    margin: 4rem auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.heading h2 {
+    line-height: 3rem;
+    font-weight: 700;
 }
 
 .stars {
     color: #3C2F2F;
+    font-size: 3rem;
 }
 
 .average-grade {
     color: gray;
+    font-size: 2rem;
+    text-transform: uppercase;
 }
