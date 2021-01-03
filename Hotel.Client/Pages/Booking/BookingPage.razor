@@ -2,7 +2,7 @@
 
 @if (ConfirmedBooking == null)
 {
-    <CheckinForm EventCallback="GetRoom" AvailableRoom="AppState.AvailabilityRequest" />
+    <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
     <h1 class="display-4">Booking</h1>
     if (AppState.Rooms != null)
     {
@@ -30,5 +30,5 @@
 else
 {
     <ConfirmationPage ConfirmedBooking="@ConfirmedBooking"></ConfirmationPage>
-    <CheckinForm EventCallback="GetRoom" AvailableRoom="AppState.AvailabilityRequest" />
+    <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
 }
