@@ -41,7 +41,7 @@ namespace Hotel.Client.Toast
         {
             if (CountDown ==null)
             {
-                CountDown = new Timer(3000);
+                CountDown = new Timer(5000);
                 CountDown.Elapsed += HideToast;
                 CountDown.AutoReset = false;
             }
