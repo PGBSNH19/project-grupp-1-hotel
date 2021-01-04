@@ -3,6 +3,7 @@ using Hotel.Server.Models;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Services;
+using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,11 +20,11 @@ namespace Hotel.Server.Tests.ControllerTests
         private BookingController GetRepoMockSetup(List<Booking> bookings, List<Room> rooms)
         {
             var ctx = new Mock<HotelContext>();
-            var config = new Mock<IConfiguration>();
+            var emailService = new Mock<IEmailService>();
             ctx.Setup(x => x.Rooms).ReturnsDbSet(rooms);
             ctx.Setup(x => x.Bookings).ReturnsDbSet(bookings);
             var bookingRepository = new BookingRepository(ctx.Object);
-            var service = new BookingService(bookingRepository, config.Object);
+            var service = new BookingService(bookingRepository, emailService.Object);
 
             return new BookingController(service);
         }
