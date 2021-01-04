@@ -1,4 +1,5 @@
-﻿using Hotel.Shared;
+﻿using Hotel.Client.ViewModel;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -18,11 +19,14 @@ namespace Hotel.Client.Pages.Home
         public List<string> Images = new List<string> { "room2.jpg", "room3.jpg", "room4.jpg" };
         protected int displayIndex = 0;
         protected Timer timer;
-        protected List<ReviewInfo> reviews = null;
+        protected List<ReviewViewModel> reviews;
 
         protected async override Task OnInitializedAsync()
         {
-            reviews = await Http.GetFromJsonAsync<List<ReviewInfo>>($"{Config["BaseApiUrl"]}api/v1.0/review/random");
+            reviews = new List<ReviewViewModel>();
+            var revs = await Http.GetFromJsonAsync<List<ReviewInfo>>($"{Config["BaseApiUrl"]}api/v1.0/review/random");
+            foreach (var r in revs)
+                reviews.Add(new ReviewViewModel { Review = r });
             StateHasChanged();
             StartTimer(3000);
         }
@@ -59,6 +63,7 @@ namespace Hotel.Client.Pages.Home
             var random = new Random();
             int num = random.Next(0, Images.Count);
             displayIndex = num;
+            Console.WriteLine(displayIndex);
             StateHasChanged();
         }
     }

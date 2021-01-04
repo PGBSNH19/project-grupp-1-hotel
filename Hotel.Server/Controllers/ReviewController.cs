@@ -32,9 +32,7 @@ namespace Hotel.Server.Controllers
             var reviews = await _reviewService.GetRandomReviewsAsync();
 
             if(reviews == null)
-            {
                 return BadRequest();
-            }
 
             return Ok(reviews.Entity);
         }

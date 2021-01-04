@@ -61,28 +61,28 @@
 }
 
 .content .top { 
-    font-size: 3rem; 
+    font-size: 2rem; 
     text-align: right; 
     margin-bottom: 2rem; 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
-.content .top .quote {
-    font-size: 3rem;
-    color: #aaa;
+    justify-content: flex-end;
 }
 
-.content .top .stars {
-    color: orange;
-}
-.content .description { 
-    line-height: 2rem; 
-    color: whitesmoke; 
-    letter-spacing: 1px;
-    font-style: italic;
-    margin-bottom: 1rem;
-}
+.content .top .stars { color: orange; }
+.content .top .stars .gray { color: dimgray; }
+    .content .description {
+        line-height: 1.2rem;
+        color: whitesmoke;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+/*        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-height: 180px;
+        width: 100%;*/
+    }
 .content .description::first-letter {
     font-size: 1.5rem;
     font-weight: 700;
