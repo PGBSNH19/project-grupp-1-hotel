@@ -31,7 +31,7 @@ namespace Hotel.Server.Services
 
             var entity = reviewRequest.ToDomain();
 
-            if (entity.Anonymous)
+            if (!entity.Anonymous)
             {
                 entity.FirstName = bookingNumberControl.FirstName;
                 entity.LastName = bookingNumberControl.LastName;
@@ -72,7 +72,7 @@ namespace Hotel.Server.Services
 
                 return new ServiceResponse<List<ReviewInfo>>(reviews);
             }
-            return null;
+            return new ServiceResponse<List<ReviewInfo>>("No reviews found.");
         }
     }
 }

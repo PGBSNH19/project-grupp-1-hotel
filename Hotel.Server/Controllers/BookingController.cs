@@ -101,8 +101,8 @@ namespace Hotel.Server.Controllers
         ///<response code="404">Found no booking with BookingNumber/Email does not match Booking</response>
         ///<response code="400">The input data was not correct, BookingNumber and Email cannot be empty or whitespace</response>
         [HttpPut]
-        [Route("{bookingNumber}/cancel/{email}")]
-        public async Task<IActionResult> CancelBooking(string bookingNumber, string email)
+        [Route("{bookingNumber}/cancel")]
+        public async Task<IActionResult> CancelBooking([FromRoute]string bookingNumber, [FromBody]string email)
         {
             Log.Information("Controller method starting: [BookingController] CancelBooking");
             if (string.IsNullOrWhiteSpace(bookingNumber)) return BadRequest("BookingNumber not valid");

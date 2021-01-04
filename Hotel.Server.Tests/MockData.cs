@@ -8,8 +8,8 @@ namespace Hotel.Server.Tests
     public static class MockData
     {
         public static List<Booking> MockBookings => new List<Booking> {
-                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
-                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
+                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test", LastName = "Testsson" },
+                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test2", LastName = "Testsson2" },
             };
 
         public static List<Room> MockRooms => new List<Room> {
@@ -77,6 +77,17 @@ namespace Hotel.Server.Tests
                 LastName = "TageHassesson",
                 BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
             },
+        };
+
+        public static Review MockReview => new Review
+        {
+            Id = 4,
+            Description = "Friendly staff and extraordinary food in the restaurant.",
+            Grade = 5,
+            Anonymous = false,
+            FirstName = "TageHasse",
+            LastName = "TageHassesson",
+            BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
         };
     }
 }

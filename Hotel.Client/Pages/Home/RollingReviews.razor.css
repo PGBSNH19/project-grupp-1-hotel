@@ -1,0 +1,131 @@
+﻿.image-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.oi {
+    font-size: 2rem;
+    color: white;
+    opacity: 0.6;
+}
+
+    .oi:hover {
+        opacity: 1;
+    }
+
+.btn-right, .btn-left { 
+    position: absolute;
+    top: 45%;
+    background-color: rgba(255, 255, 255, 0.15);
+    outline: none;
+    color: navajowhite;
+    border: 0;
+    top: 0%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    padding: 0 1rem;
+    opacity: 0;
+}
+.btn-left { left: 0%; }
+.btn-right { right: 0%; }
+
+.btn-right:hover, .btn-left:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.review-shader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.35));
+    z-index: 2;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    z-index: 3;
+    width: 100%;
+}
+
+    .content .top {
+        font-size: 2rem;
+        text-align: right;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+.content .top .stars { color: orange; }
+.content .top .stars .gray { color: dimgray; }
+.content .description {
+    line-height: 1.2rem;
+    color: whitesmoke;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    overflow: auto hidden;
+    max-height: 180px;
+}
+.content .description::first-letter {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.content .info { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: whitesmoke;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+@media all and (min-width: 540px) {
+    .image-container {
+        height: 400px;
+    }
+    .btn-left, .btn-right {
+        opacity: 1;
+    }
+    .content {
+        padding: 0 4rem;
+    }
+    .oi {
+        font-size: 1.5rem;
+        color: white;
+        opacity: 0.6;
+    }
+    .oi:hover {
+        opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .content .top {
+        justify-content: flex-end;
+    }
+}
+@media all and (min-width: 900px) {
+    .image-container {
+        height: 450px;
+    }
+    .content {
+        padding: 0 8rem;
+    }
+    .btn-left, .btn-right {
+        padding: 0 3rem;
+    }
+}

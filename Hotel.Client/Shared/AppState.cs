@@ -2,6 +2,7 @@
 using Hotel.Shared;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hotel.Client.Shared
 {
@@ -52,7 +53,14 @@ namespace Hotel.Client.Shared
             NotifyStateChanged();
         }
 
-        private void NotifyStateChanged() => OnChange?.Invoke();
+        public void SetBookingRequest(RoomAvailabilityRequest availabilityRequest)
+        {
+            BookingRequest.CheckInDate = availabilityRequest.CheckInDate;
+            BookingRequest.CheckOutDate = availabilityRequest.CheckOutDate;
+            BookingRequest.Guests = availabilityRequest.Guests;
+            NotifyStateChanged();
+        }
 
+        private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }
