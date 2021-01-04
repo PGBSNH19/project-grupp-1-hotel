@@ -16,15 +16,14 @@ namespace Hotel.Client.Pages.Booking
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
-        RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest();
+        RoomAvailabilityRequest AvailabilityRequest { get; set; }
         private RoomInfo[] Rooms { get; set; }
 
         [Inject] ToastService Toast { get; set; }
         protected override void OnInitialized()
         {
-            AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
-            AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
-            AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;
+            AvailabilityRequest = AppState.AvailabilityRequest;
+            AppState.SetBookingRequest(AvailabilityRequest);
             StateHasChanged();
         }
 
@@ -69,12 +68,11 @@ namespace Hotel.Client.Pages.Booking
             }
             else
             {
+                AppState.SetBookingRequest(AvailabilityRequest);
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
                      ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yyyy-MM-dd")}");
-
-                if (Rooms != null)
+                if (Rooms.Length > 0)
                 {
-                    AppState.Flush(); // reset booking data on no results
                     AppState.SetAvailabilityRequest(AvailabilityRequest);
                     AppState.SetRooms(Rooms);
                     StateHasChanged();

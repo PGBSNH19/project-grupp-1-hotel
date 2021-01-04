@@ -40,7 +40,7 @@ namespace Hotel.Client.Toast
         private void SetCountDown()
         {
             if (CountDown == null)
-            {
+            { 
                 CountDown = new Timer(6000);
                 CountDown.Elapsed += HideToast;
                 CountDown.AutoReset = false;

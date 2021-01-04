@@ -53,6 +53,14 @@ namespace Hotel.Client.Shared
             NotifyStateChanged();
         }
 
+        public void SetBookingRequest(RoomAvailabilityRequest availabilityRequest)
+        {
+            BookingRequest.CheckInDate = availabilityRequest.CheckInDate;
+            BookingRequest.CheckOutDate = availabilityRequest.CheckOutDate;
+            BookingRequest.Guests = availabilityRequest.Guests;
+            NotifyStateChanged();
+        }
+
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

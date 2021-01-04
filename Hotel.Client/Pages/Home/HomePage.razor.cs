@@ -22,9 +22,9 @@ namespace Hotel.Client.Pages.Home
 
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
         protected double AverageGrade = 0;
-
         protected override async Task OnInitializedAsync()
         {
+            AppState.Flush();
             AverageGrade = await Http.GetFromJsonAsync<double>($"{Config["BaseApiUrl"]}api/v1.0/review/average");
         }
 
@@ -50,9 +50,8 @@ namespace Hotel.Client.Pages.Home
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
                      ($"{Config["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailableRoom.Guests}/checkin/{AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")}");
 
-                if (Rooms != null)
+                if (Rooms.Length > 0)
                 {
-                    AppState.Flush(); // reset booking data on no results
                     AppState.SetAvailabilityRequest(AvailableRoom);
                     AppState.SetRooms(Rooms);
                     NavigationManager.NavigateTo("booking");
