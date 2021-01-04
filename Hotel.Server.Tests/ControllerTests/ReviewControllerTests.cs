@@ -3,6 +3,7 @@ using Hotel.Server.Models;
 using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Hotel.Server.Services;
+using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Moq;
@@ -18,11 +19,13 @@ namespace Hotel.Server.Tests.ControllerTests
 {
     public class ReviewControllerTests
     {
-        private ReviewController GetRepoMockSetup(List<Review> reviews)
+        private ReviewController GetRepoMockSetup(List<Booking> bookings, List<Review> reviews)
         {
             var ctx = new Mock<HotelContext>();
             ctx.Setup(x => x.Reviews).ReturnsDbSet(reviews);
+            ctx.Setup(x => x.Bookings).ReturnsDbSet(bookings);
             var reviewRepository = new ReviewRepository(ctx.Object);
+            var bookingRepository = new BookingRepository(ctx.Object);
             var service = new ReviewService(reviewRepository);
 
             return new ReviewController(service);
@@ -31,11 +34,21 @@ namespace Hotel.Server.Tests.ControllerTests
         [Fact]
         public async void GetThreeRandomReviews_IfNoReviewsExists_ReturnNoContent()
         {
-            var controller = GetRepoMockSetup(new List<Review>());
+            var controller = GetRepoMockSetup(MockData.MockBookings, new List<Review>());
 
             var result = await controller.GetThreeRandomReviews();
 
             Assert.IsType<NotFoundObjectResult>(result);
+        }
+
+        [Fact]
+        public async void GetThreeRandomReviews_IfReviewsWithGradeFourOrHigherExists_ReturnOkObjectResult()
+        {
+            var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockReviews);
+
+            var result = await controller.GetThreeRandomReviews();
+
+            Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
@@ -55,7 +68,7 @@ namespace Hotel.Server.Tests.ControllerTests
                 }
             };
 
-            var controller = GetRepoMockSetup(reviews);
+            var controller = GetRepoMockSetup(MockData.MockBookings, reviews);
 
             var result = await controller.GetThreeRandomReviews();
 
@@ -63,7 +76,52 @@ namespace Hotel.Server.Tests.ControllerTests
         }
 
 
+        [Fact]
+        public async void GetAverage_IncomingReviewIsValid_GetAverageReviews()
+        {
+            var controller = GetRepoMockSetup(MockData.MockBookings, MockData.MockReviews);
+
+            var result = await controller.GetAverage();
+
+            Assert.IsType<OkObjectResult>(result);
+        }
 
 
+
+        [Fact]
+        public async void PostBooking_IncomingBookingObjectIsValid_ReturnsOkObjectResult()
+        {
+            var controller = GetRepoMockSetup(MockData.MockBookings, new List<Review>());
+
+            var result = await controller.PostReview(
+                new ReviewRequest
+                {
+                    Description = "Friendly staff and extraordinary food in the restaurant.",
+                    Grade = 5,
+                    Anonymous = false,
+                    BookingNumber = "foo"
+                }
+            );
+
+            Assert.IsType<OkObjectResult>(result);
+        }
+
+        [Fact]
+        public async void PostBooking_IncomingBookingObjectIsValid_ReturnsNotFoundObjectResult()
+        {
+            var controller = GetRepoMockSetup(MockData.MockBookings, new List<Review>());
+
+            var result = await controller.PostReview(
+                new ReviewRequest
+                {
+                    Description = "Friendly staff and extraordinary food in the restaurant.",
+                    Grade = 5,
+                    Anonymous = false,
+                    BookingNumber = ""
+                }
+            );
+
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
     }
 }

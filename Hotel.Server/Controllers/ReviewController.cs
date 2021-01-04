@@ -34,7 +34,7 @@ namespace Hotel.Server.Controllers
             if(reviews.Entity != null)
                 return Ok(reviews.Entity);
 
-            return NotFound(reviews.Message);  
+            return NotFound(reviews.Message);
         }
         
         ///<summary>
