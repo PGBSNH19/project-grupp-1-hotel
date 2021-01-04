@@ -134,23 +134,5 @@ namespace Hotel.Server.Tests.ServiceTests
             Assert.False(String.IsNullOrEmpty(result.Entity.FirstName));
             Assert.False(String.IsNullOrEmpty(result.Entity.LastName));
         }
-
-        [Fact]
-        public async void CreateReviewAsync_IncomingReviewHasHasGradeAs0_ReturnReviewInfoEntityAsNull()
-        {
-            var service = GetRepoMockSetup(MockData.MockReviews, MockData.MockBookings);
-            ReviewRequest reviewRequest = new ReviewRequest
-            {
-                Grade = 0,
-                BookingNumber = "foo",
-                Anonymous = false,
-            };
-
-            var result = await service.CreateReviewAsync(reviewRequest);
-
-            Assert.Null(result.Entity);
-        }
-
-
     }
 }

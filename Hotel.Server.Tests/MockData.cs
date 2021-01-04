@@ -78,5 +78,16 @@ namespace Hotel.Server.Tests
                 BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
             },
         };
+
+        public static Review MockReview => new Review
+        {
+            Id = 4,
+            Description = "Friendly staff and extraordinary food in the restaurant.",
+            Grade = 5,
+            Anonymous = false,
+            FirstName = "TageHasse",
+            LastName = "TageHassesson",
+            BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
+        };
     }
 }
