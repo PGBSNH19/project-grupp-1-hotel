@@ -63,10 +63,10 @@ namespace Hotel.Server.Controllers
                     CheckOutDate = DateTime.Parse(checkOut)
                 };
                 var result = await _bookingService.GetAvailableRoomTypesAsync(roomAvailability);
-                if (result.Entity.Any())
-                    return Ok(result.Entity);
+                if (!result.Success)
+                    return BadRequest();
 
-                return NotFound(result.Message);
+                return Ok(result.Entity);
             }
             catch
             {
