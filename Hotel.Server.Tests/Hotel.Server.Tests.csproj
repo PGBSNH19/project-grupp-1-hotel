@@ -23,8 +23,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Hotel.Server\Hotel.Server.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ServiceTests\" />
-  </ItemGroup>
 </Project>

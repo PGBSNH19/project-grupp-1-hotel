@@ -8,8 +8,8 @@ namespace Hotel.Server.Tests
     public static class MockData
     {
         public static List<Booking> MockBookings => new List<Booking> {
-                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
-                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
+                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test", LastName = "Testsson" },
+                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test2", LastName = "Testsson2" },
             };
 
         public static List<Room> MockRooms => new List<Room> {
