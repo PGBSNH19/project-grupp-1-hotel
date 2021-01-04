@@ -6,6 +6,7 @@
 
     <div class="form">
         <EditForm Model="@Review" OnValidSubmit="(() => TryPost())">
+            <DataAnnotationsValidator />
             <div class="form-group">
                 <label>How would you grade your stay?</label>
                 <InputSelect @bind-Value="@Review.Grade" class="form-control">

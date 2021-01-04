@@ -35,5 +35,4 @@ namespace Hotel.Client.ViewModel
         MasterSuite,
         Unknown
     }
-
 }
