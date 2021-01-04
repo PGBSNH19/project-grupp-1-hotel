@@ -31,7 +31,7 @@ namespace Hotel.Server.Services
 
             var entity = reviewRequest.ToDomain();
 
-            if (entity.Anonymous)
+            if (!entity.Anonymous)
             {
                 entity.FirstName = bookingNumberControl.FirstName;
                 entity.LastName = bookingNumberControl.LastName;
