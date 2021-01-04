@@ -42,6 +42,7 @@ namespace Hotel.Server
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IReviewService, ReviewService>();
