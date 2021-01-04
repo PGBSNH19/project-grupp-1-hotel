@@ -9,7 +9,7 @@ namespace Hotel.Shared
 {
     public class ReviewRequest
     {
-        [MaxLength(255, ErrorMessage = "No more than 255 characters!")]
+        [MaxLength(255, ErrorMessage = "No more than 255 characters allowed!")]
         public string? Description { get; set; }
         [Required]
         [RegularExpression(@"^[1-5]{1}$", ErrorMessage = "Grade must be between 1 and 5!")]

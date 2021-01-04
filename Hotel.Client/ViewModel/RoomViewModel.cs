@@ -14,6 +14,16 @@ namespace Hotel.Client.ViewModel
             (2, 0) => RoomType.TwinBeds,
             _ => RoomType.Unknown
         };
+
+        public string RoomTypeInfo => (RoomInfo.Beds, RoomInfo.DoubleBeds) switch
+        {
+            (1, 0) => "Single bed",
+            (1, 1) => "Double bed",
+            (2, 2) => "Master suite",
+            (2, 1) => "Triple bed",
+            (2, 0) => "Twin bed",
+            _ => string.Empty
+        };
     }
 
     public enum RoomType
