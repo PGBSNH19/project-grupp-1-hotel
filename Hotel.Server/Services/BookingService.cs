@@ -27,7 +27,6 @@ namespace Hotel.Server.Services
         {
             this.repo = repo;
             _configuration = configuration;
-
         }
 
         public async Task<ServiceResponse<BookingInfo>> CancelAsync(string bookingNumber, string email)
