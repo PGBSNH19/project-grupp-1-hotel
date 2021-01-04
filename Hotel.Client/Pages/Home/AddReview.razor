@@ -1,5 +1,4 @@
-﻿
-<section>
+﻿<section>
     <div class="gradient-shader"></div>
     <div class="heading">
         <h2>Enjoyed your stay?<br /><span>Leave a review!</span></h2>
@@ -7,7 +6,6 @@
 
     <div class="form">
         <EditForm Model="@Review" OnValidSubmit="(() => TryPost())">
-            <DataAnnotationsValidator />
             <div class="form-group">
                 <label>How would you grade your stay?</label>
                 <InputSelect @bind-Value="@Review.Grade" class="form-control">
@@ -23,17 +21,18 @@
             <div class="form-group">
                 <label for="bookingNumber">Booking Number:</label>
                 <InputText @bind-Value="@Review.BookingNumber" class="form-control" id="bookingNumber" placeholder="BookingNumber" />
-                <small id="bookingNumberHelp" class="form-text text-muted">We require your Booking Number to very your stay</small>
+                <small id="bookingNumberHelp" class="form-text text-muted">Booking Number is used to verify your stay</small>
                 <ValidationMessage For="@(() => Review.BookingNumber)" />
             </div>
             <div class="form-group">
                 <label for="description">Please enter a short description of your stay</label>
                 <InputTextArea @bind-Value="@Review.Description" id="description" class="form-control" />
                 <small id="descriptionHelp" class="form-text text-muted">This is not required but we would love to receive feedback from you</small>
+                <ValidationMessage For="@(() => Review.Description)" />
             </div>
             <div class="form-group row">
-                <label for="anonymous" class="col-sm-6 col-form-label">Check this to stay anonymous</label>
-                <div class="col-sm-6">
+                <label for="anonymous" class="col-6 col-form-label">Hide my name</label>
+                <div class="col-6 hide-name">
                     <InputCheckbox @bind-Value="@Review.Anonymous" id="anonymous" />
                 </div>
             </div>
@@ -45,25 +44,22 @@
 </section>
 
 @code {
-    protected ReviewRequest Review;
     [Inject] HttpClient Http { get; set; }
     [Inject] ToastService Toast { get; set; }
     [Inject] IConfiguration Config { get; set; }
+    protected ReviewRequest Review;
 
-    protected override void OnInitialized()
-    {
-        Review = new ReviewRequest();
-    }
+    protected override void OnInitialized() => Review = new ReviewRequest(); 
 
     private async Task TryPost()
     {
         var result = await Http.PostAsJsonAsync<ReviewRequest>($"{Config["BaseApiUrl"]}api/v1.0/review", Review);
         if (result.IsSuccessStatusCode)
         {
-            Toast.ShowToast("Successfully posted a review. Thank you!", ToastLevel.Success);
+            Toast.ShowToast("We have received your review. Thank you!", ToastLevel.Success);
             Review = new ReviewRequest();
             StateHasChanged();
         }
-        else Toast.ShowToast("Wops! There was an error handling the request.", ToastLevel.Error);
+        else Toast.ShowToast($"Could not receive your review. Make sure Booking Number is correct, and there are no other reviews with the same number.", ToastLevel.Error);
     }
 }
