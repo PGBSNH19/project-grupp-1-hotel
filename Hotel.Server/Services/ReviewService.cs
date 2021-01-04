@@ -72,7 +72,7 @@ namespace Hotel.Server.Services
 
                 return new ServiceResponse<List<ReviewInfo>>(reviews);
             }
-            return null;
+            return new ServiceResponse<List<ReviewInfo>>("No reviews found.");
         }
     }
 }
