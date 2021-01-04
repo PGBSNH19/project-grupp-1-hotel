@@ -22,8 +22,6 @@ namespace Hotel.Server.Services
         private readonly IBookingRepository repo;
         private readonly IEmailService emailService;
 
-        private readonly IConfiguration _configuration;
-
         public BookingService(IBookingRepository repo, IEmailService emailService)
         {
             this.repo = repo;
