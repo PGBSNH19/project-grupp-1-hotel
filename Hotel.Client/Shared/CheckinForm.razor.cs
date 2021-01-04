@@ -12,7 +12,7 @@ namespace Hotel.Client.Shared
 {
     public partial class CheckinForm
     {
-        [Parameter] public RoomAvailabilityRequest AvailableRoom { get; set; } = new RoomAvailabilityRequest();
+        [Parameter] public RoomAvailabilityRequest AvailableRoom { get; set; }
         [Parameter] public EventCallback EventCallback { get; set; }
         [Inject] AppState AppState { get; set; }
         [Inject] HttpClient Http { get; set; }
