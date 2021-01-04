@@ -63,7 +63,6 @@ namespace Hotel.Client.Pages.Home
             var random = new Random();
             int num = random.Next(0, Images.Count);
             displayIndex = num;
-            Console.WriteLine(displayIndex);
             StateHasChanged();
         }
     }
