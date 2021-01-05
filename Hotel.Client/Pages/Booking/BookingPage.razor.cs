@@ -18,8 +18,6 @@ namespace Hotel.Client.Pages.Booking
         public BookingInfo ConfirmedBooking { get; set; }
         RoomAvailabilityRequest AvailabilityRequest { get; set; }
         private RoomInfo[] Rooms { get; set; }
-       
-        RoomInfo RadioValue { get; set; }
 
         [Inject] ToastService Toast { get; set; }
         protected override void OnInitialized()
