@@ -29,10 +29,8 @@ namespace Hotel.Server.Repositories
         public IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs)
         {
             Log.Information("BookingRepository processing request for GetAvailableRooms {@IDs}", unavailableIDs);
-            //var res = unavailableIDs.ToList();
             if (!unavailableIDs.Any()) return ctx.Rooms;
             var query = ctx.Rooms.Where(r => !unavailableIDs.Any(e => e == r.Id));
-            //var t = query.ToList();
             return query;
         }
 

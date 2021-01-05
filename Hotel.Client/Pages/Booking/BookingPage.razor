@@ -4,8 +4,8 @@
 {
     <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
     <h1 class="display-4">Booking</h1>
-    <h4>CheckIn: @AvailabilityRequest.CheckInDate.ToString("dd/MM/yyyy")</h4>
-    <h4>CheckOut: @AvailabilityRequest.CheckOutDate.ToString("dd/MM/yyyy")</h4>
+    <h4>Check In: @AvailabilityRequest.CheckInDate.ToString("MM/dd/yyyy")</h4>
+    <h4>Check Out: @AvailabilityRequest.CheckOutDate.ToString("MM/dd/yyyy")</h4>
     if (AppState.Rooms != null)
     {
         <div class="lead pb-4">
