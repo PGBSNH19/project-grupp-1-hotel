@@ -18,6 +18,8 @@ namespace Hotel.Client.Pages.Booking
         public BookingInfo ConfirmedBooking { get; set; }
         RoomAvailabilityRequest AvailabilityRequest { get; set; }
         private RoomInfo[] Rooms { get; set; }
+       
+        RoomInfo RadioValue { get; set; }
 
         [Inject] ToastService Toast { get; set; }
         protected override void OnInitialized()
@@ -25,6 +27,12 @@ namespace Hotel.Client.Pages.Booking
             AvailabilityRequest = AppState.AvailabilityRequest;
             AppState.SetBookingRequest(AvailabilityRequest);
             StateHasChanged();
+        }
+
+        void RadioSelection(RoomInfo room)
+        {
+            AppState.SetPickedRoom(room);
+            Console.WriteLine(AppState.PickedRoom.Beds);
         }
 
         public async Task CreateBooking()
