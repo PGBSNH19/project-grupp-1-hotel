@@ -86,6 +86,8 @@ namespace Hotel.Client.Pages.Booking
                 else
                 {
                     Toast.ShowToast("No Available Room", ToastLevel.Error);
+                    AppState.Flush();
+                    StateHasChanged();
                 }
             }
         }
