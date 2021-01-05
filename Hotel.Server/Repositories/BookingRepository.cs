@@ -19,17 +19,20 @@ namespace Hotel.Server.Repositories
         {
             Log.Information("BookingRepository processing request for GetUnavailableRoomIds {@Request}", request);
             var ids = ctx.Bookings
-                .Where(e => !(request.CheckOutDate <= e.CheckInDate || request.CheckInDate >= e.CheckOutDate) && e.Room != null && !e.IsCanceled)
-                .Include(e => e.Room)
+                .Where(e => !(request.CheckOutDate.Date <= e.CheckInDate.Date || request.CheckInDate.Date >= e.CheckOutDate.Date) && e.Room != null && !e.IsCanceled)  // request in 6 out 7
+                .Include(e => e.Room)                                                                                                                                // blocking in 5 out 6
                 .Select(e => e.Room.Id);
+            var foo = ids.ToList();
             return ids;
         }
 
         public IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs)
         {
             Log.Information("BookingRepository processing request for GetAvailableRooms {@IDs}", unavailableIDs);
-            var query = ctx.Rooms
-                .Where(r => !unavailableIDs.Contains(r.Id));
+            //var res = unavailableIDs.ToList();
+            if (!unavailableIDs.Any()) return ctx.Rooms;
+            var query = ctx.Rooms.Where(r => !unavailableIDs.Any(e => e == r.Id));
+            //var t = query.ToList();
             return query;
         }
 
