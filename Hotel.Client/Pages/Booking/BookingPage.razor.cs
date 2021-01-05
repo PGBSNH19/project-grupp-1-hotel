@@ -27,6 +27,12 @@ namespace Hotel.Client.Pages.Booking
             StateHasChanged();
         }
 
+        void RadioSelection(RoomInfo room)
+        {
+            AppState.SetPickedRoom(room);
+            Console.WriteLine(AppState.PickedRoom.Beds);
+        }
+
         public async Task CreateBooking()
         {
             try
