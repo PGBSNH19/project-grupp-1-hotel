@@ -109,7 +109,6 @@ namespace Hotel.Server.Services
                 return new ServiceResponse<List<RoomInfo>>("Check out date cannot occur before or same date as Check in date.");
 
             var unavailablequery = repo.GetUnavailableRoomIds(request);
-            var res = repo.GetAvailableRooms(unavailablequery).ToList();
             var roomTypes = await repo.GetAvailableRooms(unavailablequery)
                 .Select(s => new { Beds = s.Beds, DoubleBeds = s.DoubleBeds })
                 .Distinct()

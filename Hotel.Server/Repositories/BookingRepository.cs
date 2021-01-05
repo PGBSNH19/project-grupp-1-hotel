@@ -22,7 +22,6 @@ namespace Hotel.Server.Repositories
                 .Where(e => !(request.CheckOutDate.Date <= e.CheckInDate.Date || request.CheckInDate.Date >= e.CheckOutDate.Date) && e.Room != null && !e.IsCanceled)  // request in 6 out 7
                 .Include(e => e.Room)                                                                                                                                // blocking in 5 out 6
                 .Select(e => e.Room.Id);
-            var foo = ids.ToList();
             return ids;
         }
 
