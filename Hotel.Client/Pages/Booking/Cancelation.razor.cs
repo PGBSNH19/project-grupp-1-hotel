@@ -21,14 +21,16 @@ namespace Hotel.Client.Pages.Booking
         [Inject] NavigationManager Nav { get; set; }
         [Inject] AppState AppState { get; set; }
         public RoomViewModel RoomViewModel { get; set; }
+        public CancelBookingViewModel CancelBookingRequest { get; set; } = new CancelBookingViewModel();
 
         [Parameter]
-        public CancelBookingViewModel CancelBookingRequest { get; set; }
+        public string BookingNumber { get; set; }
         public BookingInfo Bookinginfo { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            if (String.IsNullOrEmpty(CancelBookingRequest.BookingNumber))
+            CancelBookingRequest.BookingNumber = BookingNumber;
+            if (String.IsNullOrEmpty(BookingNumber))
             {
                 Toast.ShowToast("Please enter a booking number ", ToastLevel.Warning);
                 Nav.NavigateTo("/");
@@ -64,7 +66,7 @@ namespace Hotel.Client.Pages.Booking
 
             if(result.IsSuccessStatusCode)
             {
-                Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
+                Toast.ShowToast($"You have canceled your booking with the booking number {BookingNumber}", ToastLevel.Success);
                 CancelBookingRequest = new CancelBookingViewModel();
                 StateHasChanged();
             }
