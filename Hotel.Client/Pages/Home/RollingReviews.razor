@@ -1,0 +1,42 @@
+﻿<div class="image-container" style="background-image: url(Images/@Images[displayIndex])">
+    <button @onclick="@SlideRight" class="btn-right"><i class="oi oi-arrow-thick-right"></i></button>
+    <button @onclick="@SlideLeft" class="btn-left"><i class="oi oi-arrow-thick-left"></i></button>
+    <div class="review-shader">
+    </div>
+
+    <div class="content">
+        @if (reviews.Count > 0)
+        { 
+            <div class="top">
+                <div class="stars">
+                    @for (int i = 0; i < reviews[displayIndex].Stars; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                    @for (int i = 0; i < reviews[displayIndex].GrayStars; i++)
+                    {
+                        <i class="fa fa-star gray"></i>
+                    }
+                </div>
+                </div>
+            <p class="description">
+                @reviews[displayIndex].Review.Description
+            </p>
+            <div class="info">
+                <p class="author">
+                    @if (string.IsNullOrEmpty(reviews[displayIndex].Review.FirstName))
+                    {
+                        <text>Anonymous author</text>
+                    }
+                    else
+                    {
+                        <text>@reviews[displayIndex].Review.FirstName @reviews[displayIndex].Review.LastName</text>
+                    }
+                </p>
+            </div>
+        }
+    </div>
+</div>
+@code {
+
+}

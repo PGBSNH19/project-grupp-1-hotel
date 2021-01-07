@@ -1,4 +1,5 @@
 ﻿using Hotel.Client.Shared;
+using Hotel.Client.Toast;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
@@ -15,15 +16,21 @@ namespace Hotel.Client.Pages.Booking
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] AppState AppState { get; set; }
         public BookingInfo ConfirmedBooking { get; set; }
-        RoomAvailabilityRequest AvailabilityRequest { get; set; } = new RoomAvailabilityRequest();
+        RoomAvailabilityRequest AvailabilityRequest { get; set; }
         private RoomInfo[] Rooms { get; set; }
 
+        [Inject] ToastService Toast { get; set; }
         protected override void OnInitialized()
         {
-            AppState.BookingRequest.Guests = AppState.AvailabilityRequest.Guests;
-            AppState.BookingRequest.CheckInDate = AppState.AvailabilityRequest.CheckInDate;
-            AppState.BookingRequest.CheckOutDate = AppState.AvailabilityRequest.CheckOutDate;
+            AvailabilityRequest = AppState.AvailabilityRequest;
+            AppState.SetBookingRequest(AvailabilityRequest);
             StateHasChanged();
+        }
+
+        void RadioSelection(RoomInfo room)
+        {
+            AppState.SetPickedRoom(room);
+            Console.WriteLine(AppState.PickedRoom.Beds);
         }
 
         public async Task CreateBooking()
@@ -37,6 +44,10 @@ namespace Hotel.Client.Pages.Booking
                     ConfirmedBooking = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{AppState.BookingRequest.BookingNumber}");
                     StateHasChanged();
                 }
+                else
+                {
+                    Toast.ShowToast("Booking Failed", ToastLevel.Error);
+                }
             }
             catch (Exception e)
             {
@@ -46,26 +57,37 @@ namespace Hotel.Client.Pages.Booking
 
         async Task GetRoom()
         {
-            if (AvailabilityRequest.CheckInDate >= AvailabilityRequest.CheckOutDate || AvailabilityRequest.CheckInDate < DateTime.Now || AvailabilityRequest.CheckOutDate <= DateTime.Now)
+            if (AvailabilityRequest.CheckInDate.Date < DateTime.Now.Date)
             {
-                // todo: toast notification
+                Toast.ShowToast("CheckInDate can't happen earlier than today.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailabilityRequest.CheckOutDate.Date <= DateTime.Now.Date)
+            {
+                Toast.ShowToast("CheckOutDate can't happen today or earlier.", ToastLevel.Error);
+                AppState.Flush(); // reset booking data on bad search
+            }
+            else if (AvailabilityRequest.CheckInDate.Date >= AvailabilityRequest.CheckOutDate.Date)
+            {
+                Toast.ShowToast("CheckInDate can't happen same day or after CheckInDate.", ToastLevel.Error);
                 AppState.Flush(); // reset booking data on bad search
             }
             else
             {
+                AppState.SetBookingRequest(AvailabilityRequest);
                 Rooms = await Http.GetFromJsonAsync<RoomInfo[]>
-                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yy-MM-dd")}");
-
-                if (Rooms != null)
+                     ($"{Configuration["BaseApiUrl"]}api/v1.0/booking/check/guests/{AvailabilityRequest.Guests}/checkin/{AvailabilityRequest.CheckInDate.ToString("yyyy-MM-dd")}/checkout/{AvailabilityRequest.CheckOutDate.ToString("yyyy-MM-dd")}");
+                if (Rooms.Length > 0)
                 {
-                    AppState.Flush(); // reset booking data on no results
                     AppState.SetAvailabilityRequest(AvailabilityRequest);
                     AppState.SetRooms(Rooms);
                     StateHasChanged();
                 }
                 else
                 {
-                    // todo: toast notification
+                    Toast.ShowToast("No Available Room", ToastLevel.Error);
+                    AppState.Flush();
+                    StateHasChanged();
                 }
             }
         }

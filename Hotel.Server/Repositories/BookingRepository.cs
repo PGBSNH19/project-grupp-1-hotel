@@ -19,8 +19,8 @@ namespace Hotel.Server.Repositories
         {
             Log.Information("BookingRepository processing request for GetUnavailableRoomIds {@Request}", request);
             var ids = ctx.Bookings
-                .Where(e => !(request.CheckOutDate <= e.CheckInDate || request.CheckInDate >= e.CheckOutDate) && e.Room != null && !e.IsCanceled)
-                .Include(e => e.Room)
+                .Where(e => !(request.CheckOutDate.Date <= e.CheckInDate.Date || request.CheckInDate.Date >= e.CheckOutDate.Date) && e.Room != null && !e.IsCanceled)  // request in 6 out 7
+                .Include(e => e.Room)                                                                                                                                // blocking in 5 out 6
                 .Select(e => e.Room.Id);
             return ids;
         }
@@ -28,15 +28,15 @@ namespace Hotel.Server.Repositories
         public IQueryable<Room> GetAvailableRooms(IQueryable<int> unavailableIDs)
         {
             Log.Information("BookingRepository processing request for GetAvailableRooms {@IDs}", unavailableIDs);
-            var query = ctx.Rooms
-                .Where(r => !unavailableIDs.Contains(r.Id));
+            if (!unavailableIDs.Any()) return ctx.Rooms;
+            var query = ctx.Rooms.Where(r => !unavailableIDs.Any(e => e == r.Id));
             return query;
         }
 
         public async Task<Booking> GetByBookingNumberAsync(string bookingnumber)
         {
             Log.Information("BookingRepository processing request for GetByBookingNumberAsync {@BookingNumber}", bookingnumber);
-            var result = await ctx.Bookings.FirstOrDefaultAsync(e => e.BookingNumber == bookingnumber);
+            var result = await ctx.Bookings.Include(e => e.Room).FirstOrDefaultAsync(e => e.BookingNumber == bookingnumber);
             return result;
         }
     }

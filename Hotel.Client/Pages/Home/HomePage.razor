@@ -1,11 +1,6 @@
 ﻿<CheckinForm EventCallback="GetRoom" AvailableRoom="AvailableRoom" />
-<div class="image-container">
-    <img src="/Images/@Images[ImageIndex]" asp-append-version="true" id="img" />
-    <button @onclick="@SlideRight" class="btn-right"><i class="oi oi-arrow-thick-right"></i></button>
-    <button @onclick="@SlideLeft" class="btn-left"><i class="oi oi-arrow-thick-left"></i></button>
-    <div class="image-text">
-        <p class="title">WELCOME TO OUR HOTEL</p>
-        <p class="description">Please feel free to let us know if you need anything</p>
-    </div>
-</div>
 
+<RollingReviews />
+
+<AverageReview Average="@AverageGrade" />
+<AddReview />

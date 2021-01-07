@@ -1,5 +1,5 @@
 ﻿<EditForm Model="@AvailableRoom" OnValidSubmit="EventCallback">
-    <div id="main">
+    <div id="main" class="mb-4">
         <DataAnnotationsValidator />
         <div class="form-group">
             <label>Guests</label>
@@ -15,7 +15,7 @@
             <div>
                 <label>Check in</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" class="form-control-sm w-100"></InputDate>
+                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
                 </div>
             </div>
@@ -24,7 +24,7 @@
             <div>
                 <label>Check out</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" class="form-control-sm w-100"></InputDate>
+                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
                 </div>
             </div>

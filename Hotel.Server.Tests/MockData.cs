@@ -8,8 +8,8 @@ namespace Hotel.Server.Tests
     public static class MockData
     {
         public static List<Booking> MockBookings => new List<Booking> {
-                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
-                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5) },
+                new Booking { Id = 1, BookingNumber = "foo", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test", LastName = "Testsson" },
+                new Booking { Id = 2, BookingNumber = "bar", CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(5), FirstName = "Test2", LastName = "Testsson2" },
             };
 
         public static List<Room> MockRooms => new List<Room> {
@@ -43,6 +43,51 @@ namespace Hotel.Server.Tests
             SpaAccess = false,
             IsSuite = false,
             Breakfast = true
+        };
+
+        public static List<Review> MockReviews => new List<Review>
+        {
+            new Review
+            {
+                Id = 1,
+                Description = "The most awesome hotel that I have ever visited, heads up to receptionist for being kind!",
+                Grade = 5,
+                Anonymous = false,
+                FirstName = "Hasse",
+                LastName = "Tagesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361be7c2"
+            },
+            new Review
+            {
+                Id = 2,
+                Description = "Awesome service",
+                Grade = 4,
+                Anonymous = false,
+                FirstName = "Tage",
+                LastName = "Hassesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361be7h3"
+            },
+            new Review
+            {
+                Id = 3,
+                Description = "Friendly staff and extraordinary food in the restaurant.",
+                Grade = 5,
+                Anonymous = false,
+                FirstName = "TageHasse",
+                LastName = "TageHassesson",
+                BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
+            },
+        };
+
+        public static Review MockReview => new Review
+        {
+            Id = 4,
+            Description = "Friendly staff and extraordinary food in the restaurant.",
+            Grade = 5,
+            Anonymous = false,
+            FirstName = "TageHasse",
+            LastName = "TageHassesson",
+            BookingNumber = "f10db40a-8906-4788-99c8-8292361je7h3"
         };
     }
 }

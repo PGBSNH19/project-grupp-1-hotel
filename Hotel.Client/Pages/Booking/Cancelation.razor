@@ -1,0 +1,41 @@
+﻿@page "/booking/cancel/{bookingNumber}"
+@page "/booking/cancel"
+
+<h3>Cancel Booking</h3>
+
+@if (Bookinginfo == null)
+{
+    <p>Not found booking information</p>
+}
+else
+{
+    if(!Bookinginfo.IsCanceled)
+    {
+<EditForm Model="@CancelBookingRequest" OnValidSubmit="@CancelBooking">
+    <div class=" column">
+        <div class="col">Your Booking number is: <b>@CancelBookingRequest.BookingNumber</b></div>
+        <div class="col">Your Firstname is: <b>@Bookinginfo.FirstName</b></div>
+        <div class="col">Your Lastname is: <b>@Bookinginfo.LastName</b></div>
+        <div class="col">With the Check in Date: <b>@Bookinginfo.CheckInDate.ToString("dd/MM/yyyy")</b></div>
+        <div class="col">With the Check out Date: <b>@Bookinginfo.CheckOutDate.ToString("dd/MM/yyyy")</b></div>
+        <div class="col">Your room type is: <b>@RoomViewModel.RoomType</b></div>
+        <br />
+        <DataAnnotationsValidator />
+        <div class="searchform">
+            <InputText class="form-control mr-sm-2 search" placeholder="Enter your Email to delete booking" @bind-Value="CancelBookingRequest.Email"/>
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Delete</button>
+            <ValidationMessage For="@(() => CancelBookingRequest.Email)" />
+        </div>
+    </div>
+</EditForm> 
+    }
+    else
+    {
+        <h3>Can't find your booking</h3>
+    }
+
+}
+
+    @code {
+
+    }
