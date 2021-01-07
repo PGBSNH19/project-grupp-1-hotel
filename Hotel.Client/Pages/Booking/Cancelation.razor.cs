@@ -30,7 +30,7 @@ namespace Hotel.Client.Pages.Booking
         protected override async Task OnInitializedAsync()
         {
             CancelBookingRequest.BookingNumber = BookingNumber;
-            if (String.IsNullOrEmpty(BookingNumber))
+            if (String.IsNullOrEmpty(CancelBookingRequest.BookingNumber))
             {
                 Toast.ShowToast("Please enter a booking number ", ToastLevel.Warning);
                 Nav.NavigateTo("/");
@@ -66,7 +66,7 @@ namespace Hotel.Client.Pages.Booking
 
             if(result.IsSuccessStatusCode)
             {
-                Toast.ShowToast($"You have canceled your booking with the booking number {BookingNumber}", ToastLevel.Success);
+                Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
                 CancelBookingRequest = new CancelBookingViewModel();
                 StateHasChanged();
             }
