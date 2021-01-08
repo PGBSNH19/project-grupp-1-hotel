@@ -1,0 +1,13 @@
+﻿<EditForm Model="@CancelBookingRequest" OnValidSubmit="OnClickInternal">
+    <DataAnnotationsValidator />
+    <div>
+        <div class="form-group d-flex flex-row">
+            <InputText class="form-control-sm" type="text" placeholder="Enter Bookingnumber" @bind-Value="@CancelBookingRequest.BookingNumber" />
+            <button class="btn btn-success d-inline-flex" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+            <ValidationMessage For="@(() => CancelBookingRequest.BookingNumber)" />
+        </div>
+    </div>
+</EditForm>
+

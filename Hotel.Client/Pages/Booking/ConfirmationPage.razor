@@ -1,0 +1,76 @@
+﻿    <div class="container" style="background: #fff; margin-bottom: 20px;">
+    <div class="row">
+        <div class="col-sm" style="text-align: center;">
+            <div class="rounded-element"></div>
+            <h1 class="h1-one">
+                Booking confirmed
+            </h1>
+            <h2 style="font-size: 1rem;">We've sent an email to @ConfirmedBooking.Email with your booking details</h2>
+            <h3 style="font-size: 0.9rem; color: #333; "><b>Your booking number:</b><br /><br /><span style="background: #eee">@ConfirmedBooking.BookingNumber</span></h3>            
+        </div>
+        <div class="col-sm" style="background: #c9c797; padding: 15px;">
+            <div class="row information-row">
+                <div class="col left-column">
+                    Guests:
+                </div>
+                <div class="col right-column">
+                    @ConfirmedBooking.Guests
+                </div>
+            </div>
+            <div class="row information-row">
+                <div class="col left-column">
+                    Check-in:
+                </div>
+                <div class="col right-column">
+                    @CheckInDate()
+                </div>
+            </div>
+            <div class="row information-row">
+                <div class="col left-column">
+                    Check-out:
+                </div>
+                <div class="col right-column">
+                    @CheckOutDate()
+                </div>
+            </div>
+            <div class="row information-row">
+                <div class="col left-column">
+                    Room type:
+                </div>
+                <div class="col right-column">
+                    @room.RoomTypeInfo
+                </div>
+            </div>
+            @if (ConfirmedBooking.Breakfast != false || ConfirmedBooking.SpaAccess != false)
+            {
+
+                @if (ConfirmedBooking.Breakfast != false)
+                {
+                    <div class="row information-row">
+                        <div class="col left-column">
+                            Breakfast:
+                        </div>
+                        <div class="col right-column">
+                            Included
+                        </div>
+                    </div>
+                }
+                @if (ConfirmedBooking.SpaAccess != false)
+                {
+                    <div class="row information-row">
+                        <div class="col left-column">
+                            Spa access:
+                        </div>
+                        <div class="col right-column">
+                            Included
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

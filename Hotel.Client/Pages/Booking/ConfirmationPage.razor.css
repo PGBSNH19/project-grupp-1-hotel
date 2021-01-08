@@ -1,0 +1,59 @@
+﻿.rounded-element {
+    margin: 10px auto;
+    width: 70px;
+    height: 70px;
+    background-color: #c9c797;
+    border-radius: 50%;
+    position: relative;
+}
+
+.rounded-element::after{
+    content: "";
+    height: 40px;
+    width: 5px;
+    display: inline-block;
+    background: #fff;
+    transform: rotate(30deg);
+    position: absolute;
+    top: 15px;
+
+}
+
+    .rounded-element::before {
+        content: "";
+        height: 5px;
+        width: 20px;
+        display: inline-block;
+        background: #fff;
+        transform: rotate(30deg);
+        position: absolute;
+        bottom: 22px;
+        left: 10px;
+    }
+
+.information-row {
+    align-items: center;
+}
+.left-column {
+    text-align: right;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 600;
+}
+
+.right-column {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #141313;
+    font-weight: 600;
+}
+
+.h1-one {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #333;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}

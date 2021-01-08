@@ -1,0 +1,48 @@
+﻿@page "/restaurant"
+
+<div class="outside">
+    <div class="breakfast">
+        <h3>Breakfast</h3>
+        @foreach (var item in breakFasts)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="menu">
+        <h3>Menu</h3>
+        @foreach (var item in Menus)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-footer">@item.Price SEK</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="beverage">
+        <h3>Beverage</h3>
+        @foreach (var item in Drinks)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-footer">@item.Price SEK</p>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+

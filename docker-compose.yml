@@ -1,0 +1,23 @@
+version: '3'
+services:
+  # ui
+  client:
+    image: "hotel-client:latest"
+    ports:
+      - "8080:80"
+    restart: always
+    depends_on:
+      - server
+    networks:
+      - shared
+  # api
+  server:
+    image: "hotel-server:latest"
+    ports:
+      - "5001:80"
+    restart: always
+    networks:
+      - shared
+networks:
+  shared:
+    driver: bridge

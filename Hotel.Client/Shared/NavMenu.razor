@@ -1,0 +1,60 @@
+﻿<div class="menu-wrap">
+    <div class="menu-container">
+
+        <div class="top-row pl-4 navbar navbar-dark">
+            <div class="top-row-inner">
+                <a class="navbar-brand" href="/">Hotel Group 1</a>
+                <div class="navbar-toggler" @onclick="ToggleNavMenu">
+                    <span class="oi oi-menu" aria-hidden="true"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="@NavMenuCssClass" style="width: 100%" @onclick="ToggleNavMenu">
+            <ul class="nav">
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                        @*<span class="oi oi-home" aria-hidden="true"></span>*@ Home
+                    </NavLink>
+                </li>
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="booking">
+                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ Book a room
+                    </NavLink>
+                </li>
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="restaurant">
+                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ Restaurant
+                    </NavLink>
+                </li>
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="spa">
+                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ View SPA
+                    </NavLink>
+                </li>
+                <li class="nav-item px-1 @NavMenuCssClass" @onclick="ToggleNavMenu">
+                    <div class="nav-link">
+                        <CancelBookingForm OnClick="TryCancelBooking" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+@code {
+    [Inject] NavigationManager Nav { get; set; }
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    string BookingNumber;
+
+    private void TryCancelBooking(string bookingNumber)
+    {
+        Nav.NavigateTo($"booking/cancel/{bookingNumber}", true);
+    }
+}

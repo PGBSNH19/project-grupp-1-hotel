@@ -1,0 +1,55 @@
+﻿.outside{
+    width:100%;
+}
+.breakfast{
+    display:flex;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+h3{
+    padding:10px;
+    margin: 10px 0px 10px 0px;
+    width:100%;
+    text-align:center;
+    border-bottom: 1px solid maroon;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.beverage {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 0.25rem;
+}
+
+.card-text{
+    height:126px;
+    font-size:14px;
+    padding:4px;
+}
+
+@media screen and (max-width: 646px){
+    h3{
+        width:290px;
+    }
+}
+
+@media screen and (min-width: 652px) {
+    h3 {
+        width: 576px;
+    }
+}
+
+@media screen and (min-width: 934px) {
+    h3 {
+        width: 100%;
+    }
+}

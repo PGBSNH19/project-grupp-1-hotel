@@ -1,0 +1,36 @@
+﻿<EditForm Model="@AvailableRoom" OnValidSubmit="EventCallback">
+    <div id="main" class="mb-4">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label>Guests</label>
+            <div>
+                <InputSelect @bind-Value="@AvailableRoom.Guests" class="form-control-sm w-100">
+                    @foreach (var i in numberOfGuest)
+                    {<option>@i</option>}
+                </InputSelect>
+                <ValidationMessage For="@(() => AvailableRoom.Guests)" />
+            </div>
+        </div>
+        <div class="form-group ">
+            <div>
+                <label>Check in</label>
+                <div>
+                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+            <div>
+                <label>Check out</label>
+                <div>
+                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
+                </div>
+            </div>
+        </div>
+        <div class="search-btn">
+            <button type="submit" class="btn btn-outline-light btn-sm h-50 mt-4">Search</button>
+        </div>
+    </div>
+</EditForm>
