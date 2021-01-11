@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hotel.Client.Shared;
+using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +9,13 @@ namespace Hotel.Client.Pages
 {
     public partial class Restaurant
     {
+        [Inject] AppState AppState { get; set; }
+
+        protected override void OnInitialized()
+        {
+            AppState.Flush();
+        }
+
         List<BreakFast> breakFasts = new List<BreakFast>
         {
             new BreakFast 
