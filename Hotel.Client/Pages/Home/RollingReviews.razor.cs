@@ -46,7 +46,11 @@ namespace Hotel.Client.Pages.Home
             {
                 displayIndex = 0;
             }
-            displayIndex++;
+            else
+            {
+                displayIndex++;
+            }
+            
         }
 
         private void SlideLeft()
