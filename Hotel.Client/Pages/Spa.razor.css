@@ -1,0 +1,108 @@
+﻿.image-container {
+    background-image: url(/Images/Spa/spa-header.jpg);
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+    background-position: right 35% bottom 37%;
+    height: 450px;
+}
+
+.image-container h1 {
+    color: #fff;
+    font-size: 2.5em;
+    font-family: sans-serif;
+    letter-spacing: 0.5em;
+    background: rgb(255, 255, 255, 0.1);
+    padding: 40px;
+    font-weight: lighter;
+}
+
+.book-btn {
+    background: #4B3832;
+    padding: 10px;
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: #fff;
+    transition: 0.1s ease-out; 
+}
+.book-btn:hover {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.content p {
+    letter-spacing: 0.1em;
+    width: 70%;
+    text-align: center;
+    margin: 30px auto;
+    position: relative;
+}
+h1.spa-head {
+    text-align: center;
+    border-bottom: 1px solid #8a8a8a;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
+}
+h1.spa-secondhead {
+    font-size: 1em;
+    text-align: left;
+    padding: 10px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.card-text h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    letter-spacing: 0.01em;
+    line-height: 150%;
+}
+
+@media (max-width: 810px) {
+    .content p {
+        width: 80%;
+
+    }
+    .image-container h1 {
+        font-size: 2em;
+        padding: 20px;
+    } 
+}
+
+@media (max-width: 635px){
+    .content p {
+        width: 100%;
+        font-size: smaller;
+    }
+
+    .image-container h1 {
+        font-size: 17px;
+        padding: 5px;
+    }
+
+    .image-container {
+        background-position: right 50% bottom 37%;
+        height: 250px;
+    }
+    .col-sm {
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #808080;
+    }
+
+}
