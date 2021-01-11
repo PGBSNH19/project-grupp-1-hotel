@@ -62,7 +62,7 @@ namespace Hotel.Client.Pages.Booking
 
         public async Task CancelBooking()
         {
-            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email);
+            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email.ToLower());
 
             if(result.IsSuccessStatusCode)
             {
