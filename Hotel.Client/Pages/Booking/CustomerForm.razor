@@ -40,8 +40,8 @@
                     </div>
                     <div class="col-sm">
                         <div class="form-check">
-                            <InputCheckbox name="breakfast" aria-label="Include breakfast" class="form-check-input" @bind-Value="@AppState.BookingRequest.Breakfast"></InputCheckbox>
-                            <label class="form-check-label" for="gridCheck">
+                            <InputCheckbox id="breakfast" name="breakfast" aria-label="Include breakfast" class="form-check-input" @bind-Value="@AppState.BookingRequest.Breakfast"></InputCheckbox>
+                            <label class="form-check-label" for="breakfast">
                                 Breakfast 360 SEK / Person
                             </label>
                         </div>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="col-sm">
                         <div class="form-check">
-                            <InputCheckbox name="spa" aria-label="Include spa" class="form-check-input" @bind-Value="@AppState.BookingRequest.SpaAccess"></InputCheckbox>
-                            <label class="form-check-label" for="gridCheck">
+                            <InputCheckbox id="spa" name="spa" aria-label="Include spa" class="form-check-input" @bind-Value="@AppState.BookingRequest.SpaAccess"></InputCheckbox>
+                            <label class="form-check-label" for="spa">
                                 Spa 890 SEK / Person.
                             </label>
                         </div>
