@@ -1,5 +1,6 @@
 <h1> Hotel Web Template</h1>
 <h2>Kurs Producera och leverera mjukvara</h2>
+
 ![Development CI/CD](https://github.com/PGBSNH19/project-grupp-1-hotel/workflows/Development%20CI/CD/badge.svg?branch=development)
 
 <h2>Grupp 1</h2>
@@ -54,6 +55,6 @@ http://localhost:8080/swagger/index.html
 
 <h2>Övriga resurser och länkar</h2>
 <h2>Resurser</h2>
-<a href="Documentation/BDD.md">Länk till BDD dokument</a>
-<a href="https://plushogskolan.atlassian.net/jira/software/c/projects/G1/pages">Övrig dokumentation på Confluence</a>
-<a href="https://pgbsnh19.github.io/course-producera-leverera/assignments/project">Länk till projekt</a>
+* <a href="Documentation/BDD.md">Länk till BDD dokument</a>
+* <a href="https://plushogskolan.atlassian.net/jira/software/c/projects/G1/pages">Övrig dokumentation på Confluence</a>
+* <a href="https://pgbsnh19.github.io/course-producera-leverera/assignments/project">Länk till projekt</a>
