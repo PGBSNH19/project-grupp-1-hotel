@@ -12,11 +12,11 @@
 - **.NET 5** eller .NET Core 3.1
   - **C#**
 - En (eller fler) frontend
-  - **Blazor**
+  - **Blazor WebAssembly**
 - En backend
   - **REST**
 - En databas
-  - **MongoDB**
+  - **T-SQL**
 - **GitHub Action CI/CD**
 - Deployment till moln AWS eller Azure
 - **Docker**
@@ -26,16 +26,27 @@
 
 ## Projekt grund
 
-Vad tänker ni att bygga? Börja diskutera, detta kan påverka ert tekniska design
+#### Contract agreement
 
-Börja att skåpa en grund till programmet. Skåpa alla projekt och se till att få till namngivning och mapp struktur från början.
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/65307989/Contract+agreement+V1
 
-Förslag 1: Börja med ett simpelt “view” som visar ett “Hello world”, som det hämtar från ett Hello World-endpoint i ert API.
+#### Testplan (STP)
 
-Skriv ett par automatiska test av frontend och backend.
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/67993900/Testplan+STP
 
-Sätta upp Docker och Docker-compose.
+#### Testspecifikation (STD)
 
-Konfigurara upp GitHub actions. Börja med CI.
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/67964027/Testspecifikation+STD01
 
-Få till deployment av denna Hello World.
+#### Project Plan
+
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/65341206/Project+Plan+V1
+
+#### Behaviour Driven Development
+
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/65243714/Behavior+Driven+Development+V1
+
+#### Non functional requirements
+
+https://plushogskolan.atlassian.net/wiki/spaces/G1/pages/72614461/Non+functional+requirements
+
