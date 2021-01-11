@@ -44,6 +44,7 @@ namespace Hotel.Client.Shared
         public void SetConfirmedBooking(BookingInfo confirmedBooking)
         {
             ConfirmedBooking = confirmedBooking;
+            ConfirmedBooking.Email.ToLower();
             NotifyStateChanged();
         }
 

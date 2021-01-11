@@ -86,6 +86,7 @@ namespace Hotel.Server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            bookingRequest.Email = bookingRequest.Email.ToLower();
             var result = await _bookingService.CreateAsync(bookingRequest);
 
             if (result.Entity != null)
@@ -108,7 +109,7 @@ namespace Hotel.Server.Controllers
             if (string.IsNullOrWhiteSpace(bookingNumber)) return BadRequest("BookingNumber not valid");
             if (string.IsNullOrWhiteSpace(email)) return BadRequest("Email not valid");
 
-            var result = await _bookingService.CancelAsync(bookingNumber, email);
+            var result = await _bookingService.CancelAsync(bookingNumber, email.ToLower());
             if (!result.Success) 
                 return NotFound(result.Message);
 
