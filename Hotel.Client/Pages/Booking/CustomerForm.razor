@@ -1,49 +1,69 @@
 ﻿
 <EditForm Model="@AppState.BookingRequest" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator /> 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <InputText placeholder="First name" class="form-control" @bind-Value="@AppState.BookingRequest.FirstName"></InputText>
-            <ValidationMessage For="@(() => AppState.BookingRequest.FirstName)"></ValidationMessage>
+    <div class="form-content">
+        <h5 class="heading">YOUR CONTACT DETAILS</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <InputText name="First name" aria-label="First name" placeholder="First name" class="form-control" @bind-Value="@AppState.BookingRequest.FirstName"></InputText>
+                <ValidationMessage For="@(() => AppState.BookingRequest.FirstName)"></ValidationMessage>
+            </div>
+            <div class="form-group col-md-6">
+                <InputText name="Last name" aria-label="Lastname" placeholder="Last name" class="form-control" @bind-Value="@AppState.BookingRequest.LastName"></InputText>
+                <ValidationMessage For="@(() => AppState.BookingRequest.LastName)"></ValidationMessage>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <InputText placeholder="Last name" class="form-control" @bind-Value="@AppState.BookingRequest.LastName"></InputText>
-            <ValidationMessage For="@(() => AppState.BookingRequest.LastName)"></ValidationMessage>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <InputText name="Email" aria-label="Email" type="email" placeholder="Email" class="form-control" @bind-Value="@AppState.BookingRequest.Email"></InputText>
+                <ValidationMessage For="@(() => AppState.BookingRequest.Email)"></ValidationMessage>
+            </div>
+            <div class="form-group col-md-6">
+                <InputText name="Phone number" aria-label="Phone number" placeholder="Phone number" class="form-control" @bind-Value="@AppState.BookingRequest.PhoneNumber"></InputText>
+                <ValidationMessage For="@(() => AppState.BookingRequest.PhoneNumber)"></ValidationMessage>
+            </div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <InputText type="email" placeholder="Email" class="form-control" @bind-Value="@AppState.BookingRequest.Email"></InputText>
-            <ValidationMessage For="@(() => AppState.BookingRequest.Email)"></ValidationMessage>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <InputText name="Address" aria-label="Address" placeholder="Address" class="form-control" @bind-Value="@AppState.BookingRequest.Address"></InputText>
+                <ValidationMessage For="@(() => AppState.BookingRequest.Address)"></ValidationMessage>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <InputText placeholder="Phone number" class="form-control" @bind-Value="@AppState.BookingRequest.PhoneNumber"></InputText>
-            <ValidationMessage For="@(() => AppState.BookingRequest.PhoneNumber)"></ValidationMessage>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <InputText placeholder="Address" class="form-control" @bind-Value="@AppState.BookingRequest.Address"></InputText>
-            <ValidationMessage For="@(() => AppState.BookingRequest.Address)"></ValidationMessage>
-        </div>
-    </div>
-    <div class="form-group">
-        <h5>Include in my booking:</h5>
+        <div class="form-group">
+            <h5 class="heading">SOMETHING EXTRA</h5>
 
-        <div class="form-check">
-            <InputCheckbox class="form-check-input" @bind-Value="@AppState.BookingRequest.Breakfast"></InputCheckbox>
-            <label class="form-check-label" for="gridCheck">
-                Breakfast buffet 360 SEK
-            </label>
+            <div class="container">
+                <div class="row -style">
+                    <div class="col-sm">
+                        <h6 class="heading">Breakfast buffet</h6>
+                        <h7 class="heading">Enjoy a delicious breakfast buffet.</h7>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-check">
+                            <InputCheckbox name="breakfast" aria-label="Include breakfast" class="form-check-input" @bind-Value="@AppState.BookingRequest.Breakfast"></InputCheckbox>
+                            <label class="form-check-label" for="gridCheck">
+                                Breakfast 360 SEK / Person
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row -style">
+                    <div class="col-sm">
+                        <h6 class="heading">Spa entrance</h6>
+                        <h7 class="heading">Get access to our relaxing and energizing spa.</h7>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-check">
+                            <InputCheckbox name="spa" aria-label="Include spa" class="form-check-input" @bind-Value="@AppState.BookingRequest.SpaAccess"></InputCheckbox>
+                            <label class="form-check-label" for="gridCheck">
+                                Spa 890 SEK / Person.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>                   
         </div>
-        <div class="form-check">
-            <InputCheckbox class="form-check-input" @bind-Value="@AppState.BookingRequest.SpaAccess"></InputCheckbox>
-            <label class="form-check-label" for="gridCheck">
-                Spa entrance 899 SEK
-            </label>
-        </div>
+
+        <button name="submit" aria-label="Confirm booking" type="submit" class="btn btn-primary btn-lg">Confirm</button>
     </div>
-
-    <button type="submit" class="btn btn-primary btn-lg">Confirm</button>
-
 </EditForm>
