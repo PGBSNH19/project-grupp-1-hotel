@@ -86,7 +86,9 @@ namespace Hotel.Server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            bookingRequest.Email = bookingRequest.Email.ToLower();
+            if (bookingRequest.Email != null)
+                bookingRequest.Email = bookingRequest.Email.ToLower();
+
             var result = await _bookingService.CreateAsync(bookingRequest);
 
             if (result.Entity != null)
