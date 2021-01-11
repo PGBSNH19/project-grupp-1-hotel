@@ -3,9 +3,10 @@
 @if (ConfirmedBooking == null)
 {
     <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
-    <h1 class="display-4">Booking</h1>
-    <h4>Check In: @AvailabilityRequest.CheckInDate.ToString("dd/MM/yyyy")</h4>
-    <h4>Check Out: @AvailabilityRequest.CheckOutDate.ToString("dd/MM/yyyy")</h4>
+    <div class="show-date" style="display:@showDate">
+        <h4>Check In: @AvailabilityRequest.CheckInDate.ToString("yyyy/MM/dd")</h4>
+        <h4>Check Out: @AvailabilityRequest.CheckOutDate.ToString("yyyy/MM/dd")</h4>
+    </div>
 
     if (AppState.Rooms != null)
     {
