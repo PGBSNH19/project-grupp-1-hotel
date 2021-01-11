@@ -30,6 +30,8 @@ namespace Hotel.Client.Pages.Home
 
         private async Task GetRoom()
         {
+            Console.WriteLine("Check in: " + AvailableRoom.CheckInDate);
+            Console.WriteLine("Check out: " + AvailableRoom.CheckOutDate);
             if (AvailableRoom.CheckInDate.Date < DateTime.Now.Date)
             {
                 Toast.ShowToast("CheckInDate can't happen earlier than today.", ToastLevel.Error);

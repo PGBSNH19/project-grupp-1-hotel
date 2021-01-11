@@ -15,8 +15,10 @@
             <div>
                 <label>Check in</label>
                 <div>
-                    <input type="date" @bind-value="@AvailableRoom.CheckInDate" format-value="yyyy-MM-dd" max="9999-12-31" class="form-control-sm w-100">
-                    <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
+                    <input type="date" @oninput="@((ui) => { UpdateCheckIn((string)ui.Value);})" 
+                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
+                           min="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
+                           max="9999-12-31" class="form-control-sm w-100">
                 </div>
             </div>
         </div>
@@ -24,8 +26,10 @@
             <div>
                 <label>Check out</label>
                 <div>
-                    <input type="date" @bind-value="@AvailableRoom.CheckOutDate" format-value="yyyy-MM-dd" max="9999-12-31" class="form-control-sm w-100" >
-                    <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
+                    <input type="date" @oninput="@((ui) => { UpdateCheckOut((string)ui.Value);})" 
+                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
+                           min="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
+                           max="9999-12-31" class="form-control-sm w-100">
                 </div>
             </div>
         </div>
