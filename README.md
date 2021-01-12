@@ -17,7 +17,17 @@ Fokus under projektet ligger på funktionalitet och säkerhet för hotellbokning
 
 <h2>Tech stack</h2>
 
-Systemets Frontend byggs i **Blazor WebAssembly**. Backend Server är ett **.NET 5.0** API och all data lagras i en **relationsdatabas på Azure**.
+#### Client Projekt
+Client är vår Frontend och är byggd med **Blazor WebAssembly** som kommunicerar med vår API genom HTTPS. 
+
+#### Server Projekt
+Server är ett **.Net 5.0 core** API som hämtar och lagrar data i vår relationsdatabase som hostas på Azure. 
+
+#### Test Projekt
+Det är en Xunit projekt som innehåller enhetstester för vår API.
+
+#### Shared Bibliotek
+Shared är ett klassbibliotek som innehåller alla vår modeller och DTO:er. Vi har byggt en Nuget package baserad detta klassbibliotek för att dela modeller och DTO:er mellan olika projekter.
 
 <h2>Branching strategi</h2>
 För utveckling och test staging använder vi en branch Development. Commits till Development triggar en CI/CD pipeline som updaterar en development live server av applikationen. 
@@ -44,6 +54,17 @@ För att starta upp projektet lokalt så behöver man bygga upp en appsettings.D
     "DefaultConnection": "Connection_String"
   }
 }
+```
+
+För att kunna skicka och ta emot email behöver man lägga till detta i sin appsettings.Development. EmailUsername samt EmailPassword håller credentials till avsändaren och behöver således fyllas i personligen. 
+
+```json
+"EmailService": {
+    "EmailUsername": "",
+    "EmailPassword": "",
+    "EmailSmtpHost": "smtp.gmail.com",
+    "EmailSmtpPort": 587
+  }
 ```
 
 Stega in i Hotel.Server/, öppna package-manager console och gör en migration. 
