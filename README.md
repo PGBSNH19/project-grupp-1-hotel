@@ -60,7 +60,9 @@ dotnet ef database update
 
 Ifrån solution, välj multiple startup projects (Hotel.Server, Hotel.Client) och kör igång!
 
-<h2>Api dokumentation</h2>
+<h2>Hotel Api</h2>
+
+### Dokumentation
 
 Swagger används som dokumentation av vårat server API.
 
@@ -78,6 +80,24 @@ docker run -d -p 8080:80 --name hotelapi --env ASPNETCORE_ENVIRONMENT=Developmen
 
 När det är gjort ska det gå att nå dokumentationen på: 
 http://localhost:8080/swagger/index.html
+
+### Postman API Requests
+
+Det finns en Postman API Request Collection fil som innehåller requests till alla våra CRUD-funktioner som enkelt kan importeras och köras i Postman.
+
+[Länk till PostmanAPIRequestCollection]: Documentation/PostmanAPIRequestCollection/HotelAPIServerRequestCollection.postman_collection.JSON	"postmanJSON"
+
+Det kan behövas att sätta *Collection Variable* "API_URL" till din lokala URL om den skulle skilja sig, det kan göras genom att klicka på Edit.
+
+![](Documentation/Pics/Postman1.png) 
+
+
+
+Därefter gå in på Variables ändra *API_URL*, ändra både *INITIAL VALUE* och *CURRENT VALUE*. 
+
+![](Documentation/Pics/Postman2.png) 
+
+
 
 <h2>Övriga resurser och länkar</h2>
 
