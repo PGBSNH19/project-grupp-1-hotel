@@ -1,15 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using Hotel.Server.Models;
+﻿using Hotel.Server.Models;
+using Hotel.Server.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using System.Net;
-using Hotel.Server.Services.Interfaces;
-using Hotel.Shared;
+using System.Net.Mail;
+using System.Text;
 
 namespace Hotel.Server.Services
 {
@@ -69,7 +64,7 @@ namespace Hotel.Server.Services
             message.IsBodyHtml = true;
 
             return message;
-        } 
+        }
         private StringBuilder CreateMessageContent(Booking entity)
         {
             StringBuilder mailbody = new StringBuilder();
@@ -78,7 +73,7 @@ namespace Hotel.Server.Services
             string checkout = entity.CheckOutDate.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
             string roomType = RoomTypeInfo(entity);
 
-            string breakfastIncluded = entity.Breakfast? $"Breakfast - Included<br>":"";
+            string breakfastIncluded = entity.Breakfast ? $"Breakfast - Included<br>" : "";
             string spaIncluded = entity.SpaAccess ? "Spa Access - Included<br>" : "";
 
             string created = entity.Created.ToString("dd/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
@@ -106,7 +101,7 @@ namespace Hotel.Server.Services
                             $"{breakfastIncluded}" +
                             $"Created at - {created}</font></div>"
                             );
-                            
+
 
             return mailbody;
         }

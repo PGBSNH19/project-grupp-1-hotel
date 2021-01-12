@@ -249,7 +249,7 @@ namespace Hotel.Server.Persistence
             }
             );
 
-            
+
         }
     }
 }

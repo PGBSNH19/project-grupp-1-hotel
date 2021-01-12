@@ -5,8 +5,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 
 namespace Hotel.Client.Shared
 {
@@ -26,7 +24,7 @@ namespace Hotel.Client.Shared
         private void UpdateCheckIn(string s)
         {
             if (DateTime.TryParse(s, out DateTime t))
-                AvailableRoom.CheckInDate = t; 
+                AvailableRoom.CheckInDate = t;
         }
 
         private void UpdateCheckOut(string s)

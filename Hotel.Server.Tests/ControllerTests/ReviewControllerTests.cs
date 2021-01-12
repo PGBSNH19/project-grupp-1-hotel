@@ -5,14 +5,9 @@ using Hotel.Server.Repositories;
 using Hotel.Server.Services;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using Moq.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hotel.Server.Tests.ControllerTests
@@ -55,7 +50,7 @@ namespace Hotel.Server.Tests.ControllerTests
         public async void GetThreeRandomReviews_IfNoReviewsWithGradeFourOrHigherExists_ReturnNoContent()
         {
             List<Review> reviews = new List<Review>
-            { 
+            {
                 new Review
                 {
                     Id = 1,
