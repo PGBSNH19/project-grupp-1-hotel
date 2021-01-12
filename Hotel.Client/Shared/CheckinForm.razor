@@ -15,10 +15,8 @@
             <div>
                 <label>Check in</label>
                 <div>
-                    <input type="date" @oninput="@((ui) => { UpdateCheckIn((string)ui.Value);})" 
-                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
-                           min="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
-                           max="9999-12-31" class="form-control-sm w-100">
+                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" @bind-Value:format="yyyy-MM-dd" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
                 </div>
             </div>
         </div>
@@ -26,15 +24,13 @@
             <div>
                 <label>Check out</label>
                 <div>
-                    <input type="date" @oninput="@((ui) => { UpdateCheckOut((string)ui.Value);})" 
-                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
-                           min="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
-                           max="9999-12-31" class="form-control-sm w-100">
+                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" @bind-Value:format="yyyy-MM-dd" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
                 </div>
             </div>
         </div>
         <div class="search-btn">
-            <button name="Search" aria-label="Search" type="submit" class="btn btn-outline-light btn-sm h-50 mt-4">Search</button>
+            <button type="submit" class="btn btn-outline-light btn-sm h-50 mt-4">Search</button>
         </div>
     </div>
 </EditForm>

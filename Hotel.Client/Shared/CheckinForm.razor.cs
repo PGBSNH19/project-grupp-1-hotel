@@ -22,17 +22,5 @@ namespace Hotel.Client.Shared
         private List<int> numberOfGuest = new List<int> { 1, 2, 3, 4 };
         [Inject] ToastService Toast { get; set; }
         private RoomInfo[] Rooms { get; set; } // todo: pass this data to next component to show rooms
-
-        private void UpdateCheckIn(string s)
-        {
-            if (DateTime.TryParse(s, out DateTime t))
-                AvailableRoom.CheckInDate = t; 
-        }
-
-        private void UpdateCheckOut(string s)
-        {
-            if (DateTime.TryParse(s, out DateTime t))
-                AvailableRoom.CheckOutDate = t;
-        }
     }
 }
