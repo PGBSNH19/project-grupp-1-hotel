@@ -46,6 +46,17 @@ För att starta upp projektet lokalt så behöver man bygga upp en appsettings.D
 }
 ```
 
+För att kunna skicka och ta emot email behöver man lägga till detta i sin appsettings.Development. EmailUsername samt EmailPassword håller credentials till avsändaren och behöver således fyllas i personligen. 
+
+```json
+"EmailService": {
+    "EmailUsername": "",
+    "EmailPassword": "",
+    "EmailSmtpHost": "smtp.gmail.com",
+    "EmailSmtpPort": 587
+  }
+```
+
 Stega in i Hotel.Server/, öppna package-manager console och gör en migration. 
 
 ```
