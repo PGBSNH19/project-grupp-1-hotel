@@ -59,17 +59,23 @@ namespace Hotel.Client.Pages.Booking
 
         public async Task CancelBooking()
         {
-            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email.ToLower());
-
-            if (result.IsSuccessStatusCode)
+            if (!String.IsNullOrEmpty(CancelBookingRequest.Email))
             {
-                Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
-                CancelBookingRequest = new CancelBookingViewModel();
-                StateHasChanged();
+                var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email.ToLower());
+                if (result.IsSuccessStatusCode)
+                {
+                    Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
+                    CancelBookingRequest = new CancelBookingViewModel();
+                    StateHasChanged();
+                }
+                else
+                {
+                    Toast.ShowToast("Cant find your email, please enter your correct email", ToastLevel.Error);
+                }
             }
             else
             {
-                Toast.ShowToast("Cant find your email, please enter your correct email", ToastLevel.Error);
+                Toast.ShowToast("Please enter your email", ToastLevel.Error);
             }
         }
     }
