@@ -2,9 +2,6 @@
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Controllers
@@ -31,12 +28,12 @@ namespace Hotel.Server.Controllers
         {
             var reviews = await _reviewService.GetRandomReviewsAsync();
 
-            if(reviews.Entity != null)
+            if (reviews.Entity != null)
                 return Ok(reviews.Entity);
 
             return NotFound(reviews.Message);
         }
-        
+
         ///<summary>
         ///Retrieves the average grade out of all reviews 
         ///</summary>

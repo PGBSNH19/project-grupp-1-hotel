@@ -4,15 +4,10 @@ using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Services
@@ -41,7 +36,8 @@ namespace Hotel.Server.Services
                 booking.Cancel();
                 await repo.Complete();
                 return new ServiceResponse<BookingInfo>(booking.ToDto());
-            } catch(Exception ex) { return new ServiceResponse<BookingInfo>($"Failure canceling Booking: {ex.Message}"); }
+            }
+            catch (Exception ex) { return new ServiceResponse<BookingInfo>($"Failure canceling Booking: {ex.Message}"); }
         }
 
         public async Task<ServiceResponse<BookingInfo>> CreateAsync(BookingRequest request, bool isProduction = true)

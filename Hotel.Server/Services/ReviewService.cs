@@ -1,4 +1,5 @@
-﻿using Hotel.Server.Repositories.Interfaces;
+﻿using Hotel.Server.Extensions;
+using Hotel.Server.Repositories.Interfaces;
 using Hotel.Server.Services.Communication;
 using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
@@ -7,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hotel.Server.Extensions;
 
 namespace Hotel.Server.Services
 {
@@ -55,7 +55,7 @@ namespace Hotel.Server.Services
             Log.Information("ReviewService processing request for GetAverageGradeAsync");
             return await Task.FromResult(_reviewRepository.GetAverageGradeAsync().Average(x => x.Grade));
         }
-       
+
 
         public async Task<ServiceResponse<List<ReviewInfo>>> GetRandomReviewsAsync()
         {

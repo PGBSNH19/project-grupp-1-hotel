@@ -2,7 +2,6 @@
 using Hotel.Shared;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Hotel.Client.Shared
 {

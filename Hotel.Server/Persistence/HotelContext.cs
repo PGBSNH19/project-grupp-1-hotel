@@ -251,7 +251,7 @@ namespace Hotel.Server.Persistence
             }
             );
 
-            
+
         }
     }
 }
