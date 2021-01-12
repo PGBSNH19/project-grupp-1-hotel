@@ -199,7 +199,9 @@ namespace Hotel.Server.Persistence
                 Guests = 1,
                 Breakfast = true,
                 SpaAccess = false,
-                Created = DateTime.Now
+                Created = DateTime.Now,
+                RoomId = 1
+
             });
             booking.HasKey(e => e.Id);
 

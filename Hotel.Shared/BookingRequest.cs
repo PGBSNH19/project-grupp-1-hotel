@@ -21,7 +21,7 @@ namespace Hotel.Shared
         [MaxLength(20, ErrorMessage = "Must have a length between 2 and 20."), MinLength(2, ErrorMessage = "Must have a length between 2 and 20.")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "The email address is required")]
-        [RegularExpression(@"^([a-zA-Z.0-9]{5,55})(@[a-zA-Z.0-9-]{2,255})([a-zA-Z]{2,6}$)", ErrorMessage = "Invalid email address")]
+        [RegularExpression(@"^([a-zA-Z.0-9]{1,55})(@[a-zA-Z.0-9-]{1,255})[.]([a-zA-Z]{2,6})$", ErrorMessage = "Invalid email address")]
         [MaxLength(260, ErrorMessage = "Email address have a bad length."), MinLength(5, ErrorMessage = "Email address have a bad length.")]
         public string Email { get; set; }
         [Required]

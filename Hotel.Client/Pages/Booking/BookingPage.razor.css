@@ -11,3 +11,10 @@
     box-shadow: 0px 1px 0px 0px black;
     justify-content: space-around;
 }
+tr:not(.top-row) {
+    transition: .25s ease-in-out;
+    cursor: pointer;
+}
+.selected {
+    background: lightgreen !important;
+}
