@@ -106,7 +106,7 @@ http://localhost:8080/swagger/index.html
 
 Det finns en Postman API Request Collection fil som innehåller requests till alla våra CRUD-funktioner som enkelt kan importeras och köras i Postman.
 
-[Länk till PostmanAPIRequestCollection]: Documentation/PostmanAPIRequestCollection/HotelAPIServerRequestCollection.postman_collection.JSON	"postmanJSON"
+[Postman API Request Collection](https://github.com/PGBSNH19/project-grupp-1-hotel/blob/development/Documentation/PostmanAPIRequestCollection/Hotel%20API%20Server%20Request%20Collection.postman_collection.json)
 
 Det kan behövas att sätta *Collection Variable* "API_URL" till din lokala URL om den skulle skilja sig, det kan göras genom att klicka på Edit.
 
