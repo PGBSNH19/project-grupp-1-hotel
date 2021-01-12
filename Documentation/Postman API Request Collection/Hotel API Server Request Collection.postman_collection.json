@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "69727f03-0765-4a2c-9d67-ebcf76e274fc",
+		"name": "Hotel API Server Request Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAvailableRooms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/booking/check/guests/4/checkin/{{dateNow}}/checkout/{{dateTomorrow}}",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"booking",
+						"check",
+						"guests",
+						"4",
+						"checkin",
+						"{{dateNow}}",
+						"checkout",
+						"{{dateTomorrow}}"
+					]
+				},
+				"description": "Gets rooms available for specific timespan, all room available"
+			},
+			"response": []
+		},
+		{
+			"name": "PostBooking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"BookingNumber\": \"a022fc9c-945b-45f2-9d95-1105d5caf4fe\",\r\n    \"CheckInDate\": \"{{checkInDate}}\",\r\n    \"CheckOutDate\": \"{{checkOutDate}}\",\r\n    \"FirstName\": \"Post\",\r\n    \"LastName\": \"Man\",\r\n    \"Email\": \"{{email}}\",\r\n    \"PhoneNumber\": \"060604504\",\r\n    \"Address\": \"Postmanvägen\",\r\n    \"Guests\": 4,\r\n    \"Breakfast\": false,\r\n    \"SpaAccess\": true,\r\n    \"Beds\": 1,\r\n    \"DoubleBeds\": 0,\r\n    \"IsCondo\": false,\r\n    \"IsSuite\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/booking",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"booking"
+					]
+				},
+				"description": "Post a booking on todays date."
+			},
+			"response": []
+		},
+		{
+			"name": "GetBookingByBookingNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Gets a booking by its bookingNumber."
+			},
+			"response": []
+		},
+		{
+			"name": "CancelBooking",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{email}}"
+				},
+				"url": {
+					"raw": "{{API_URL}}/booking/{{bookingNumber}}/cancel",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"booking",
+						"{{bookingNumber}}",
+						"cancel"
+					]
+				},
+				"description": "Cancel previous booking."
+			},
+			"response": []
+		},
+		{
+			"name": "Post Review",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Description\": \"Best hotel ever made only good things happens all the time in here always happy, very best always too good to be true.\",\r\n    \"Grade\": 1,\r\n    \"BookingNumber\": \"{{bookingNumber}}\",\r\n    \"Anonymous\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/review",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"review"
+					]
+				},
+				"description": "Post review, needs to be a existing bookingNumber and only one review can be posted per bookingNumber."
+			},
+			"response": []
+		},
+		{
+			"name": "GetThreeRandomReviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Returns three random reviews with grades greater or equal to 4."
+			},
+			"response": []
+		},
+		{
+			"name": "GetAverage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Get average grade from latest 100 reviews."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c7ece6e9-c74e-4422-a42a-a5c65d0e7d1c",
+				"type": "text/javascript",
+				"exec": [
+					"const dateNow = new Date();",
+					"const dateTomorrow = new Date();",
+					"dateTomorrow.setDate(dateTomorrow.getDate() + 1);",
+					"pm.collectionVariables.set(\"dateNow\", dateNow.toLocaleDateString().toString());",
+					"pm.collectionVariables.set(\"dateTomorrow\", dateTomorrow.toLocaleDateString().toString());",
+					"",
+					"pm.collectionVariables.set(\"checkInDate\", dateNow.toLocaleDateString());",
+					"pm.collectionVariables.set(\"checkOutDate\", dateTomorrow.toLocaleDateString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "052929c0-be84-4137-aa33-6015a3a6997d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6e9d9503-ac45-4fad-9e47-c47072931152",
+			"key": "API_URL",
+			"value": "https://localhost:44354/api/v1.0"
+		},
+		{
+			"id": "d6904fde-a50b-4695-ae67-532548c160f9",
+			"key": "dateNow",
+			"value": ""
+		},
+		{
+			"id": "42d3eefa-9ac6-4595-bcdc-66bbb6873569",
+			"key": "dateTomorrow",
+			"value": ""
+		},
+		{
+			"id": "d70d2837-3352-417d-ae00-bb05c7fbe339",
+			"key": "checkInDate",
+			"value": ""
+		},
+		{
+			"id": "360e0942-52fe-4a5b-8097-34a0c5baaee6",
+			"key": "checkOutDate",
+			"value": ""
+		},
+		{
+			"id": "93c325a1-0f68-4cf9-bd36-9c37c1390ce5",
+			"key": "bookingNumber",
+			"value": "a022fc9c-945b-45f2-9d95-1105d5caf4fe"
+		},
+		{
+			"id": "86348879-2ee5-40e5-b07d-a910d8d04bf0",
+			"key": "email",
+			"value": "manpost@mannen.test"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
