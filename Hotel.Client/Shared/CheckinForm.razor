@@ -15,10 +15,8 @@
             <div>
                 <label>Check in</label>
                 <div>
-                    <input type="date" @oninput="@((ui) => { UpdateCheckIn((string)ui.Value);})" 
-                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
-                           min="@AvailableRoom.CheckInDate.ToString("yyyy-MM-dd")" 
-                           max="9999-12-31" class="form-control-sm w-100">
+                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
                 </div>
             </div>
         </div>
@@ -26,10 +24,8 @@
             <div>
                 <label>Check out</label>
                 <div>
-                    <input type="date" @oninput="@((ui) => { UpdateCheckOut((string)ui.Value);})" 
-                           format-value="yyyy-MM-dd" value="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
-                           min="@AvailableRoom.CheckOutDate.ToString("yyyy-MM-dd")" 
-                           max="9999-12-31" class="form-control-sm w-100">
+                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
                 </div>
             </div>
         </div>
