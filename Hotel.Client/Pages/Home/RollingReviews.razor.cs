@@ -1,4 +1,5 @@
-﻿using Hotel.Client.ViewModel;
+﻿using Hotel.Client.Extensions;
+using Hotel.Client.ViewModel;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
@@ -28,42 +29,39 @@ namespace Hotel.Client.Pages.Home
             foreach (var r in revs)
                 reviews.Add(new ReviewViewModel { Review = r });
             StateHasChanged();
-            StartTimer(3000);
+            StartTimer(5000);
         }
 
         private void StartTimer(int interval)
         {
-            timer = new Timer();
-            timer.Interval = interval;
+            timer = new Timer
+            {
+                Interval = interval,
+                AutoReset = true,
+                Enabled = true
+            };
             timer.Elapsed += ShowRandomImage;
-            timer.AutoReset = true;
-            timer.Enabled = true;
         }
 
         private void SlideRight()
         {
+            timer.Reset();
             if (displayIndex == Images.Count - 1)
-            {
                 displayIndex = 0;
-            }
-            displayIndex++;
+            else
+                displayIndex++;
+            StateHasChanged();
         }
 
         private void SlideLeft()
         {
+            timer.Reset();
             if (displayIndex == 0)
-            {
                 displayIndex = Images.Count;
-            }
             displayIndex--;
-        }
-
-        private void ShowRandomImage(object sender, ElapsedEventArgs e)
-        {
-            var random = new Random();
-            int num = random.Next(0, Images.Count);
-            displayIndex = num;
             StateHasChanged();
         }
+
+        private void ShowRandomImage(object sender, ElapsedEventArgs e) => SlideRight();
     }
 }

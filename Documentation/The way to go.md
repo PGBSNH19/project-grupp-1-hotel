@@ -7,7 +7,6 @@
 - Communicate when interruptions occurs
 - Development branch instead of using main as merge branch
 - Main branch is updated during sprint endings and on proposal
-- During pull requests Frontend and Backend team handle their own requests
 - Always add all members to pull requests
 - Domain Driven Design as possible design pattern
 - Take your time during pull requests and give good feedback

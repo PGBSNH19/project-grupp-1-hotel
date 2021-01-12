@@ -1,10 +1,9 @@
-## Projekt krav
+## Projektkrav
 
-- Ett SRS dokument på engelska (i markdown)
 - Krav skrivs som features med BDD på engelska
 - Al kod i ett publikt GitHub repo
 - GitHub pull requests
-- Confulenece
+- Confluence
 - Jira
 
 ## Tekniska krav
@@ -12,19 +11,19 @@
 - **.NET 5** eller .NET Core 3.1
   - **C#**
 - En (eller fler) frontend
-  - **Blazor**
+  - **Blazor Webassembly**
 - En backend
-  - **REST**
+  - **REST .NET 5 API**
 - En databas
-  - **MongoDB**
+  - **MSSQL Azure Database**
 - **GitHub Action CI/CD**
-- Deployment till moln AWS eller Azure
+- Deployment till moln AWS eller **Azure**
 - **Docker**
 - **Automatiska test**
   - **Unit tests**
   - evt. Integration tests
 
-## Projekt grund
+## Projektgrund
 
 Vad tänker ni att bygga? Börja diskutera, detta kan påverka ert tekniska design
 
