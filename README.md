@@ -13,7 +13,7 @@ Medverkande i grupp 1 är Aron Cederlund, Ted Henriksson, Pierre Nygård, Samir 
 
 Man ska också kunna läsa och skriva recensioner för hotellet och hotellets restaurang. 
 
-Fokus under projektet ligger på funktionalitet och säkerhet för hotellbokning och avbokninga, samt dataintegritet och åtminstone en grundläggande design för Appen.
+Fokus under projektet ligger på funktionalitet och säkerhet för hotellbokning och avbokning, samt dataintegritet och åtminstone en grundläggande design för Appen.
 
 <h2>Tech stack</h2>
 
@@ -30,7 +30,33 @@ Branches är namngivna antingen efter Jira story eller, om tillgängligt, sub ta
 
 För att starta upp projektet lokalt så behöver man bygga upp en appsettings.Development.json med ConnectionStrings och DefaultConnection riktad mot en Sql Server. Denna fil ska ligga inuti Hotel.Server.
 
-Stega in i Hotel.Server/ och gör en migration. Uppdatera sedan databasen med <a href="https://docs.microsoft.com/en-us/ef/core/cli/dotnet">Ef tools</a>.
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Connection_String"
+  }
+}
+```
+
+Stega in i Hotel.Server/, öppna package-manager console och gör en migration. 
+
+```
+dotnet ef migrations add "Name_Migrations"
+```
+
+Uppdatera sedan databasen med <a href="https://docs.microsoft.com/en-us/ef/core/cli/dotnet">Ef tools</a>.
+
+```
+dotnet ef database update
+```
 
 Ifrån solution, välj multiple startup projects (Hotel.Server, Hotel.Client) och kör igång!
 
