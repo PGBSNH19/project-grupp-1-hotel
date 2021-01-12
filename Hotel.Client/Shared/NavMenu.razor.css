@@ -22,11 +22,15 @@
     align-items: center;
 }
 
+.navbar-dark, .navbar-brand {
+    color: #141414;
+}
+
 .navbar-brand {
+    
     font-size: 1.5rem;
     font-weight: 300;
 }
-
 
 .navbar-toggler {
     border: 0;
