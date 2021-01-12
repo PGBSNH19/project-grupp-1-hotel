@@ -4,7 +4,6 @@ using Hotel.Server.Repositories.Interfaces;
 using Hotel.Shared;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +19,7 @@ namespace Hotel.Server.Repositories
             Log.Information("BookingRepository processing request for GetUnavailableRoomIds {@Request}", request);
             var ids = ctx.Bookings
                 .Where(e => !(request.CheckOutDate.Date <= e.CheckInDate.Date || request.CheckInDate.Date >= e.CheckOutDate.Date) && e.Room != null && !e.IsCanceled)  // request in 6 out 7
-                .Include(e => e.Room)                                                                                                                                // blocking in 5 out 6
+                .Include(e => e.Room) // blocking in 5 out 6
                 .Select(e => e.Room.Id);
             return ids;
         }

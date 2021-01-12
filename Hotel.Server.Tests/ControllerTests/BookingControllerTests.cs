@@ -6,11 +6,9 @@ using Hotel.Server.Services;
 using Hotel.Server.Services.Interfaces;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using Moq.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace Hotel.Server.Tests.ControllerTests

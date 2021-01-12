@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Timers;
 
 namespace Hotel.Client.Toast
@@ -8,7 +6,7 @@ namespace Hotel.Client.Toast
     public enum ToastLevel
     {
         Info,
-        Success, 
+        Success,
         Warning,
         Error
     }
@@ -40,7 +38,7 @@ namespace Hotel.Client.Toast
         private void SetCountDown()
         {
             if (CountDown == null)
-            { 
+            {
                 CountDown = new Timer(6000);
                 CountDown.Elapsed += HideToast;
                 CountDown.AutoReset = false;

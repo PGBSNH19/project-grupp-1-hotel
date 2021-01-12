@@ -3,11 +3,8 @@ using Hotel.Server.Persistence;
 using Hotel.Server.Repositories;
 using Moq;
 using Moq.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hotel.Server.Tests.RepositoryTests
