@@ -2,9 +2,9 @@
     <div id="main" class="mb-4">
         <DataAnnotationsValidator />
         <div class="form-group">
-            <label>Guests</label>
+            <label for="Guests">Guests</label>
             <div>
-                <InputSelect @bind-Value="@AvailableRoom.Guests" class="form-control-sm w-100">
+                <InputSelect id="Guests" @bind-Value="@AvailableRoom.Guests" class="form-control-sm w-100">
                     @foreach (var i in numberOfGuest)
                     {<option>@i</option>}
                 </InputSelect>
@@ -13,18 +13,18 @@
         </div>
         <div class="form-group ">
             <div>
-                <label>Check in</label>
+                <label for="CheckIn">Check in</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckInDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <InputDate id="CheckIn" @bind-Value="@AvailableRoom.CheckInDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(() => AvailableRoom.CheckInDate)" />
                 </div>
             </div>
         </div>
         <div class="form-group ">
             <div>
-                <label>Check out</label>
+                <label for="CheckOut">Check out</label>
                 <div>
-                    <InputDate @bind-Value="@AvailableRoom.CheckOutDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
+                    <InputDate id="CheckOut" @bind-Value="@AvailableRoom.CheckOutDate" max="9999-12-31" @bind-Value:format="dd/MM/yyyy" class="form-control-sm w-100"></InputDate>
                     <ValidationMessage For="@(()=> AvailableRoom.CheckOutDate)"></ValidationMessage>
                 </div>
             </div>
