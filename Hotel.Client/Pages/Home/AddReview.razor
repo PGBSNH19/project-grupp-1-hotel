@@ -8,8 +8,8 @@
         <EditForm Model="@Review" OnValidSubmit="(() => TryPost())">
             <DataAnnotationsValidator />
             <div class="form-group">
-                <label>How would you grade your stay?</label>
-                <InputSelect @bind-Value="@Review.Grade" class="form-control">
+                <label for="Grade">How would you grade your stay?</label>
+                <InputSelect id="Grade" @bind-Value="@Review.Grade" class="form-control">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
