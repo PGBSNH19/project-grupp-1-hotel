@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Controllers
@@ -86,6 +85,9 @@ namespace Hotel.Server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (bookingRequest.Email != null)
+                bookingRequest.Email = bookingRequest.Email.ToLower();
+
             var result = await _bookingService.CreateAsync(bookingRequest);
 
             if (result.Entity != null)
@@ -102,14 +104,14 @@ namespace Hotel.Server.Controllers
         ///<response code="400">The input data was not correct, BookingNumber and Email cannot be empty or whitespace</response>
         [HttpPut]
         [Route("{bookingNumber}/cancel")]
-        public async Task<IActionResult> CancelBooking([FromRoute]string bookingNumber, [FromBody]string email)
+        public async Task<IActionResult> CancelBooking([FromRoute] string bookingNumber, [FromBody] string email)
         {
             Log.Information("Controller method starting: [BookingController] CancelBooking");
             if (string.IsNullOrWhiteSpace(bookingNumber)) return BadRequest("BookingNumber not valid");
             if (string.IsNullOrWhiteSpace(email)) return BadRequest("Email not valid");
 
-            var result = await _bookingService.CancelAsync(bookingNumber, email);
-            if (!result.Success) 
+            var result = await _bookingService.CancelAsync(bookingNumber, email.ToLower());
+            if (!result.Success)
                 return NotFound(result.Message);
 
             return Ok(result.Entity);

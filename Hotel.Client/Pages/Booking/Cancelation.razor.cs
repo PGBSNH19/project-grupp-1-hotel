@@ -3,10 +3,8 @@ using Hotel.Client.Toast;
 using Hotel.Client.ViewModel;
 using Hotel.Shared;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -19,7 +17,6 @@ namespace Hotel.Client.Pages.Booking
         [Inject] IConfiguration Configuration { get; set; }
         [Inject] ToastService Toast { get; set; }
         [Inject] NavigationManager Nav { get; set; }
-        [Inject] AppState AppState { get; set; }
         public RoomViewModel RoomViewModel { get; set; }
         public CancelBookingViewModel CancelBookingRequest { get; set; } = new CancelBookingViewModel();
 
@@ -50,7 +47,7 @@ namespace Hotel.Client.Pages.Booking
             {
                 Bookinginfo = await Http.GetFromJsonAsync<BookingInfo>($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}");
                 Console.WriteLine(Bookinginfo.IsCanceled);
-                RoomViewModel = new RoomViewModel { RoomInfo = Bookinginfo.Room};
+                RoomViewModel = new RoomViewModel { RoomInfo = Bookinginfo.Room };
             }
             catch (Exception ex)
             {
@@ -62,17 +59,23 @@ namespace Hotel.Client.Pages.Booking
 
         public async Task CancelBooking()
         {
-            var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email);
-
-            if(result.IsSuccessStatusCode)
+            if (!String.IsNullOrEmpty(CancelBookingRequest.Email))
             {
-                Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
-                CancelBookingRequest = new CancelBookingViewModel();
-                StateHasChanged();
+                var result = await Http.PutAsJsonAsync($"{Configuration["BaseApiUrl"]}api/v1.0/booking/{CancelBookingRequest.BookingNumber}/cancel", CancelBookingRequest.Email.ToLower());
+                if (result.IsSuccessStatusCode)
+                {
+                    Toast.ShowToast($"You have canceled your booking with the booking number {CancelBookingRequest.BookingNumber}", ToastLevel.Success);
+                    CancelBookingRequest = new CancelBookingViewModel();
+                    StateHasChanged();
+                }
+                else
+                {
+                    Toast.ShowToast("Cant find your email, please enter your correct email", ToastLevel.Error);
+                }
             }
             else
             {
-                Toast.ShowToast("Cant find your email, please enter your correct email", ToastLevel.Error);
+                Toast.ShowToast("Please enter your email", ToastLevel.Error);
             }
         }
     }

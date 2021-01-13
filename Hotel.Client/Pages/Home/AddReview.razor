@@ -8,8 +8,8 @@
         <EditForm Model="@Review" OnValidSubmit="(() => TryPost())">
             <DataAnnotationsValidator />
             <div class="form-group">
-                <label>How would you grade your stay?</label>
-                <InputSelect @bind-Value="@Review.Grade" class="form-control">
+                <label for="Grade">How would you grade your stay?</label>
+                <InputSelect id="Grade" @bind-Value="@Review.Grade" class="form-control">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -27,12 +27,12 @@
             </div>
             <div class="form-group">
                 <label for="description">Please enter a short description of your stay</label>
-                <InputTextArea @bind-Value="@Review.Description" id="description" class="form-control" />
+                <InputTextArea @bind-Value="@Review.Description" style="resize: none; height: 150px" id="description" class="form-control" />
                 <small id="descriptionHelp" class="form-text text-muted">This is not required but we would love to receive feedback from you</small>
                 <ValidationMessage For="@(() => Review.Description)" />
             </div>
-            <div class="form-group row">
-                <label for="anonymous" class="col-6 col-form-label">Hide my name</label>
+            <div class="form-group">
+                <label for="anonymous" class="form-label" style="margin-bottom: 0">Hide my name</label>
                 <div class="col-6 hide-name">
                     <InputCheckbox @bind-Value="@Review.Anonymous" id="anonymous" />
                 </div>

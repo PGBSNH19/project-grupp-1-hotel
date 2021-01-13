@@ -22,8 +22,8 @@ else
         <br />
         <DataAnnotationsValidator />
         <div class="searchform">
-            <InputText class="form-control mr-sm-2 search" placeholder="Enter your Email to delete booking" @bind-Value="CancelBookingRequest.Email"/>
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Delete</button>
+            <InputText name="Email" aria-label="Email" class="form-control mr-sm-2 search" placeholder="Enter your Email to delete booking" @bind-Value="CancelBookingRequest.Email"/>
+            <button name="Delete" aria-label="Delete" class="btn btn-outline-warning my-2 my-sm-0" type="submit">Delete</button>
             <ValidationMessage For="@(() => CancelBookingRequest.Email)" />
         </div>
     </div>
@@ -35,7 +35,3 @@ else
     }
 
 }
-
-    @code {
-
-    }

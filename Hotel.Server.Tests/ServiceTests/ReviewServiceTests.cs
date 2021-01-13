@@ -7,9 +7,6 @@ using Moq;
 using Moq.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hotel.Server.Tests.ServiceTests
@@ -40,15 +37,15 @@ namespace Hotel.Server.Tests.ServiceTests
             Assert.True(result.Entity[2].Grade >= 4);
         }
 
-       [Fact]
-       public async void GetAverageGradeAsync_ReturnTypeIsOfTypeDouble()
-       {
+        [Fact]
+        public async void GetAverageGradeAsync_ReturnTypeIsOfTypeDouble()
+        {
             var service = GetRepoMockSetup(MockData.MockReviews, MockData.MockBookings);
 
             var result = await service.GetAverageGradeAsync();
 
             Assert.IsType<Double>(result);
-       }
+        }
 
         [Theory]
         [InlineData("foo")]

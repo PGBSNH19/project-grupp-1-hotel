@@ -2,3 +2,19 @@
     background-color: #ffffff;
     padding: 20px;
 }
+.show-date {
+    display: flex;
+    background: lightgrey;
+    margin: 10px 0px;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0px 1px 0px 0px black;
+    justify-content: space-around;
+}
+tr:not(.top-row) {
+    transition: .25s ease-in-out;
+    cursor: pointer;
+}
+.selected {
+    background: lightgreen !important;
+}

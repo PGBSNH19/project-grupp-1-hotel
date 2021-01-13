@@ -1,8 +1,6 @@
 ﻿using Hotel.Server.Services.Communication;
 using Hotel.Shared;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hotel.Server.Services.Interfaces

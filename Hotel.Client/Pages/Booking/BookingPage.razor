@@ -3,28 +3,36 @@
 @if (ConfirmedBooking == null)
 {
     <CheckinForm EventCallback="GetRoom" AvailableRoom="AvailabilityRequest" />
-    <h1 class="display-4">Booking</h1>
-    <h4>Check In: @AvailabilityRequest.CheckInDate.ToString("dd/MM/yyyy")</h4>
-    <h4>Check Out: @AvailabilityRequest.CheckOutDate.ToString("dd/MM/yyyy")</h4>
+    <div class="show-date" style="display:@showDate">
+        <h4>Check In: @AvailabilityRequest.CheckInDate.ToString("dddd, dd MMMM yyyy")</h4>
+        <h4>Check Out: @AvailabilityRequest.CheckOutDate.ToString("dddd, dd MMMM yyyy") </h4>
+    </div>
 
     if (AppState.Rooms != null)
     {
-       <div class="lead pb-4">
-            <ul class="list-group">
-                @foreach (var room in AppState.Rooms)
-                 {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="form-check">
-                            <input type="radio" name="technology" id="@room" value="@room" @onchange="@(() => RadioSelection(room.RoomInfo))" />
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                @room.RoomType
-                            </label>
-                        </div>
-                    </li>
-                 }
-            </ul>
-       </div>
-                    
+        <div class="form-content">
+            <h5 class="heading" b-5qoe286ebo="">CHOOSE A ROOM</h5>
+            <table class="table table-hover table-light">
+                <thead>
+                    <tr class="top-row">
+                        <th scope="col">Title</th>
+                        <th scope="col">Beds</th>
+                        <th scope="col">Doublebeds</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in AppState.Rooms)
+                    {
+                        <tr @onclick="@(() => RadioSelection(room.RoomInfo))" class="@((AppState.PickedRoom == room.RoomInfo) ? "selected" : "")">
+                            <td>@room.RoomTypeInfo</td>
+                            <td>@room.RoomInfo.Beds</td>
+                            <td>@room.RoomInfo.DoubleBeds</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
         <div class="pt-4">
             <CustomerForm OnValidSubmit="@CreateBooking"></CustomerForm>
         </div>
@@ -33,8 +41,8 @@
     {
         <p>For us to show you available rooms, please tell us how many you are and what dates you intend to stay.</p>
     }
- }
- else
- {
+}
+else
+{
     <ConfirmationPage ConfirmedBooking="@ConfirmedBooking"></ConfirmationPage>
- }
+}

@@ -2,3 +2,12 @@
     background-color: #ffffff;
     padding: 20px;
 }
+.row.-style {
+    margin: 5px;
+    background: #eee;
+    padding: 5px;
+}
+.container{
+    margin: 0;
+    padding: 0;
+}

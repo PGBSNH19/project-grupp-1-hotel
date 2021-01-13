@@ -14,22 +14,22 @@
             <ul class="nav">
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
-                        @*<span class="oi oi-home" aria-hidden="true"></span>*@ Home
+                        Home
                     </NavLink>
                 </li>
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="booking">
-                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ Book a room
+                       Book a room
                     </NavLink>
                 </li>
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="restaurant">
-                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ Restaurant
+                        Restaurant
                     </NavLink>
                 </li>
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="spa">
-                        @*<span class="oi oi-list-rich" aria-hidden="true"></span>*@ View SPA
+                        View SPA
                     </NavLink>
                 </li>
                 <li class="nav-item px-1 @NavMenuCssClass" @onclick="ToggleNavMenu">
@@ -51,7 +51,6 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-    string BookingNumber;
 
     private void TryCancelBooking(string bookingNumber)
     {

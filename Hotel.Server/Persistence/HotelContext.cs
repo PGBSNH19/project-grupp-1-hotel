@@ -199,7 +199,9 @@ namespace Hotel.Server.Persistence
                 Guests = 1,
                 Breakfast = true,
                 SpaAccess = false,
-                Created = DateTime.Now
+                Created = DateTime.Now,
+                RoomId = 1
+
             });
             booking.HasKey(e => e.Id);
 
@@ -214,9 +216,42 @@ namespace Hotel.Server.Persistence
                 Anonymous = true,
                 FirstName = "",
                 LastName = "",
+                BookingNumber = "bar",
+                Created = DateTime.Now
+            }, new
+            {
+                Id = 2,
+                Description = "The booking site was great",
+                Grade = 4,
+                Anonymous = true,
+                FirstName = "",
+                LastName = "",
                 BookingNumber = "foo",
                 Created = DateTime.Now
-            });
+            }, new
+            {
+                Id = 3,
+                Description = "The booking site was ok",
+                Grade = 3,
+                Anonymous = true,
+                FirstName = "",
+                LastName = "",
+                BookingNumber = "klas",
+                Created = DateTime.Now
+            }, new
+            {
+                Id = 4,
+                Description = "The booking site was really cool, great design!",
+                Grade = 5,
+                Anonymous = true,
+                FirstName = "",
+                LastName = "",
+                BookingNumber = "klas2",
+                Created = DateTime.Now
+            }
+            );
+
+
         }
     }
 }

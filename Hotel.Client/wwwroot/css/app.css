@@ -27,6 +27,33 @@ a, .btn-link {
     padding-top: 1.1rem;
 }
 
+.form-content {
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+h5.heading {
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+h7.heading {
+    font-family: serif;
+    text-transform: none;
+    color: #666;
+    letter-spacing: 0.05em;
+}
+
+h6.heading {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: bold;
+    display: block;
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }

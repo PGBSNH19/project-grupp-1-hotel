@@ -20,6 +20,7 @@ namespace Hotel.Client.Pages.Booking
         private RoomInfo[] Rooms { get; set; }
 
         [Inject] ToastService Toast { get; set; }
+        private string showDate = "none";
         protected override void OnInitialized()
         {
             AvailabilityRequest = AppState.AvailabilityRequest;
@@ -57,6 +58,8 @@ namespace Hotel.Client.Pages.Booking
 
         async Task GetRoom()
         {
+            showDate = "flex";
+
             if (AvailabilityRequest.CheckInDate.Date < DateTime.Now.Date)
             {
                 Toast.ShowToast("CheckInDate can't happen earlier than today.", ToastLevel.Error);
