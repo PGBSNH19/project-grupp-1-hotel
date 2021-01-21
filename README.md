@@ -125,3 +125,13 @@ Därefter gå in på Variables ändra *API_URL*, ändra både *INITIAL VALUE* oc
 - <a href="Documentation/BDD.md">Länk till BDD dokument</a>
 - <a href="https://plushogskolan.atlassian.net/jira/software/c/projects/G1/pages">Övrig dokumentation på Confluence</a>
 - <a href="https://pgbsnh19.github.io/course-producera-leverera/assignments/project">Länk till projekt</a>
+
+<h3>Gherkin feature filer</h3>
+
+- <a href="Documentation/Features/BookRoom.feature">BookRoom</a>
+- <a href="Documentation/Features/BookingSearch.feature">BookingSearch</a>
+- <a href="Documentation/Features/CancelBooking.feature">CancelBooking</a>
+- <a href="Documentation/Features/GetEmail.feature">GetEmail</a>
+- <a href="Documentation/Features/StartPageSearch.feature">StartPageSearch</a>
+- <a href="Documentation/Features/ViewMenu.feature">ViewMenu</a>
+
